@@ -11,16 +11,19 @@ class ReportController extends Controller
     //     $this->middleware('guest');
     // }
 
-    public function generar(){
+    public function generar()
+    {
         return view('reporte');
     }
 
-    public function admin(){
+    public function admin()
+    {
         return view('administrar');
     }
 
     
-    public function topusuarios(){
+    public function topusuarios()
+    {
 
         // $user = User::all();
 
@@ -28,10 +31,10 @@ class ReportController extends Controller
         
         ->join('users', 'users.id', '=', 'images.user_id')
         ->join('likes', 'images.id', '=', 'likes.image_id')
-        ->select(\DB::raw('count(likes.id) as cantidad, name,surname,nick,image_path'))
+        ->select(\DB::raw('count(likes.id) as cantidad, name,surname,nick,description'))
         // ->where('users.id', '=', 'likes.user_id')
         ->groupBy('image_id')
-        ->orderBy('cantidad','desc')
+        ->orderBy('cantidad', 'desc')
         ->limit(5)
         ->get();
 
@@ -56,11 +59,9 @@ class ReportController extends Controller
 
         //  $likes = Like::all();
  
-        $view = \View::make('reporte/topusers',compact('likes'))->render();
+        $view = \View::make('reporte/topusers', compact('likes'))->render();
         $pdf= \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
         return $pdf->stream('informe'.'.pdf');
-     }
-
-
+    }
 }

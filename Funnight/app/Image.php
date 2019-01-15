@@ -10,6 +10,7 @@ class Image extends Model
     use Rateable;
 
     protected $table = 'Images';
+    
 
     //relacion one to many/ de uno a muchos
     public function comments()

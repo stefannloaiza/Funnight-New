@@ -18,8 +18,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css"/>
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css"
+    />
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/main.js') }}"></script>
@@ -60,7 +61,7 @@
                             <a href="{{route('home')}}" class="nav-link">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('user.index')}}" class="nav-link">Gente</a>
+                            <a href="{{route('user.index')}}" class="nav-link">Parceros</a>
                         </li>
 
                         <li class="nav-item">
@@ -91,11 +92,10 @@
                                     </a>
                                 <a class="dropdown-item" href="{{route('config')}}">
                                                      Configuración             
-                                    </a>
-                                {{-- @if(users()->roles()->name='admin'){    --}}
+                                    </a> {{-- @if(users()->roles()->name='admin'){ --}}
                                 <a class="dropdown-item" href="{{route('administrar')}}">
                                         Reportes             
-                                     </a>                                                                    
+                                     </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
@@ -111,7 +111,7 @@
                 </div>
             </div>
         </nav>
-    
+
         <main class="py-4">
             @yield('content')
         </main>
