@@ -3,6 +3,7 @@
 namespace Illuminate\Foundation\Auth;
 
 use Illuminate\Http\Request;
+use App\Traits\UserAuthentication;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
@@ -82,6 +83,8 @@ trait AuthenticatesUsers
             $this->credentials($request),
             $request->filled('remember')
         );
+
+        dd($request);
     }
 
     /**
