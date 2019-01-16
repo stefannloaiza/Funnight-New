@@ -365,6 +365,7 @@ class ComposerStaticInite1c1a6ce56e84d7d8c04e3d81314f21a
     public static $classMap = array (
         'App\\Comment' => __DIR__ . '/../..' . '/app/Comment.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\Establecimiento' => __DIR__ . '/../..' . '/app/Establecimiento.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Helpers\\FormatTime' => __DIR__ . '/../..' . '/app/Helpers/FormatTime.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -394,6 +395,7 @@ class ComposerStaticInite1c1a6ce56e84d7d8c04e3d81314f21a
         'App\\Providers\\FormatTimeServiceProvider' => __DIR__ . '/../..' . '/app/Providers/FormatTimeServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Role' => __DIR__ . '/../..' . '/app/Role.php',
+        'App\\Traits\\UserAuthentication' => __DIR__ . '/../..' . '/app/Traits/UserAuthentication.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'Barryvdh\\DomPDF\\Facade' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/Facade.php',
         'Barryvdh\\DomPDF\\PDF' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/PDF.php',
