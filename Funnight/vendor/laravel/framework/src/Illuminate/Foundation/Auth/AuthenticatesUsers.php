@@ -3,7 +3,7 @@
 namespace Illuminate\Foundation\Auth;
 
 use Illuminate\Http\Request;
-use App\Traits\UserAuthentication;
+// use App\Traits\UserAuthentication;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
@@ -18,10 +18,7 @@ trait AuthenticatesUsers
      */
     public function showLoginForm()
     {
-        $inactive = false;
-        return view('auth.login', [
-            'inactive' => $inactive
-        ]);
+        return view('auth.login');
     }
 
     /**
@@ -45,8 +42,31 @@ trait AuthenticatesUsers
             return $this->sendLockoutResponse($request);
         }
 
-        if ($this->attemptLogin($request)) {
-            return $this->sendLoginResponse($request);
+        // Init login user
+        // if ($this->attemptLogin($request)) {
+        //     return $this->sendLoginResponse($request);
+        // }
+
+        // This section is the only change
+        if ($this->guard()->validate($this->credentials($request))) {
+            $user = $this->guard()->getLastAttempted();
+
+            // dd($user->userActive);
+
+            // Make sure the user is active
+            if ($user->userActive && $this->attemptLogin($request)) {
+                // Send the normal successful login response
+                return $this->sendLoginResponse($request);
+            } else {
+                // Increment the failed login attempts and redirect back to the
+                // login form with an error message.
+                $this->incrementLoginAttempts($request);
+                return redirect()
+                ->back()
+                ->with('inactive', 'true');
+                // ->withInput($request->only($this->username(), 'remember'))
+                // ->withErrors(['active' => 'You must be active to login.']);
+            }
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
@@ -79,12 +99,7 @@ trait AuthenticatesUsers
      */
     protected function attemptLogin(Request $request)
     {
-        return $this->guard()->attempt(
-            $this->credentials($request),
-            $request->filled('remember')
-        );
-
-        dd($request);
+        return $this->guard()->attempt($this->credentials($request), $request->filled('remember'));
     }
 
     /**
@@ -136,9 +151,16 @@ trait AuthenticatesUsers
      */
     protected function sendFailedLoginResponse(Request $request)
     {
+        // if ($request['inactive']) {
+        //     # this user is inactive
+        //     throw ValidationException::withMessages([
+        //         $this->username() => [trans('auth.inactive')],
+        //     ]);
+        // } else {
         throw ValidationException::withMessages([
-            $this->username() => [trans('auth.failed')],
-        ]);
+                $this->username() => [trans('auth.failed')],
+            ]);
+        // }
     }
 
     /**

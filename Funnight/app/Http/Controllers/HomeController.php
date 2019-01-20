@@ -25,42 +25,32 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         if ($request->user()->authorizeRoles(['user', 'admin','site'])) {
-            if ($this->isUserActive()) {
-                # user active
-                if ($request->user()->hasRole('user')) {
-                    $images = Image::orderBy('id', 'desc')->paginate(10);
-    
-                    return view('home', [
-                        'images' => $images
+            if ($request->user()->hasRole('user')) {
+                $images = Image::orderBy('id', 'desc')->paginate(10);
+
+                return view('home', [
+                    'images' => $images
+                ]);
+            } elseif ($request->user()->hasRole('site')) {
+                if (withoutInteractionDays() == 5) {
+                    # 5 days without interaction
+                    $inactivity = true;
+                    return view('sites.index', [
+                    'inactivity'=> $inactivity
                     ]);
-                } elseif ($request->user()->hasRole('site')) {
-                    $inactive = false;
-                    if (withoutInteractionDays() == 5) {
-                        # 5 days without interaction
-                        $inactivity = true;
-                        return view('sites.index', [
-                        'inactivity'=> $inactivity
-                        ]);
-                    } elseif (withoutInteractionDays() == 7) {
-                        # 7 days without interaction - inactive
-                        return Route::controller('inactiveUser', 'UserController');
-                    } else {
-                        # not without
-                        $inactivity = false;
-                        return view('sites.index', [
-                        'inactivity'=> $inactivity
-                        ]);
-                    }
+                } elseif (withoutInteractionDays() == 7) {
+                    # 7 days without interaction - inactive
+                    return Route::controller('inactiveUser', 'UserController');
                 } else {
-                    # this is admin
-                    return view('admin.index');
+                    # not without
+                    $inactivity = false;
+                    return view('sites.index', [
+                    'inactivity'=> $inactivity
+                    ]);
                 }
             } else {
-                # user inactive
-                $inactive = true;
-                return view('auth.login', [
-                        'inactive'=> $inactive
-                    ]);
+                # this is admin
+                return view('admin.index');
             }
         } else {
             # this is nothing

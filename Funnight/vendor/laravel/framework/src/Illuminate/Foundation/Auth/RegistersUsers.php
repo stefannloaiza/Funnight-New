@@ -2,6 +2,7 @@
 
 namespace Illuminate\Foundation\Auth;
 
+use App\Pais;
 use App\Role;
 
 use Illuminate\Http\Request;
@@ -19,10 +20,12 @@ trait RegistersUsers
      */
     public function showRegistrationForm()
     {
-        $roles = Role::where('id','!=','1')->get();
+        $roles = Role::where('id', '!=', '1')->get();
+        $paises = Pais::all();
 
-        return view('auth.register',[
-            'roles' => $roles
+        return view('auth.register', [
+            'roles' => $roles,
+            'paises' => $paises
         ]);
     }
 

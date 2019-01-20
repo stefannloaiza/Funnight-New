@@ -48,7 +48,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                                     {{ __('Login') }}
                                 </button>
 
@@ -58,7 +58,7 @@
                             </div>
                         </div>
                     </form>
-                    @if ($inactive)
+                    @if(session('inactive'))
                     <!-- Modal -->
                     <div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Cerrar</button> --}}
-                                    <a type="button" href="/" class="btn btn-secondary">Cerrar</a>
+                                    <a type="button" href="/login" class="btn btn-secondary">Cerrar</a>
                                 </div>
                             </div>
                         </div>
@@ -85,30 +85,6 @@
         </div>
     </div>
 </div>
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-    Launch demo modal
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
 <script>
     $('#exampleModal').modal('show');

@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 // GENERALES
 Auth::routes();
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/home', 'HomeController@ratingData')->name('home.rating');
 
@@ -26,7 +27,14 @@ Route::post('/user/update', 'UserController@update')->name('user.update');
 Route::get('/user/avatar/{filename}', 'UserController@getImage')->name('user.avatar');
 Route::get('/perfil/{id}', 'UserController@profile')->name('profile');
 Route::get('/gente/{search?}', 'UserController@index')->name('user.index');
-Route::get('/establecimiento/{search?}', 'UserController@indexestablecimiento')->name('user.indexestablecimiento');
+
+// Establecimiento
+Route::get('/sites', 'EstablecimientoController@index')->name('sites.index');
+Route::get('/sites/create', 'EstablecimientoController@create')->name('sites.create');
+Route::get('/sites/edit', 'EstablecimientoController@edit')->name('sites.edit');
+Route::get('/sites/show', 'EstablecimientoController@show')->name('sites.show');
+Route::post('/sites/store', 'EstablecimientoController@store')->name('sites.store');
+Route::post('/sites/update', 'EstablecimientoController@update')->name('sites.update');
 
 // IMAGEN
 Route::get('/subir-imagen', 'ImageController@create')->name('image.create');

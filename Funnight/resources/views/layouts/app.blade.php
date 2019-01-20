@@ -66,7 +66,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{route('user.indexestablecimiento')}}" class="nav-link">Establecimiento</a>
+                            <a href="{{route('sites.index')}}" class="nav-link">Establecimiento</a>
                         </li>
 
                         <li class="nav-item">

@@ -460,8 +460,11 @@ class ComposerStaticInite1c1a6ce56e84d7d8c04e3d81314f21a
     );
 
     public static $classMap = array (
+        'App\\Ciudad' => __DIR__ . '/../..' . '/app/Ciudad.php',
+        'App\\Comida' => __DIR__ . '/../..' . '/app/Comida.php',
         'App\\Comment' => __DIR__ . '/../..' . '/app/Comment.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\Establecimiento' => __DIR__ . '/../..' . '/app/Establecimiento.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Helpers\\FormatTime' => __DIR__ . '/../..' . '/app/Helpers/FormatTime.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -470,6 +473,7 @@ class ComposerStaticInite1c1a6ce56e84d7d8c04e3d81314f21a
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\CommentController' => __DIR__ . '/../..' . '/app/Http/Controllers/CommentController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\EstablecimientoController' => __DIR__ . '/../..' . '/app/Http/Controllers/EstablecimientoController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\ImageController' => __DIR__ . '/../..' . '/app/Http/Controllers/ImageController.php',
         'App\\Http\\Controllers\\LikeController' => __DIR__ . '/../..' . '/app/Http/Controllers/LikeController.php',
@@ -485,7 +489,12 @@ class ComposerStaticInite1c1a6ce56e84d7d8c04e3d81314f21a
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Image' => __DIR__ . '/../..' . '/app/Image.php',
         'App\\Like' => __DIR__ . '/../..' . '/app/Like.php',
+<<<<<<< HEAD
         'App\\Product' => __DIR__ . '/../..' . '/app/Product.php',
+=======
+        'App\\Musica' => __DIR__ . '/../..' . '/app/Musica.php',
+        'App\\Pais' => __DIR__ . '/../..' . '/app/Pais.php',
+>>>>>>> 08adb12cdb9db086ac8c058ab81ec9098b764321
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
