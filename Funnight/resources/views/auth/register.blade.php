@@ -59,23 +59,20 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
+                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
 
                             <div class="col-md-6">
-                                <select class="form-control" name="role" id="role" required>
+                                <select class="form-control" name="role" id="role" style="height: auto;" required>
                                     <option value="">Seleccione</option>
                                     @foreach ($roles as $role)
                                         <option value="{{ $role->id }}">{{ $role->description }}</option> 
                                     @endforeach
-                                </select>
-                                @if ($errors->has('role'))
-                                    <span class="invalid-feedback" role="alert">
+                                </select> @if ($errors->has('role'))
+                                <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('role') }}</strong>
-                                    </span> 
-                                @endif
+                                    </span> @endif
                             </div>
                         </div>
-
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
@@ -97,8 +94,48 @@
                             </div>
                         </div>
 
+                        <hr>
+
+                        <div id="roleUser" style="display: none;">
+                            <div class="form-group row">
+                                <label for="pais" class="col-md-4 col-form-label text-md-right">{{ __('Pais Usuario') }}</label>
+
+                                <div class="col-md-6">
+                                    <select class="form-control" name="pais" id="paisUser" style="height: auto;" required>
+                                        <option value="">Seleccione</option>
+                                        @foreach ($paises as $pais)
+                                            <option value="{{ $pais->id }}">{{ $pais->nombre }}</option> 
+                                        @endforeach
+                                    </select> @if ($errors->has('pais'))
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('pais') }}</strong>
+                                        </span> @endif
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+
+                        <div id="roleSite" style="display: none;">
+                            <div class="form-group row">
+                                <label for="pais" class="col-md-4 col-form-label text-md-right">{{ __('Pais Establecimiento') }}</label>
+
+                                <div class="col-md-6">
+                                    <select class="form-control" name="pais" id="paisSite" style="height: auto;" required>
+                                        <option value="">Seleccione</option>
+                                        @foreach ($paises as $pais)
+                                            <option value="{{ $pais->id }}">{{ $pais->nombre }}</option> 
+                                        @endforeach
+                                    </select> @if ($errors->has('pais'))
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('pais') }}</strong>
+                                        </span> @endif
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
@@ -110,4 +147,6 @@
         </div>
     </div>
 </div>
+
+<script src="{{ asset('js/register.js') }}"></script>
 @endsection

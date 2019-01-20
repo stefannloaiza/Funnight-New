@@ -17,6 +17,7 @@ Route::get('/', function () {
 
 // GENERALES
 Auth::routes();
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/home', 'HomeController@ratingData')->name('home.rating');
 
