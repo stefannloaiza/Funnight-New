@@ -46,8 +46,9 @@ Route::get('/likes', 'LikeController@index')->name('likes');
 Route::get('/like/{image_id}', 'LikeController@like')->name('like.save');
 Route::get('/dislike/{image_id}', 'LikeController@dislike')->name('like.delete');
 
-// REPORTE
+// REPORTE PDF
 Route::get('/reporte/top', 'ReportController@topusuarios')->name('topusers');
+
 
 // Administrador
 
@@ -55,3 +56,8 @@ Route::get('/administracion', 'ReportController@admin')->name('administrar');
 
 // RATINGS
 Route::post('rating/{image_id}/{rating}', 'ImageController@ratingImage');
+
+// excel prueba
+
+Route::get('/', 'ProductController@index')->name('products');
+Route::get('descargar-productos', 'ProductController@excel')->name('products.excel');
