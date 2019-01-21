@@ -489,15 +489,9 @@ class ComposerStaticInite1c1a6ce56e84d7d8c04e3d81314f21a
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Image' => __DIR__ . '/../..' . '/app/Image.php',
         'App\\Like' => __DIR__ . '/../..' . '/app/Like.php',
-<<<<<<< HEAD
-        'App\\Product' => __DIR__ . '/../..' . '/app/Product.php',
-=======
         'App\\Musica' => __DIR__ . '/../..' . '/app/Musica.php',
-        'App\\Pais' => __DIR__ . '/../..' . '/app/Pais.php',
->>>>>>> 08adb12cdb9db086ac8c058ab81ec9098b764321
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
-        'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\FormatTimeServiceProvider' => __DIR__ . '/../..' . '/app/Providers/FormatTimeServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',

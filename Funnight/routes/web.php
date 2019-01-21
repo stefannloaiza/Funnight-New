@@ -67,5 +67,5 @@ Route::post('rating/{image_id}/{rating}', 'ImageController@ratingImage');
 
 // excel prueba
 
-Route::get('/', 'ProductController@index')->name('products');
-Route::get('descargar-productos', 'ProductController@excel')->name('products.excel');
+// Route::get('/', 'ProductController@index')->name('products');
+// Route::get('descargar-productos', 'ProductController@excel')->name('products.excel');

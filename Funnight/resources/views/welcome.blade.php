@@ -5,10 +5,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>FUNNIGHT</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <link href="{{ asset('css/welcome.css') }}" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
         <style>
@@ -69,26 +70,22 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/home') }}">{{ __('welcome.home') }}</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
+                        <a href="{{ route('login') }}">{{ __('welcome.login') }}</a>
+                        <a href="{{ route('register') }}">{{ __('welcome.register') }}</a>
                     @endauth
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                   proyecto Laravel
+                    <h1 class="display-1">Fun Night</h1>
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                <h2>
+                    Disfruta la noche de otra manera. Promociones y eventos cada noche. Para que pases una noche divertida.
+                </h2>
+                <a class="btn btn-primary" href="{{ route('register') }}" role="button">Registrate</a>
             </div>
         </div>
     </body>
