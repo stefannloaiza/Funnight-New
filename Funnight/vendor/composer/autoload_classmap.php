@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Ambiente' => $baseDir . '/app/Ambiente.php',
     'App\\Ciudad' => $baseDir . '/app/Ciudad.php',
     'App\\Comida' => $baseDir . '/app/Comida.php',
     'App\\Comment' => $baseDir . '/app/Comment.php',
@@ -35,12 +36,9 @@ return array(
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Image' => $baseDir . '/app/Image.php',
     'App\\Like' => $baseDir . '/app/Like.php',
-<<<<<<< HEAD
-    'App\\Product' => $baseDir . '/app/Product.php',
-=======
     'App\\Musica' => $baseDir . '/app/Musica.php',
     'App\\Pais' => $baseDir . '/app/Pais.php',
->>>>>>> 08adb12cdb9db086ac8c058ab81ec9098b764321
+    'App\\Product' => $baseDir . '/app/Product.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',

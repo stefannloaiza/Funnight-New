@@ -14,5 +14,8 @@ return [
 
     'failed'   => 'Estas credenciales no coinciden con nuestros registros.',
     'throttle' => 'Demasiados intentos de acceso. Por favor intente nuevamente en :seconds segundos.',
-    'inactive' => 'The user is currently inactive. Contact the system administrator.',
+    'inactive' => 'El usuario se encuentra inactivo. Por favor, contactarse con el administrador.',
+
+    // news translate
+
 ];
