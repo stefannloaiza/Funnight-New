@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
 use App\Image;
 use Illuminate\Http\Request;
 
@@ -32,13 +33,13 @@ class HomeController extends Controller
                     'images' => $images
                 ]);
             } elseif ($request->user()->hasRole('site')) {
-                if (withoutInteractionDays() == 5) {
+                if ($this->withoutInteractionDays() == 5) {
                     # 5 days without interaction
                     $inactivity = true;
                     return view('sites.index', [
                     'inactivity'=> $inactivity
                     ]);
-                } elseif (withoutInteractionDays() == 7) {
+                } elseif ($this->withoutInteractionDays() == 7) {
                     # 7 days without interaction - inactive
                     return Route::controller('inactiveUser', 'UserController');
                 } else {

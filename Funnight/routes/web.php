@@ -57,6 +57,8 @@ Route::get('/dislike/{image_id}', 'LikeController@dislike')->name('like.delete')
 // REPORTE PDF
 Route::get('/reporte/top', 'ReportController@topusuarios')->name('topusers');
 
+// CIUDAD
+Route::get('/ajaxGetCiudad', 'CiudadController@ajaxGetCiudad');
 
 // Administrador
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use DateTime;
+use App\Ciudad;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -65,24 +67,74 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        dd($data);
-        $user = User::create([
-            'name' => $data['name'],
-            'surname' => $data['surname'],
-            'nick' => $data['nick'],
-            'email' => $data['email'],
-            'role'=> $data['role'],
-            'image'=> '',
-            'userActive'=> 1,
-            'password' => Hash::make($data['password']),
-        ]);
+        // dd($data);
 
-        if ($data['role'] == 3) {
-            # Save last interaction
+        if ($data['role'] == 2) {
+            # Save user datas
+            
+            $user = User::create([
+                'name' => $data['name'],
+                'surname' => $data['surname'],
+                'nick' => $data['nick'],
+                'email' => $data['email'],
+                'role'=> $data['role'],
+                'image'=> '',
+                'userActive'=> 1,
+                'password' => Hash::make($data['password']),
+                
+                // More data
+                'paisActual' => $data['pais'],
+                'ciudadActual' => $data['ciudad'],
+                'genero'=> $data['genero'],
+                'zona' => $data['zona'],
+                'direccion_residencia' => $data['direccion'],
+                'fechaNacimiento'=> new DateTime($data['fechaNac']) ,
+                'telefono' => $data['telefono'],
+                'celular' => $data['celular'],
+                'tipo_establecimiento' => $data['establecimiento'],
+                'tipo_comida'=> $data['comidaUser'],
+                'tipo_ambiente'=> $data['ambienteUser'],
+                'tipo_musica'=> $data['musicaUser'],
+
+                'lastInteraction'=> new DateTime(),
+            ]);
+            
+            $user->roles()->attach($data['role']);
+            
+            return $user;
+        } else {
+            # Save night site datas
+            
+            $site = User::create([
+                'name' => $data['name'],
+                'surname' => $data['surname'],
+                'nick' => $data['nick'],
+                'email' => $data['email'],
+                'role'=> $data['role'],
+                'image'=> '',
+                'userActive'=> 1,
+                'password' => Hash::make($data['password']),
+
+                 // More data
+                'paisActual' => $data['paisSite'],
+                'ciudadActual' => $data['ciudadSite'],
+                'zona' => $data['zonaSite'],
+                'direccion_residencia' => $data['direccionSite'],
+                'telefono' => $data['telefonoSite'],
+                'celular' => $data['celularSite'],
+                'tipo_establecimiento' => $data['typeSite'],
+                'tipo_comida'=> $data['comidaSite'],
+                'tipo_ambiente'=> $data['ambienteSite'],
+                'tipo_musica'=> $data['musicaSite'],
+                 
+                'genero'=> '',
+                'lastInteraction'=> new DateTime(),
+                // 'fechaNacimiento'=> '',
+            ]);
+            
+            $site->roles()->attach($data['role']);
+
+            return $site;
         }
-
-        $user->roles()->attach($data['role']);
-
-        return $user;
     }
 }

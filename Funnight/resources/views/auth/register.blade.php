@@ -96,7 +96,6 @@
 
                         <hr>
 
-
                         <div id="roleUser" style="display: none;">
                             <h4 class="text-center usertext">
                                 Registro de usuario
@@ -122,11 +121,11 @@
                                 <label for="ciudad" class="col-md-4 col-form-label text-md-right">{{ __('Ciudad Usuario') }}</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-control" name="ciudad" id="ciudadUser" style="height: auto;"   >
-                                        <option value="">Selecciona la ciudad</option>
-                                        @foreach ($paises as $pais)
+                                    <select class="form-control" name="ciudad" id="ciudadUser" style="height: auto;" disabled>
+                                        {{-- <option value="">Selecciona la ciudad</option> --}}
+                                        {{-- @foreach ($paises as $pais)
                                             <option value="{{ $pais->id }}">{{ $pais->nombre }}</option> 
-                                        @endforeach
+                                        @endforeach --}}
                                     </select> @if ($errors->has('ciudad'))
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('ciudad') }}</strong>
@@ -222,11 +221,11 @@
                             <br>
 
                             <div class="form-group row">
-                                <label for="establecimiento" class="col-md-4 col-form-label text-md-right">{{ __('Establecimiento preferido') }}</label>
+                                <label for="establecimiento" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de establecimiento preferido') }}</label>
 
                                 <div class="col-md-6">
                                     <select class="form-control" name="establecimiento" id="siteUser" style="height: auto;"  >
-                                        <option value="">Selecciona el ambiente</option>
+                                        <option value="">Selecciona el tipo de establecimiento</option>
                                         @foreach ($tipoEstablecimiento as $type)
                                             <option value="{{ $type->id_tipo_establecimiento }}">{{ $type->nombre }}</option> 
                                         @endforeach
@@ -258,7 +257,7 @@
 
                                 <div class="col-md-6">
                                     <select class="form-control" name="ambienteUser" id="ambienteUser" style="height: auto;"  >
-                                        <option value="">Seleccione</option>
+                                        <option value="">Selecciona el ambiente</option>
                                         @foreach ($ambientes as $ambiente)
                                             <option value="{{ $ambiente->id_ambiente }}">{{ $ambiente->nombre }}</option> 
                                         @endforeach
@@ -310,17 +309,17 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="ciudadEst" class="col-md-4 col-form-label text-md-right">{{ __('Ciudad Establecimiento') }}</label>
+                                <label for="ciudadSite" class="col-md-4 col-form-label text-md-right">{{ __('Ciudad Establecimiento') }}</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-control" name="ciudadSite" id="ciudadSite" style="height: auto;"   disabled>
-                                        <option value="">Selecciona la ciudad</option>
-                                        @foreach ($paises as $pais)
+                                    <select class="form-control" name="ciudadSite" id="ciudadSite" style="height: auto;" disabled>
+                                        {{-- <option value="">Selecciona la ciudad</option> --}}
+                                        {{-- @foreach ($paises as $pais)
                                             <option value="{{ $pais->id }}">{{ $pais->nombre }}</option> 
-                                        @endforeach
-                                    </select> @if ($errors->has('ciudadEst'))
+                                        @endforeach --}}
+                                    </select> @if ($errors->has('ciudadSite'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('ciudadEst') }}</strong>
+                                            <strong>{{ $errors->first('ciudadSite') }}</strong>
                                         </span> @endif
                                 </div>
                             </div>
@@ -390,7 +389,7 @@
 
                                 <div class="col-md-6">
                                     <select class="form-control" name="typeSite" id="typeSite" style="height: auto;"  >
-                                        <option value="">Selecciona el ambiente</option>
+                                        <option value="">Selecciona el tipo de establecimiento</option>
                                         @foreach ($tipoEstablecimiento as $type)
                                             <option value="{{ $type->id_tipo_establecimiento }}">{{ $type->nombre }}</option> 
                                         @endforeach

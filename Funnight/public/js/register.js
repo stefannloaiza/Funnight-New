@@ -29,9 +29,15 @@ window.addEventListener("load", function () {
     })
 
 
-    $("#paisId").change(function () {
+    $("#paisSite").change(function () {
 
-        var pais = $("#paisId").val()
+        var pais = $("#paisSite").val()
+
+        if (pais == "") {
+            $("#ciudadSite").attr("disabled", "disables");
+        } else {
+            $("#ciudadSite").removeAttr("disabled");
+        }
 
         $.ajax({
             data: { cod_pais: pais },
@@ -39,19 +45,57 @@ window.addEventListener("load", function () {
             type: 'get',
             beforeSend: function () {
                 select = '<option value="0">Procesando....</option>';
-                $("#ciudad").html(select);
+                $("#ciudadSite").html(select);
             },
             success: function (jsonData) {
-                select = '<select name="position" class="form-control input-sm " required id="position" >';
-                for(var i in jsonData){
+                // select = '<select name="position" class="form-control input-sm " required id="position" >';
+
+                select = '<option value="0">Selecciona la ciudad</option>';
+                for (var i in jsonData) {
                     select += '<option value="' + jsonData[i].id + '">' + jsonData[i].nombre + '</option>';
                 };
-                select += '</select>';
-                $("#ciudad").html(select);
-                
+                // select += '</select>';
+                $("#ciudadSite").html(select);
+
+
+
+            }
+
+        });
+
+    });
+
+    $("#paisUser").change(function () {
+
+        var pais = $("#paisUser").val()
+
+        if (pais == "") {
+            $("#ciudadUser").attr("disabled", "disables");
+        } else {
+            $("#ciudadUser").removeAttr("disabled");
+        }
+
+        $.ajax({
+            data: { cod_pais: pais },
+            url: 'ajaxGetCiudad',
+            type: 'get',
+            beforeSend: function () {
+                select = '<option value="0">Procesando....</option>';
+                $("#ciudadUser").html(select);
+            },
+            success: function (jsonData) {
+                // select = '<select name="position" class="form-control input-sm " required id="position" >';
+                select = '<option value="0">Selecciona la ciudad</option>';
+                for (var i in jsonData) {
+                    select += '<option value="' + jsonData[i].id + '">' + jsonData[i].nombre + '</option>';
+                };
+                // select += '</select>';
+                $("#ciudadUser").html(select);
+
             }
         });
-        
+
     });
+
 
 });
