@@ -20,4 +20,4 @@
 
 
 
-    <a type="submit" href="{{route('products')}}" style="margin: 15px" class="btn btn-success">Establecimiento con mayor puntaje en estrellas</a>
+    <a type="submit" href="{{route('topusersexcel')}}" style="margin: 15px" class="btn btn-success">Imagenes con mayor cantidad de Likes Excel</a>    {{-- reporte pendiente Establecimiento con mayor puntaje en estrellas --}}

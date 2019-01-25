@@ -48,6 +48,9 @@ Route::post('/image/update', 'ImageController@update')->name('image.update');
 // COMENTARIOS
 Route::post('/comment/save', 'CommentController@save')->name('comment.save');
 Route::get('/comment/delete/{id}', 'CommentController@delete')->name('comment.delete');
+Route::get('/comment/update/{id}', 'CommentController@update')->name('actualizarcomentario');
+Route::post('/comment/edit', 'CommentController@edit')->name('comment.edit');
+
 
 // LIKES
 Route::get('/likes', 'LikeController@index')->name('likes');
@@ -65,7 +68,7 @@ Route::get('/administracion', 'ReportController@admin')->name('administrar');
 // RATINGS
 Route::post('rating/{image_id}/{rating}', 'ImageController@ratingImage');
 
-// excel prueba
+// REPORTE EXCEL
 
-Route::get('/', 'ProductController@index')->name('products');
-Route::get('descargar-productos', 'ProductController@excel')->name('products.excel');
+Route::get('/reporte/products', 'ReportController@index')->name('topusersexcel');
+Route::get('descargar-productos', 'ReportController@excel')->name('topusersexcel.excel');
