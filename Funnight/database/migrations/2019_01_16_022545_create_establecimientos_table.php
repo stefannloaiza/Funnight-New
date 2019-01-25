@@ -13,8 +13,8 @@ class CreateEstablecimientosTable extends Migration
      */
     public function up()
     {
-        Schema::create('establecimientos', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('establecimiento', function (Blueprint $table) {
+            $table->increments('id_tipo_establecimiento');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ class CreateEstablecimientosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('establecimientos');
+        Schema::dropIfExists('establecimiento');
     }
 }

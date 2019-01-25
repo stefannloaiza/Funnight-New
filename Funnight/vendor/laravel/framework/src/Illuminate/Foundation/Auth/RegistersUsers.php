@@ -4,6 +4,11 @@ namespace Illuminate\Foundation\Auth;
 
 use App\Pais;
 use App\Role;
+use App\Ciudad;
+use App\Comida;
+use App\Musica;
+use App\Ambiente;
+use App\Establecimiento;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,9 +28,18 @@ trait RegistersUsers
         $roles = Role::where('id', '!=', '1')->get();
         $paises = Pais::all();
 
+        $comidas = Comida::all();
+        $musica = Musica::all();
+        $ambientes = Ambiente::all();
+        $typeEstablecimiento = Establecimiento::all();
+        
         return view('auth.register', [
             'roles' => $roles,
-            'paises' => $paises
+            'paises' => $paises,
+            'comidas' => $comidas,
+            'musica' => $musica,
+            'ambientes' => $ambientes,
+            'tipoEstablecimiento' => $typeEstablecimiento,
         ]);
     }
 

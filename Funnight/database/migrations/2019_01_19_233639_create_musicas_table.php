@@ -13,8 +13,8 @@ class CreateMusicasTable extends Migration
      */
     public function up()
     {
-        Schema::create('musicas', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('musica', function (Blueprint $table) {
+            $table->increments('id_musica');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ class CreateMusicasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('musicas');
+        Schema::dropIfExists('musica');
     }
 }

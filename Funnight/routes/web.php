@@ -60,6 +60,8 @@ Route::get('/dislike/{image_id}', 'LikeController@dislike')->name('like.delete')
 // REPORTE PDF
 Route::get('/reporte/top', 'ReportController@topusuarios')->name('topusers');
 
+// CIUDAD
+Route::get('/ajaxGetCiudad', 'CiudadController@ajaxGetCiudad');
 
 // Administrador
 
@@ -70,5 +72,10 @@ Route::post('rating/{image_id}/{rating}', 'ImageController@ratingImage');
 
 // REPORTE EXCEL
 
+<<<<<<< HEAD
 Route::get('/reporte/products', 'ReportController@index')->name('topusersexcel');
 Route::get('descargar-productos', 'ReportController@excel')->name('topusersexcel.excel');
+=======
+// Route::get('/', 'ProductController@index')->name('products');
+// Route::get('descargar-productos', 'ProductController@excel')->name('products.excel');
+>>>>>>> ce26134b5fb65a5c286b754dd2a34369882a71a1
