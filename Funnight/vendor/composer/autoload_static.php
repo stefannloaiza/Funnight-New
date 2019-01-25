@@ -490,15 +490,9 @@ class ComposerStaticInite1c1a6ce56e84d7d8c04e3d81314f21a
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Image' => __DIR__ . '/../..' . '/app/Image.php',
         'App\\Like' => __DIR__ . '/../..' . '/app/Like.php',
-<<<<<<< HEAD
         'App\\Product' => __DIR__ . '/../..' . '/app/Product.php',
         'App\\Musica' => __DIR__ . '/../..' . '/app/Musica.php',
         'App\\Pais' => __DIR__ . '/../..' . '/app/Pais.php',
-=======
-        'App\\Musica' => __DIR__ . '/../..' . '/app/Musica.php',
-        'App\\Pais' => __DIR__ . '/../..' . '/app/Pais.php',
-        'App\\Product' => __DIR__ . '/../..' . '/app/Product.php',
->>>>>>> ce26134b5fb65a5c286b754dd2a34369882a71a1
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
