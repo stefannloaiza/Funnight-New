@@ -128,7 +128,6 @@ class UserController extends Controller
                         ]);
     }
 
-<<<<<<< HEAD
     /**
     * Metodo para agregar calificación de estrellas a un establecimiento con el usuario logueado que la está calificando.
     *
@@ -146,12 +145,14 @@ class UserController extends Controller
         $rating->rateable_type = "App\User";
         $rating->user_id = \Auth::id();
         // dd($rating);
-
+    
         $user->ratings()->save($rating);
-
+    
         return response()->json([
-            'message'=>'Has dado dislike correctamente'
-=======
+    'message'=>'Has dado dislike correctamente'
+    ]);
+    }
+
     public function gustos($search= null)
     {
         $ambientes = Ambiente::all();
@@ -182,7 +183,6 @@ class UserController extends Controller
            'musica' => $musica,
            'ambientes' => $ambientes,
            'tipoEstablecimiento' => $typeEstablecimiento
->>>>>>> 3c4e4c2d0f13ade4174e6d6b1ec6ade59bc0ce81
         ]);
     }
 }
