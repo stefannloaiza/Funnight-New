@@ -105,9 +105,23 @@ class UserController extends Controller
     public function profile($id)
     {
         $user = User::find($id);
+        $paises = Pais::find($user->paisActual);
+        $ambientes = Ambiente::where('id_ambiente', $user->tipo_ambiente)->first();
+        $comidas = Comida::where('id_comida', $user->tipo_comida)->first();
+        $musica = Musica::where('id_musica', $user->tipo_musica)->first();
+        $typeEstablecimiento = Establecimiento::where('id_tipo_establecimiento', $user->tipo_establecimiento)->first();
+        
+        
 
+        // dd($paises->nombre);
         return view('user.profile', [
-            'user'=> $user
+           'user'=> $user,
+           'paises' => $paises,
+            'ambientes' => $ambientes,
+           'comidas' => $comidas,
+           'musica' => $musica,
+           'tipoEstablecimiento' =>  $typeEstablecimiento
+
         ]);
     }
 
@@ -149,20 +163,14 @@ class UserController extends Controller
         $user->ratings()->save($rating);
     
         return response()->json([
-<<<<<<< HEAD
-    'message'=>'Has dado dislike correctamente'
-    ]);
-    }
+   
 
-=======
             'message'=>'Has dado dislike correctamente'
-        ]);
+            ]);
     }
     
->>>>>>> c89b8b922a4beb879e9e203b1132b06cf339aa40
     public function gustos($search= null)
     {
-        $ambientes = Ambiente::all();
         $paises = Pais::all();
         $comidas = Comida::all();
         $musica = Musica::all();
