@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Pais;
+use App\Role;
 use App\User;
+use App\Ciudad;
+use App\Comida;
+use App\Musica;
+use App\Ambiente;
+use App\Establecimiento;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use App\Role;
-use App\Pais;
-use App\Musica;
-use App\Comida;
-use App\Ambiente;
-use App\Ciudad;
-use App\Establecimiento;
 
 class UserController extends Controller
 {
@@ -149,10 +149,17 @@ class UserController extends Controller
         $user->ratings()->save($rating);
     
         return response()->json([
+<<<<<<< HEAD
     'message'=>'Has dado dislike correctamente'
     ]);
     }
 
+=======
+            'message'=>'Has dado dislike correctamente'
+        ]);
+    }
+    
+>>>>>>> c89b8b922a4beb879e9e203b1132b06cf339aa40
     public function gustos($search= null)
     {
         $ambientes = Ambiente::all();

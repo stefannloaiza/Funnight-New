@@ -78,7 +78,12 @@ window.addEventListener("load", function () {
 
             $.ajax({
                 url: url + '/rating/' + $(this).data('id') + "/" + $(this).val(),
+                method: "get",
                 type: 'get',
+                crossDomain: true,
+                contentType: 'application/json',
+                // dataType: 'jsonp',
+                timeout: 3000, // sets timeout to 3 seconds
                 success: function (response) {
                     console.log(response);
                     if (response.like) {
@@ -86,8 +91,7 @@ window.addEventListener("load", function () {
                     } else {
                         console.log('Error al dar la calificacion');
                     }
-                },
-                timeout: 2000 // sets timeout to 3 seconds
+                }
             });
         });
     }

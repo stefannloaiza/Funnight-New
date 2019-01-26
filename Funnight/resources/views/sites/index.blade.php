@@ -10,7 +10,7 @@
             @endforeach
 
             <!-- PAGINACION -->
-            <div class="clearfix"></div>
+            <div class="clearfix"></div> --}}
             {{ $images->links() }}
         </div>
     </div>
