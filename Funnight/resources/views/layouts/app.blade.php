@@ -53,17 +53,25 @@
                         <!-- Authentication Links -->
                         @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Sesión') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Registro') }}</a>
                         </li>
-                        @else
+                        @else {{--
+                        <div class="container-avatar" style="align-center">
+                            <img src="img/logov2.png" class="avatar" id="logo" alt="" />
+                        </div> --}}
+
                         <li class="nav-item">
                             <a href="{{route('home')}}" class="nav-link">Inicio</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('user.index')}}" class="nav-link">Parceros</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="{{route('user.gustos')}}" class="nav-link">Gustos</a>
                         </li>
 
                         <li class="nav-item">

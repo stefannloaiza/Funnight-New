@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/welcome.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     <!-- Styles -->
     <style>
@@ -99,8 +100,14 @@
         @endif
 
         <div class="content">
+
             <div class="title">
                 <p>
+
+                    {{--
+                    <div>
+                        <img src="{{asset('img/logov2.png')}}" class="logofunnight" />
+                    </div> --}}
                     <b>
                         Fun Night
                     </b>
