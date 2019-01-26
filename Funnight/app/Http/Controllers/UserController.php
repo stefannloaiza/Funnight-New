@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Pais;
+use App\Role;
 use App\User;
+use App\Ciudad;
+use App\Comida;
+use App\Musica;
+use App\Ambiente;
+use App\Establecimiento;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use App\Role;
-use App\Pais;
-use App\Musica;
-use App\Comida;
-use App\Ambiente;
-use App\Ciudad;
-use App\Establecimiento;
 
 class UserController extends Controller
 {
@@ -128,7 +128,6 @@ class UserController extends Controller
                         ]);
     }
 
-<<<<<<< HEAD
     /**
     * Metodo para agregar calificación de estrellas a un establecimiento con el usuario logueado que la está calificando.
     *
@@ -151,7 +150,9 @@ class UserController extends Controller
 
         return response()->json([
             'message'=>'Has dado dislike correctamente'
-=======
+        ]);
+    }
+    
     public function gustos($search= null)
     {
         $ambientes = Ambiente::all();
@@ -182,7 +183,6 @@ class UserController extends Controller
            'musica' => $musica,
            'ambientes' => $ambientes,
            'tipoEstablecimiento' => $typeEstablecimiento
->>>>>>> 3c4e4c2d0f13ade4174e6d6b1ec6ade59bc0ce81
         ]);
     }
 }

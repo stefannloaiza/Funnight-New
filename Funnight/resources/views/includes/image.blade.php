@@ -31,12 +31,6 @@
             <p>{{ ucfirst($image->description) }}</p>
         </div>
         <hr>
-        {{-- Calificacion por estrellas 1--}}
-
-        <div class="ratings">
-            <input id="input-1" name="input-1" class="rating rating-loading btn-stars" data-id="{{ $image->id }}" data-min="0" data-max="5"
-                data-step="1" value="{{ $image->averageRating }}" data-size="xs">
-        </div>
 
         {{-- cierre calificaion por estrellas 1 --}}
 
@@ -59,8 +53,3 @@
     </div>
 
 </div>
-
-<script type="text/javascript">
-    $("#input-id").rating();
-
-</script>
