@@ -75,6 +75,3 @@ Route::get('rating/{user_id}/{ratingData}', 'UserController@ratingUser');
 
 Route::get('/reporte/products', 'ReportController@index')->name('topusersexcel');
 Route::get('descargar-productos', 'ReportController@excel')->name('topusersexcel.excel');
-
-// Filtro por gustos
-// Route::get('/gustos','UserController@up')->name('user.up');

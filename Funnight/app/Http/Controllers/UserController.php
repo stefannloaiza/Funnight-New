@@ -145,14 +145,21 @@ class UserController extends Controller
         $rating->rateable_type = "App\User";
         $rating->user_id = \Auth::id();
         // dd($rating);
-
+    
         $user->ratings()->save($rating);
-
+    
         return response()->json([
+<<<<<<< HEAD
+    'message'=>'Has dado dislike correctamente'
+    ]);
+    }
+
+=======
             'message'=>'Has dado dislike correctamente'
         ]);
     }
     
+>>>>>>> c89b8b922a4beb879e9e203b1132b06cf339aa40
     public function gustos($search= null)
     {
         $ambientes = Ambiente::all();
