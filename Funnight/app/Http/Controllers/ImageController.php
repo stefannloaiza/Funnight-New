@@ -161,6 +161,7 @@ class ImageController extends Controller
     */
     public function ratingImage($image_id, $rating)
     {
+        // dd($rating);
         $image = Image::find($image_id);
 
         $rating = new willvincent\Rateable\Rating;

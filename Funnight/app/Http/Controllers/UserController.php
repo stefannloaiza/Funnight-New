@@ -15,7 +15,6 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-
     public function index($search= null)
     {
         if (!empty($search)) {
@@ -120,5 +119,30 @@ class UserController extends Controller
         return view('auth.login', [
                         'inactive'=> $inactive
                         ]);
+    }
+
+    /**
+    * Metodo para agregar calificación de estrellas a un establecimiento con el usuario logueado que la está calificando.
+    *
+    * @param int $image_id
+    *
+    * @return void
+    */
+    public function ratingUser($user_id, $ratingData)
+    {
+        // dd($rating);
+        $user = User::find($user_id);
+        // dd($user);
+        $rating = new \willvincent\Rateable\Rating;
+        $rating->rating = $ratingData;
+        $rating->rateable_type = "App\User";
+        $rating->user_id = \Auth::id();
+        // dd($rating);
+
+        $user->ratings()->save($rating);
+
+        return response()->json([
+            'message'=>'Has dado dislike correctamente'
+        ]);
     }
 }

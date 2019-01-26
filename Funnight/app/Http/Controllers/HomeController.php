@@ -43,10 +43,13 @@ class HomeController extends Controller
                     # 7 days without interaction - inactive
                     return Route::controller('inactiveUser', 'UserController');
                 } else {
+                    $images = Image::orderBy('id', 'desc')->paginate(20);
+                    // $images = Image::orderBy('id', 'desc')->simplePaginate(3);
                     # not without
                     $inactivity = false;
                     return view('sites.index', [
-                    'inactivity'=> $inactivity
+                    'inactivity'=> $inactivity,
+                    'images' => $images
                     ]);
                 }
             } else {

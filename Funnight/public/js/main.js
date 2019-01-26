@@ -73,19 +73,21 @@ window.addEventListener("load", function () {
 
     //  Metodo RATING
     function rateImage() {
-        $('.btn-stars').unbind('click').click(function () {
+        $('.btn-stars').click(function () {
             console.log('rating this image');
 
             $.ajax({
                 url: url + '/rating/' + $(this).data('id') + "/" + $(this).val(),
-                type: 'POST',
+                type: 'get',
                 success: function (response) {
+                    console.log(response);
                     if (response.like) {
                         console.log('has calificado la publicacion');
                     } else {
                         console.log('Error al dar la calificacion');
                     }
-                }
+                },
+                timeout: 2000 // sets timeout to 3 seconds
             });
         });
     }

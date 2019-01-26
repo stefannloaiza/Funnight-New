@@ -18,6 +18,14 @@
                     <h2>{{$user->name.' '.$user->surname}}</h2>
                     <p>{{'Se unio: '.\FormatTime::LongTimeFilter($user->created_at)}}</p>
                 </div>
+
+                {{-- Calificacion por estrellas 1--}}
+
+                <div class="user-info ratings">
+                    <input id="input-1" name="input-1" class="rating rating-loading btn-stars" data-id="{{ $user->id }}" data-min="0" data-max="5"
+                        data-step="1" value="{{ $user->userAverageRating  }}" data-size="xs" style="height: 40px;">
+                        <div class="clearfix"></div>
+                </div>
                 <div class="clearfix"></div>
                 <hr>
             </div>
@@ -26,15 +34,13 @@
             </div>
 
             @foreach ($user->images as $image)
-                @include('includes.image',['image'=>$image])
-            @endforeach
+    @include('includes.image',['image'=>$image]) @endforeach
         </div>
     </div>
 
-    <style>
-        body {
-            background-image: none;
-        }
-    </style>
+    <script type="text/javascript">
+        $("#input-id").rating();
+    
+    </script>
 </div>
 @endsection

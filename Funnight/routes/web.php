@@ -51,7 +51,6 @@ Route::get('/comment/delete/{id}', 'CommentController@delete')->name('comment.de
 Route::get('/comment/update/{id}', 'CommentController@update')->name('actualizarcomentario');
 Route::post('/comment/edit', 'CommentController@edit')->name('comment.edit');
 
-
 // LIKES
 Route::get('/likes', 'LikeController@index')->name('likes');
 Route::get('/like/{image_id}', 'LikeController@like')->name('like.save');
@@ -68,7 +67,7 @@ Route::get('/ajaxGetCiudad', 'CiudadController@ajaxGetCiudad');
 Route::get('/administracion', 'ReportController@admin')->name('administrar');
 
 // RATINGS
-Route::post('rating/{image_id}/{rating}', 'ImageController@ratingImage');
+Route::get('rating/{user_id}/{ratingData}', 'UserController@ratingUser');
 
 // REPORTE EXCEL
 

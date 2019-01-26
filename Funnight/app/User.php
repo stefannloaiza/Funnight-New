@@ -2,12 +2,14 @@
 
 namespace App;
 
+use willvincent\Rateable\Rateable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use Rateable;
 
     /**
      * The attributes that are mass assignable.

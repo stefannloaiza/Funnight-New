@@ -5,12 +5,8 @@
         <div class="col-md-10">
     @include('includes.message')
 
-
-
-
             <div class="card pub_image pub_image_detail">
                 <div class="card-header">
-
 
                     @if($image->user->image)
                     <div class="container-avatar">
@@ -18,20 +14,18 @@
                     </div>
                     @endif
 
-
-
-
                     <div class="data-user">
-                        {{$image->user->name.' '.$image->user->surname}}
-                        <span class="nickname">
-                        {{' | @'.$image->user->nick}}
-                </span>
-
+                        <a href="{{ route('profile',['id'=>$image->user->id]) }}">
+                                    {{ ucwords($image->user->name.' '.$image->user->surname)  }}
+                                        <span class="nickname">
+                                            {{ '| @'.$image->user->nick }}
+                                        </span>
+                                    </a>
                     </div>
                 </div>
 
                 <div class="card-body">
-                    <div class="image-container image-detail">
+                    <div class="image-container" style="max-height: none;">
                         <img src="{{route('image.file',['filename'=>$image->image_path])}}" />
                     </div>
 
@@ -39,9 +33,9 @@
                     <div class="description">
                         <span class="nickname">{{'@'.$image->user->nick}}</span>
                         <span class="nickname date">{{' | '.\FormatTime::LongTimeFilter($image->created_at)}}</span>
-                        <p>{{$image->description}}</p>
+                        <br><br>
+                        <p>{{ ucfirst($image->description) }}</p>
                     </div>
-
 
                     <div class="likes">
 
@@ -60,8 +54,8 @@
 
                         <!-- Button to Open the Modal -->
                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">
-        Eliminar
-      </button>
+                            Eliminar
+                        </button>
 
                         <!-- The Modal -->
                         <div class="modal" id="myModal">
@@ -119,12 +113,13 @@
                         <div class="comment">
                             <span class="nickname">{{'@'.$comment->user->nick}}</span>
                             <span class="nickname date"> {{' | '.\FormatTime::LongTimeFilter($comment->created_at)}}</span>
-                            <p>{{$comment->content}}<br/> @if(Auth::check() &&($comment->user_id == Auth::user()->id || $comment->image->user_id
-                                == Auth::user()->id))
-                                <a href="{{route('comment.delete',['id'=>$comment->id])}}" class="btn btn-sm btn-danger">            
+                            <br>
+                            <p>{{ $comment->content }}
+                                <br>
+                                <br> 
+                            @if(Auth::check() && ($comment->user_id == Auth::user()->id || $comment->image->user_id == Auth::user()->id))
+                                <a href="{{ route('comment.delete',['id'=>$comment->id]) }}" class="btn btn-sm btn-danger">            
                                     Eliminar
-                             </a>
-
                                 </a>
 
                                 <form action="{{url('comment')}}/{{'update'}}/{{$comment->id}}" method="GET">
@@ -134,7 +129,7 @@
                                                 Actualizar
                                     </button>
                                     </form>
-                                    @endif
+                            @endif
                             </p>
                         </div>
                         @endforeach

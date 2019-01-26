@@ -15,12 +15,12 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet"> {{--
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"> --}} {{--
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet"> --}}
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/preview.css') }}" rel="stylesheet"> 
+    {{-- <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">  --}}
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css"/>
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -73,20 +73,22 @@
                         <li class="nav-item">
                             <a href="{{route('likes')}}" class="nav-link">Favoritas</a>
                         </li>
+                        
+                        @if( Auth::user()->hasRole('site') )
                         <li class="nav-item">
                             <a href="{{route('image.create')}}" class="nav-link">Subir Imagen</a>
                         </li>
+                        @endif
                         <li>
 
                         </li>
                         <li>
-    @include('includes.avatar')
+                            @include('includes.avatar')
                         </li>
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} {{--<span class="caret"></span>--}}
-                                </a>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ ucwords( Auth::user()->name ) }} {{--<span class="caret"></span>--}}
+                            </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('profile',['id' => Auth::user()->id])}}">
@@ -94,10 +96,12 @@
                                     </a>
                                 <a class="dropdown-item" href="{{route('config')}}">
                                                      Configuración             
-                                    </a> {{-- @if(users()->roles()->name='admin'){ --}}
-                                <a class="dropdown-item" href="{{route('administrar')}}">
-                                        Reportes             
-                                     </a>
+                                    </a> 
+                                    @if( Auth::user()->hasRole('admin') )
+                                        <a class="dropdown-item" href="{{route('administrar')}}">
+                                            Reportes             
+                                        </a>
+                                    @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}

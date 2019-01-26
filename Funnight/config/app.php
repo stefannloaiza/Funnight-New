@@ -152,6 +152,7 @@ return [
         /*
          * Package Service Providers...
          */
+        willvincent\Rateable\RateableServiceProvider::class,
 
         /*
          * Application Service Providers...

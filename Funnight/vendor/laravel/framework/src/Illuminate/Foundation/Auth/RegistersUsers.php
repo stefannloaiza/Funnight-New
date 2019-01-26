@@ -28,6 +28,7 @@ trait RegistersUsers
         $roles = Role::where('id', '!=', '1')->get();
         $paises = Pais::all();
 
+
         $comidas = Comida::all();
         $musica = Musica::all();
         $ambientes = Ambiente::all();
