@@ -15,8 +15,15 @@ form .avatar{
    margin-left: 20px;
 }
 
+.navbar-light .navbar-nav .nav-item > .nav-link {
+    color: white;
+    opacity: .7;
+}
 
-
+.navbar-light .navbar-nav .nav-item > .nav-link:hover{
+    color: #23C8F9;
+    opacity: 1;
+}
 
 .navbar .container-avatar img,
 .pub_image .container-avatar img{

@@ -16,10 +16,10 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     {{-- <link href="{{ asset('css/preview.css') }}" rel="stylesheet">  --}}
     {{-- <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">  --}}
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css"/>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.css" rel="stylesheet">
 
@@ -29,28 +29,62 @@
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/js/star-rating.min.js"></script>
+
+    <!-- Styles -->
+    <style>
+        html,
+        body {
+            background-image: url("img/fondo2.jpg");
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            font-weight: 100;
+            /* height: 100vh; */
+            margin: 0;
+        }
+
+        .form-check {
+            padding: 0;
+        }
+        input[type="checkbox"]{
+            margin: 4px -15px 0 0;
+        }
+        .form-check-label{
+            margin-left: 15px;
+        }
+        .card{
+            width: 80%;
+            border: 0;
+        }
+
+        .row{
+            background-color: white;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background-color: black; border-radius: 0px; ">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                {{-- <a class="navbar-brand" href="{{ url('/') }}">
                     
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    <img src="img/logov2.png" class="img-rounded" id="logo" alt="" style="float: left; width: 15%; height: 100%;">
+                </a> --}}
+                {{-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
-                </button>
+                </button> --}}
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
+                    <ul class="navbar-nav mr-auto" style="width: 50%;">
+                        <img src="img/logov2.png" class="img-rounded" id="logo" alt="" style="float: left; width: 15%; height: 100%;">
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto" style="float: right;">
                         <!-- Authentication Links -->
                         @guest
                         <li class="nav-item">

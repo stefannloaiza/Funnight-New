@@ -1,4 +1,4 @@
-<div class="card pub_image">
+<div class="pub_image">
     <div class="card-header">
 
         @if($image->user->image)
