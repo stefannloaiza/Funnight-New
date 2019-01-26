@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use App\Role;
+use App\Pais;
+use App\Musica;
+use App\Comida;
+use App\Ambiente;
+use App\Ciudad;
+use App\Establecimiento;
 
 class UserController extends Controller
 {
@@ -23,9 +30,9 @@ class UserController extends Controller
              ->orWhere('surname', 'LIKE', '%'.$search.'%')
              ->orWhere('email', 'LIKE', '%'.$search.'%')
              ->orderBy('id', 'desc')
-            ->paginate(5);
+            ->paginate(50);
         } else {
-            $users = User::orderBy('id', 'desc')->paginate(5);
+            $users = User::orderBy('id', 'desc')->paginate(50);
         }
         return view('user.index', [
 
@@ -121,6 +128,7 @@ class UserController extends Controller
                         ]);
     }
 
+<<<<<<< HEAD
     /**
     * Metodo para agregar calificación de estrellas a un establecimiento con el usuario logueado que la está calificando.
     *
@@ -143,6 +151,38 @@ class UserController extends Controller
 
         return response()->json([
             'message'=>'Has dado dislike correctamente'
+=======
+    public function gustos($search= null)
+    {
+        $ambientes = Ambiente::all();
+        $paises = Pais::all();
+        $comidas = Comida::all();
+        $musica = Musica::all();
+        $ambientes = Ambiente::all();
+        $typeEstablecimiento = Establecimiento::all();
+
+        if (!empty($search)) {
+            $users =User::where('nick', 'LIKE', '%'.$search.'%')
+             ->orWhere('paisActual', 'LIKE', '%'.$search.'%')
+             ->orWhere('tipo_establecimiento', 'LIKE', '%'.$search.'%')
+             ->orWhere('tipo_comida', 'LIKE', '%'.$search.'%')
+             ->orWhere('tipo_musica', 'LIKE', '%'.$search.'%')
+             ->orWhere('tipo_ambiente', 'LIKE', '%'.$search.'%')
+             ->orderBy('id', 'desc')
+            ->paginate(50);
+        } else {
+            $users = User::orderBy('id', 'desc')->paginate(50);
+        }
+        return view('user.gustos', [
+
+           'users' => $users,
+           'paises' => $paises,
+           'ambientes' => $ambientes,
+           'comidas' => $comidas,
+           'musica' => $musica,
+           'ambientes' => $ambientes,
+           'tipoEstablecimiento' => $typeEstablecimiento
+>>>>>>> 3c4e4c2d0f13ade4174e6d6b1ec6ade59bc0ce81
         ]);
     }
 }

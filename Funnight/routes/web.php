@@ -27,6 +27,8 @@ Route::post('/user/update', 'UserController@update')->name('user.update');
 Route::get('/user/avatar/{filename}', 'UserController@getImage')->name('user.avatar');
 Route::get('/perfil/{id}', 'UserController@profile')->name('profile');
 Route::get('/gente/{search?}', 'UserController@index')->name('user.index');
+Route::get('/gustos/{search?}', 'UserController@gustos')->name('user.gustos');
+
 
 // Establecimiento
 Route::get('/sites', 'EstablecimientoController@index')->name('sites.index');
@@ -73,3 +75,6 @@ Route::get('rating/{user_id}/{ratingData}', 'UserController@ratingUser');
 
 Route::get('/reporte/products', 'ReportController@index')->name('topusersexcel');
 Route::get('descargar-productos', 'ReportController@excel')->name('topusersexcel.excel');
+
+// Filtro por gustos
+// Route::get('/gustos','UserController@up')->name('user.up');
