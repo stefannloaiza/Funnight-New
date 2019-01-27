@@ -66,8 +66,7 @@ class LikeController extends Controller
 
         if ($like) {
        
-
-        //eliminar like
+            // eliminar like
             $like->delete();
        
             return response()->json([

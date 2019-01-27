@@ -45,6 +45,7 @@ Route::get('/image/file/{filename}', 'ImageController@getImage')->name('image.fi
 Route::get('/image/{id}', 'ImageController@detail')->name('image.detail');
 Route::get('/image/delete/{id}', 'ImageController@delete')->name('image.delete');
 Route::get('/imagen/editar/{id}', 'ImageController@edit')->name('image.edit');
+Route::get('/countLikes/{image_id}', 'ImageController@countLikesImage')->name('image.countLike');
 Route::post('/image/update', 'ImageController@update')->name('image.update');
 
 // COMENTARIOS

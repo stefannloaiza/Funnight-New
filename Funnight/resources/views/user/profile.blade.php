@@ -23,7 +23,7 @@
 
                 <div class="user-info ratings">
                     <input id="input-1" name="input-1" class="rating rating-loading btn-stars" data-id="{{ $user->id }}" data-min="0" data-max="5"
-                        data-step="1" value="{{ $user->userAverageRating  }}" data-size="xs" style="height: 40px;">
+                        data-step="1" value="{{ round($user->userAverageRating)   }}" data-size="xs" style="height: 40px;">
                     <div class="clearfix"></div>
                 </div>
                 <div class="clearfix"></div>

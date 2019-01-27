@@ -1,10 +1,27 @@
 
-var url = 'http://localhost:8000';
+// var url = 'http://127.0.0.1:8000';
+var url = location.protocol + '//' + location.host;
 window.addEventListener("load", function () {
 
+    console.log('la url es:' + url);
 
     $('.btn-like').css('cursor', 'pointer');
     $('.btn-dislike').css('cursor', 'pointer');
+
+
+
+    // boton de like
+    function countLikes() {
+        $.ajax({
+            url: url + '/countLikes/' + $('.btn-like').data('id'),
+            type: 'GET',
+            success: function (response) {
+                // numberLike
+                console.log(response.numberLike);
+                $(".number_likes").text(response.numberLike);
+            }
+        });
+    }
 
     //boton de like
     function like() {
@@ -19,8 +36,14 @@ window.addEventListener("load", function () {
                 success: function (response) {
                     if (response.like) {
                         console.log('has dado like a la publicacion');
+<<<<<<< HEAD
 
                         // $(".number_likes").text("");
+=======
+                        setTimeout(function () {
+                            countLikes();
+                        }, 9000);
+>>>>>>> d3f474791724f7fe26f118c7fdb76bf88aa1304e
                     } else {
                         console.log('Error al dar like');
                     }
@@ -31,8 +54,6 @@ window.addEventListener("load", function () {
         });
     }
     like();
-
-
 
     //boton de dislike
     function dislike() {
@@ -47,6 +68,7 @@ window.addEventListener("load", function () {
                 success: function (response) {
                     if (response.like) {
                         console.log('has dado dislike a la publicacion');
+                        countLikes();
                     } else {
                         console.log('Error al dar dislike');
                     }
@@ -73,27 +95,30 @@ window.addEventListener("load", function () {
 
     //  Metodo RATING
     function rateImage() {
-        $('.btn-stars').click(function () {
-            console.log('rating this image');
+        console.log('rating...');
+        $.ajax({
+            url: url + '/rating/' + $('.btn-stars').data('id') + "/" + $('.btn-stars').val(),
+            method: "get",
+            type: 'get',
+            crossDomain: true,
+            contentType: 'application/json',
+            // dataType: 'jsonp',
+            timeout: 8000, // sets timeout to 3 seconds
+            success: function (response) {
 
-            $.ajax({
-                url: url + '/rating/' + $(this).data('id') + "/" + $(this).val(),
-                method: "get",
-                type: 'get',
-                crossDomain: true,
-                contentType: 'application/json',
-                // dataType: 'jsonp',
-                timeout: 3000, // sets timeout to 3 seconds
-                success: function (response) {
-                    console.log(response);
-                    if (response.like) {
-                        console.log('has calificado la publicacion');
-                    } else {
-                        console.log('Error al dar la calificacion');
-                    }
+                if (response.finish) {
+                    console.log('has calificado la publicacion');
+                } else {
+                    console.log('Error al dar la calificacion');
                 }
-            });
+            }
         });
     }
-    rateImage();
+    $('.btn-stars').unbind('click').click(function () {
+        console.log('call rating');
+
+        setTimeout(function () {
+            rateImage();
+        }, 1000);
+    });
 });

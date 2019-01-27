@@ -163,8 +163,7 @@ class UserController extends Controller
         $user->ratings()->save($rating);
     
         return response()->json([
-   
-
+            'finish'=>true,
             'message'=>'Has dado dislike correctamente'
             ]);
     }
