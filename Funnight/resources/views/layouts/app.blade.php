@@ -54,27 +54,18 @@
         .form-check-label {
             margin-left: 15px;
         }
-<<<<<<< HEAD
 
         .card {
-            width: 80%;
+            /* width: 80%; */
             border: 0;
         }
 
         .row {
-            background-color: white;
-=======
-        .card{
-            /* width: 80%; */
-            border: 0;
-        }
-        .row{
             /* background-color: white; */
->>>>>>> 38110ba64e759c27405c468622161769582918ba
             border-radius: 5px;
         }
 
-        .searchdata{
+        .searchdata {
             background-color: white;
         }
     </style>
