@@ -19,7 +19,7 @@ window.addEventListener("load", function () {
                 success: function (response) {
                     if (response.like) {
                         console.log('has dado like a la publicacion');
-                        
+
                         // $(".number_likes").text("");
                     } else {
                         console.log('Error al dar like');

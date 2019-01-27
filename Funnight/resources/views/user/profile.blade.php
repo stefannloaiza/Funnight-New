@@ -40,9 +40,9 @@
                     <tr>
 
                         <th>Pais </th>
+                        <th>Tipo de Ambiente</th>
                         <th>Tipo de Musica</th>
                         <th>Tipo de Comida</th>
-                        <th>Tipo de Ambiente</th>
                         <th>Tipo de Establecimiento</th>
 
                     </tr>

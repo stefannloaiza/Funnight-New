@@ -113,7 +113,7 @@ class UserController extends Controller
         
         
 
-        // dd($paises->nombre);
+        // dd($user);
         return view('user.profile', [
            'user'=> $user,
            'paises' => $paises,
