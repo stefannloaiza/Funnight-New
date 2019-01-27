@@ -27,7 +27,10 @@ Route::post('/user/update', 'UserController@update')->name('user.update');
 Route::get('/user/avatar/{filename}', 'UserController@getImage')->name('user.avatar');
 Route::get('/perfil/{id}', 'UserController@profile')->name('profile');
 Route::get('/gente/{search?}', 'UserController@index')->name('user.index');
-Route::get('/gustos/{search?}', 'UserController@gustos')->name('user.gustos');
+// Route::get('/gustos/{search?}', 'UserController@gustos')->name('user.gustos');
+
+Route::get('/gustosview', 'UserController@gustosview')->name('user.gustosview');
+Route::get('/gustos', 'UserController@gustos')->name('user.gustos');
 
 
 // Establecimiento

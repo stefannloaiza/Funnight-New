@@ -25,19 +25,21 @@ class UserController extends Controller
     public function index($search= null)
     {
         if (!empty($search)) {
-            $users =User::where('nick', 'LIKE', '%'.$search.'%')
-             ->orWhere('name', 'LIKE', '%'.$search.'%')
-             ->orWhere('surname', 'LIKE', '%'.$search.'%')
-             ->orWhere('email', 'LIKE', '%'.$search.'%')
-             ->orderBy('id', 'desc')
+            // dd($search);
+            $users =User::where('role', '2')
+            ->where(function ($query) use ($search) {
+                $query->where('nick', 'LIKE', '%'.$search.'%')
+                 ->orWhere('name', 'LIKE', '%'.$search.'%')
+                 ->orWhere('surname', 'LIKE', '%'.$search.'%')
+                 ->orWhere('email', 'LIKE', '%'.$search.'%');
+            })
+            ->orderBy('id', 'desc')
             ->paginate(50);
         } else {
-            $users = User::orderBy('id', 'desc')->paginate(50);
+            $users = User::where('role', '2')->orderBy('id', 'desc')->paginate(50);
         }
         return view('user.index', [
-
            'users' => $users
-
         ]);
     }
 
@@ -167,8 +169,29 @@ class UserController extends Controller
             'message'=>'Has dado dislike correctamente'
             ]);
     }
+
+    public function gustosview()
+    {
+        $users = User::where('role', '3')->orderBy('id', 'desc')->paginate(50);
+        $paises = Pais::all();
+        $comidas = Comida::all();
+        $musica = Musica::all();
+        $ambientes = Ambiente::all();
+        $typeEstablecimiento = Establecimiento::all();
+        
+        return view('user.gustos', [
+
+            'users' => $users,
+            'paises' => $paises,
+            'ambientes' => $ambientes,
+            'comidas' => $comidas,
+            'musica' => $musica,
+            'ambientes' => $ambientes,
+            'tipoEstablecimiento' => $typeEstablecimiento
+         ]);
+    }
     
-    public function gustos($search= null)
+    public function gustos(Request $request)
     {
         $paises = Pais::all();
         $comidas = Comida::all();
@@ -176,18 +199,39 @@ class UserController extends Controller
         $ambientes = Ambiente::all();
         $typeEstablecimiento = Establecimiento::all();
 
-        if (!empty($search)) {
-            $users =User::where('nick', 'LIKE', '%'.$search.'%')
-             ->orWhere('paisActual', 'LIKE', '%'.$search.'%')
-             ->orWhere('tipo_establecimiento', 'LIKE', '%'.$search.'%')
-             ->orWhere('tipo_comida', 'LIKE', '%'.$search.'%')
-             ->orWhere('tipo_musica', 'LIKE', '%'.$search.'%')
-             ->orWhere('tipo_ambiente', 'LIKE', '%'.$search.'%')
-             ->orderBy('id', 'desc')
-            ->paginate(50);
-        } else {
-            $users = User::orderBy('id', 'desc')->paginate(50);
+        $users = User::where('role', '3');
+        
+        if ($request['search'] != null && $request['search'] != "") {
+            $users->where('nick', 'LIKE', '%'.$request['search'].'%');
         }
+        
+        if ($request['ambienteUser'] != null && $request['ambienteUser'] != "") {
+            $users->where('tipo_ambiente', '=', $request['ambienteUser']);
+        }
+
+        if ($request['comidaSite'] != null && $request['comidaSite'] != "") {
+            $users->where('tipo_comida', '=', $request['comidaSite']);
+        }
+
+        if ($request['typeSite'] != null && $request['typeSite'] != "") {
+            $users->where('tipo_establecimiento', '=', $request['typeSite']);
+        }
+
+        if ($request['musicaSite'] != null && $request['musicaSite'] != "") {
+            $users->where('tipo_musica', '=', $request['musicaSite']);
+        }
+
+        if ($request['pais'] != null && $request['pais'] != "") {
+            // dd($request);
+            $users->where('paisActual', '=', $request['pais']);
+        }
+
+        $users->orderBy('id', 'desc')->paginate(50);
+
+        $users = $users->get();
+        
+        // dd($users);
+
         return view('user.gustos', [
 
            'users' => $users,
