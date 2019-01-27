@@ -36,14 +36,9 @@ window.addEventListener("load", function () {
                 success: function (response) {
                     if (response.like) {
                         console.log('has dado like a la publicacion');
-<<<<<<< HEAD
-
-                        // $(".number_likes").text("");
-=======
                         setTimeout(function () {
                             countLikes();
-                        }, 9000);
->>>>>>> d3f474791724f7fe26f118c7fdb76bf88aa1304e
+                        }, 1000);
                     } else {
                         console.log('Error al dar like');
                     }
