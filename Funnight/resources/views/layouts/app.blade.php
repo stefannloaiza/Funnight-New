@@ -52,12 +52,16 @@
             margin-left: 15px;
         }
         .card{
-            width: 80%;
+            /* width: 80%; */
             border: 0;
         }
         .row{
-            background-color: white;
+            /* background-color: white; */
             border-radius: 5px;
+        }
+
+        .searchdata{
+            background-color: white;
         }
     </style>
 </head>

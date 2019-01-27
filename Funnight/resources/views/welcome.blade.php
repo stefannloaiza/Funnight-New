@@ -52,6 +52,7 @@
         .content {
             text-align: center;
             margin: 15%;
+            margin-bottom: 0;
         }
 
         .title {
