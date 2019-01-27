@@ -2,9 +2,10 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center searchdata">
-        <div class="col-md-8">
+        <div class="col-md-10">
 
             <h1>Gustos</h1>
+            <hr>
             <form method="GET" action="{{ route('user.gustos') }}" id="buscadorgustos">
                 <div class="row">
                     <div class="form-group col">
@@ -13,20 +14,23 @@
                     </div>
                     <div class="form-group col btn-search">
 
-                        <input type="submit" value="buscar" class="btn btn-success" />
+                            <button type="submit" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar
+                            </button>
+                        {{-- <input type="submit" value="buscar" class="btn btn-success" /> --}}
                     </div>
                 </div>
-                <div>
+                <div class="panel-body">
                     <div>
                         <h2>Puedes buscar de la siguiente forma por tipo:</h2>
                     </div>
-                    <table class="table">
+                    <table class="table table-striped table-condensed">
                         <tr>
-                            <th>Ambiente</th>
-                            <th>Comida</th>
-                            <th>Establecimiento</th>
-                            <th>Musica</th>
-                            <th>Pais</th>
+                            <th class="text-center">Ambiente</th>
+                            <th class="text-center">Comida</th>
+                            <th class="text-center">Establecimiento</th>
+                            <th class="text-center">Musica</th>
+                            <th class="text-center">Pais</th>
                         </tr>
                         <tr>
                             <td>
@@ -76,7 +80,6 @@
                 </div>
             </form>
             <hr>
-            <br>
             <div>
 
                 @foreach ($users as $user)
@@ -94,7 +97,9 @@
                         <h2>{{'@'.$user->nick}}</h2>
                         <h3>{{$user->name.' '.$user->surname}}</h3>
                         <p>{{'Se unio: '.\FormatTime::LongTimeFilter($user->created_at)}}</p>
-                        <a href="{{route('profile',['id'=> $user->id])}}" class="btn btn-success">Ver Perfil</a>
+                        <a href="{{route('profile',['id'=> $user->id])}}" class="btn btn-info">
+                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver Perfil
+                        </a>
                     </div>
                     <div class="clearfix"></div>
                     <hr>

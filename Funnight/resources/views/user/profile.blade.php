@@ -1,8 +1,8 @@
 @extends('layouts.app') 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <div class="row justify-content-center searchdata">
+        <div class="col-md-10" style="padding-top: 15px; ">
 
             <div class="profile-user">
 
@@ -17,6 +17,15 @@
                     <h1>{{'@'.$user->nick}}</h1>
                     <h2>{{$user->name.' '.$user->surname}}</h2>
                     <p>{{'Se unio: '.\FormatTime::LongTimeFilter($user->created_at)}}</p>
+
+                    @if( $user->hasRole('site') )
+                        <button name="" id="" type="button" class="btn btn-success">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Seguir
+                        </button> 
+                        {{-- <button name="" id="" type="button" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Marcar como favorito
+                        </button>  --}}
+                    @endif
                 </div>
 
                 {{-- Calificacion por estrellas 1--}}
@@ -27,53 +36,41 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="clearfix"></div>
-                <hr>
             </div>
-            <div>
-
-
-                <title>Descripcion Perfil</title>
-
-                <h1>Mis Gustos! FunNight</h1>
-
-                <table class="table">
+            <br>
+            <div class="table-responsive">
+                <h2>Mis Gustos!</h2>
+                <hr>
+                <table class="table table-striped ">
                     <tr>
-
-                        <th>Pais </th>
-                        <th>Tipo de Ambiente</th>
-                        <th>Tipo de Musica</th>
-                        <th>Tipo de Comida</th>
-                        <th>Tipo de Establecimiento</th>
-
+                        <th class="text-center">Pais</th>
+                        <th class="text-center">Tipo de Ambiente</th>
+                        <th class="text-center">Tipo de Musica</th>
+                        <th class="text-center">Tipo de Comida</th>
+                        <th class="text-center">Tipo de Establecimiento</th>
                     </tr>
-
-
-
-                    <tr>
-
-
-
+                    <tr class="text-center">
                         <td>{{$paises->nombre}}</td>
                         <td>{{$ambientes->nombre}}</td>
                         <td>{{$musica->nombre}}</td>
                         <td>{{$comidas->nombre}}</td>
                         <td>{{$tipoEstablecimiento->nombre}}</td>
-
-
-
-
-
-
                     </tr>
-
                 </table>
+                <hr>
             </div>
-
-            <div class="clearfix">
+            <div class="clearfix"></div>
+            <div class="images_profile">
+                <h2>Publicaciones</h2>
+                <hr> 
+                @if ($user->images != null && $user->images != "")
+                    @foreach ($user->images as $image)
+                        @include('includes.image',['image'=>$image]) 
+                    @endforeach
+                @else
+                    <small>Este usuario no tiene publicaciones.</small>
+                @endif
             </div>
-
-            @foreach ($user->images as $image)
-    @include('includes.image',['image'=>$image]) @endforeach
         </div>
     </div>
 

@@ -112,8 +112,6 @@ class UserController extends Controller
         $comidas = Comida::where('id_comida', $user->tipo_comida)->first();
         $musica = Musica::where('id_musica', $user->tipo_musica)->first();
         $typeEstablecimiento = Establecimiento::where('id_tipo_establecimiento', $user->tipo_establecimiento)->first();
-        
-        
 
         // dd($user);
         return view('user.profile', [
@@ -242,5 +240,18 @@ class UserController extends Controller
            'ambientes' => $ambientes,
            'tipoEstablecimiento' => $typeEstablecimiento
         ]);
+    }
+
+    /**
+     * Metodo para seguir un usuario establecimiento
+     *
+     * @param Type $var
+     *
+     * @return void
+     */
+    public function seguir()
+    {
+        // return redirect();
+        return redirect()->back();
     }
 }

@@ -108,11 +108,11 @@ overflow: hidden;
     font-size: 11px;
 }
 
-.profile-user{
-    height: 200px;
+ .profile-user{
+     /* height: 200px;
     margin-bottom: 40px;
-    padding-bottom: 20px;
-}
+    padding-bottom: 20px;  */
+} 
 
 .profile-user .container-avatar{
     width: 200px;
@@ -120,6 +120,7 @@ overflow: hidden;
     border-radius: 900px;
     overflow: hidden;
     float: left;
+    margin-top: 30px;
 }
 
 .profile-user .container-avatar img{
@@ -129,7 +130,7 @@ overflow: hidden;
 .profile-user .user-info{
     float: left;
     padding-left: 30px;
-    padding-top: 30px;
+    /* padding-top: 30px; */
 }
 
 .btn-search{
@@ -137,8 +138,10 @@ overflow: hidden;
     padding-left: 0px;
 }
 
-.ratings {
-    padding-left: 20px;
+.profile-user > .ratings {
+    padding-top: 30px;
+    /* padding-left: 0; */
+    margin-top: 20px;
 }
 
 .titulo_reporte{
