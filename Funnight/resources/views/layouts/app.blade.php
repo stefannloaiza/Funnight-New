@@ -43,6 +43,10 @@
             margin: 0;
         }
 
+        .titles {
+            color: white;
+        }
+
         .form-check {
             padding: 0;
         }
@@ -112,12 +116,13 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{route('user.gustosview')}}" class="nav-link">Gustos</a>
+                            <a href="{{route('user.gustosview')}}" class="nav-link">Establecimiento</a>
                         </li>
 
+                        {{--
                         <li class="nav-item">
                             <a href="{{route('sites.show')}}" class="nav-link">Establecimiento</a>
-                        </li>
+                        </li> --}}
 
                         <li class="nav-item">
                             <a href="{{route('likes')}}" class="nav-link">Favoritas</a>
