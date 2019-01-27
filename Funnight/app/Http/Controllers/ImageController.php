@@ -150,6 +150,17 @@ class ImageController extends Controller
                      ->with(['message'=> 'imagen actualizada con exito']);
     }
 
+    public function countLikesImage($image_id)
+    {
+        $image = Image::find($image_id);
+        // echo "console.log('".$image->likes."');";
+        // dd($image->likes);
+        $count = count($image->likes);
+
+        return response()->json([
+            'numberLike'=>$count
+        ]);
+    }
 
 
     /**

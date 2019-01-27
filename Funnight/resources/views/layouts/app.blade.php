@@ -8,7 +8,6 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>FUNNIGHT</title>
 
     <!-- Fonts -->
@@ -56,7 +55,6 @@
             width: 80%;
             border: 0;
         }
-
         .row{
             background-color: white;
             border-radius: 5px;
