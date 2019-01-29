@@ -15,6 +15,7 @@ class CreateEstablecimientosTable extends Migration
     {
         Schema::create('establecimiento', function (Blueprint $table) {
             $table->increments('id_tipo_establecimiento');
+            $table->string('nombre');
             $table->timestamps();
         });
     }

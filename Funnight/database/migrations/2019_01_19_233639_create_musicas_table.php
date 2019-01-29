@@ -15,6 +15,7 @@ class CreateMusicasTable extends Migration
     {
         Schema::create('musica', function (Blueprint $table) {
             $table->increments('id_musica');
+            $table->string('nombre');
             $table->timestamps();
         });
     }

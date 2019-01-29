@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('role');
+            $table->string('role')->nullable();
             $table->string('name');
             $table->string('surname');
             $table->string('nick');
@@ -23,6 +23,19 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('image')->nullable();
             $table->dateTime('lastInteraction');
+            $table->string('userActive');
+            $table->date('fechaNacimiento');
+            $table->string('genero');
+            $table->integer('paisActual');
+            $table->integer('ciudadActual');
+            $table->string('zona');
+            $table->string('direccion_residencia');
+            $table->integer('telefono');
+            $table->integer('celular');
+            $table->integer('tipo_establecimiento');
+            $table->integer('tipo_comida');
+            $table->integer('tipo_musica');
+            $table->integer('tipo_ambiente');
             $table->rememberToken();
             $table->timestamps();
         });

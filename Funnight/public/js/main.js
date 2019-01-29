@@ -116,4 +116,63 @@ window.addEventListener("load", function () {
             rateImage();
         }, 1000);
     });
+
+
+    /**
+     *  Metodo para seguir un usuario a un establecimiento.
+     */
+    function followSite() {
+
+        $('.followSite').click(function () {
+            console.log('following...');
+
+            $.ajax({
+                url: url + '/seguir/' + $(this).attr('id'),
+                type: 'GET',
+                success: function (response) {
+                    // console.log(response);
+                    if (response.finish) {
+
+                        $(".unfollowSite").removeAttr('hidden');
+                        $(".unfollowSite").show();
+                        $('.followSite').hide();
+
+                    } else {
+                        console.log('Error al dar dislike');
+                    }
+                }
+            });
+
+        });
+    }
+    // Execute
+    followSite();
+
+    /**
+     *  Metodo para seguir un usuario a un establecimiento.
+     */
+    function unFollowSite() {
+
+        $('.unfollowSite').click(function () {
+            console.log('unfollowing...');
+
+            $.ajax({
+                url: url + '/dejarSeguir/' + $(this).attr('id'),
+                type: 'GET',
+                success: function (response) {
+                    if (response.finish) {
+
+                        $(".followSite").show();
+                        $('.unfollowSite').hide();
+
+                    } else {
+                        console.log('Error al borrar');
+                    }
+                }
+            });
+
+        });
+    }
+    // Execute
+    unFollowSite();
 });

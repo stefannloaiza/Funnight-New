@@ -10,7 +10,6 @@
                 <div class="container-avatar">
                     <img src="{{ route('user.avatar',['filename'=>$user->image]) }}" class="avatar" />
                 </div>
-
                 @endif
 
                 <div class="user-info">
@@ -18,13 +17,15 @@
                     <h2>{{$user->name.' '.$user->surname}}</h2>
                     <p>{{'Se unio: '.\FormatTime::LongTimeFilter($user->created_at)}}</p>
 
-                    @if( $user->hasRole('site') )
-                        <button name="" id="" type="button" class="btn btn-success">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Seguir
-                        </button> 
-                        {{-- <button name="" id="" type="button" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Marcar como favorito
-                        </button>  --}}
+                    @if( $user->hasRole('site') ) 
+                        @if( Auth::user()->hasRole('site') )
+                            <button name="followSite" id="{{ $user->id }}" type="button" class="btn btn-primary btn-block followSite">
+                                Seguir
+                            </button>
+                            <button name="unfollowSite" id="{{ $user->id }}" type="button" class="btn btn-success btn-block unfollowSite" hidden>
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Seguido
+                            </button>
+                        @endif
                     @endif
                 </div>
 
@@ -62,14 +63,10 @@
             <div class="clearfix"></div>
             <div class="images_profile">
                 <h2>Publicaciones</h2>
-                <hr> 
-                @if ($user->images != null && $user->images != "")
-                    @foreach ($user->images as $image)
-                        @include('includes.image',['image'=>$image]) 
-                    @endforeach
-                @else
-                    <small>Este usuario no tiene publicaciones.</small>
-                @endif
+                <hr> @if ($user->images != null && $user->images != "") @foreach ($user->images as $image)
+    @include('includes.image',['image'=>$image])
+                @endforeach @else
+                <small>Este usuario no tiene publicaciones.</small> @endif
             </div>
         </div>
     </div>
