@@ -1,12 +1,15 @@
 <div class="pub_image">
     <div class="card-header">
 
-        @if($image->user->image)
         <div class="container-avatar">
-            <img src="{{ route('user.avatar',['filename'=>$image->user->image]) }}" class="avatar" />
+                @if ($image->user->image <> null && $image->user->image <> "" )
+                    <img src="{{ route('user.avatar',['filename'=>$image->user->image]) }}" class="avatar" />
+                @else
+                    <img src="{{ asset('img/profile1.jpg') }}" class="avatar" />
+                @endif
         </div>
-        @endif
 
+        
         <div class="data-user">
             <a href="{{ route('profile',['id'=>$image->user->id]) }}">
             {{ ucwords($image->user->name.' '.$image->user->surname)  }}
@@ -20,7 +23,11 @@
     <div class="card-body">
         <div class="image-container">
             <a href="{{ route('image.detail',['id'=>$image->id]) }}">
-                <img src="{{ route('image.file',['filename'=>$image->image_path]) }}" class="imageSites"/>
+                @if ($image->image_path <> null && $image->image_path <> "" )
+                    <img src="{{ route('image.file',['filename'=>$image->image_path]) }}" class="imageSites"/>
+                @else
+                    <img src="{{ asset('img/noimage.jpg') }}" class="imageSites" />
+                @endif
             </a>
         </div>
 

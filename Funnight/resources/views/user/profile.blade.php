@@ -5,13 +5,13 @@
         <div class="col-md-10" style="padding-top: 15px; ">
 
             <div class="profile-user">
-
-                @if($user->image)
                 <div class="container-avatar">
-                    <img src="{{ route('user.avatar',['filename'=>$user->image]) }}" class="avatar" />
+                    @if($user->image <> null && $user->image <> "")
+                        <img src="{{ route('user.avatar',['filename'=>$user->image]) }}" class="avatar" />
+                    @else
+                        <img src="{{ asset('img/profile1.jpg') }}" class="avatar center" />
+                    @endif
                 </div>
-                @endif
-
                 <div class="user-info">
                     <h1>{{$user->nick}}</h1>
                     <h2>{{$user->name.' '.$user->surname}}</h2>

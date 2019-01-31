@@ -22,13 +22,13 @@
             <hr> @foreach ($users as $user)
 
             <div class="profile-user">
-
-                @if($user->image)
                 <div class="container-avatar">
-                    <img src="{{ route('user.avatar',['filename'=>$user->image]) }}" class="avatar" />
-                </div>
-
-                @endif
+                        @if($user->image <> null && $user->image <> "")
+                            <img src="{{ route('user.avatar',['filename'=>$user->image]) }}" class="avatar" />
+                        @else
+                            <img src="{{ asset('img/profile1.jpg') }}" class="avatar center" />
+                        @endif
+                    </div>
 
                 <div class="user-info">
                     <h2>{{'@'.$user->nick}}</h2>

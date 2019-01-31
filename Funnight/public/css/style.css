@@ -1,27 +1,32 @@
 form .avatar{
-
-   
     width: 55px;
     margin-bottom: 15px;
 }
 
 .navbar .container-avatar,
 .pub_image .container-avatar {
-
    height: 35px;
    width: 35px;
    border-radius: 900px;
    overflow: hidden;
-   margin-left: 20px;
+   margin-left: 10px;
+   margin-right: 5px;
 }
 
 .navbar-light .navbar-nav .nav-item > .nav-link {
-    color: white;
-    opacity: .7;
+    color: lightblue;
+    /* background-color: aliceblue; */
+    opacity: .8;
+    /* font-weight: bold; */
 }
 
 .navbar-light .navbar-nav .nav-item > .nav-link:hover{
-    color: #23C8F9;
+    color: yellow;
+    opacity: 1;
+}
+
+.navbar-light .navbar-nav .nav-item > .nav-link:active{
+    color: yellow;
     opacity: 1;
 }
 
@@ -33,9 +38,9 @@ form .avatar{
  .pub_image{
       
     margin-bottom: 25px;
-    background-color: white;
+    background-color: rgba(11, 11, 11, .9);
     border-bottom: 1px solid rgba(0,0,0,.125);    
-    border-radius: 5px;
+    border-radius: 7px;
  }
 
  .pub_image .container-avatar {
@@ -49,11 +54,11 @@ form .avatar{
 }
 
 .pub_image .data-user a{
-    color:#444;
+    color: lightgray;
 }
 
 .pub_image .nickname{
-    color:gray;
+    color:wheat;
 }
 
 .image-container{
@@ -79,7 +84,7 @@ overflow: hidden;
 .pub_image .description{
     padding:20px;
     padding-bottom:0px;
-    
+    color: azure;
 }
 
 .pub_image .btn-comments{
@@ -124,13 +129,14 @@ overflow: hidden;
 }
 
 .profile-user .container-avatar img{
-    height: 100%; 
+    height: 100%;
+    width: 100%; 
 }
 
 .profile-user .user-info{
     float: left;
     padding-left: 30px;
-    /* padding-top: 30px; */
+    padding-top: 30px;
 }
 
 .btn-search{

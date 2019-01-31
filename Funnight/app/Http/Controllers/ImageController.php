@@ -62,6 +62,8 @@ class ImageController extends Controller
     public function getImage($filename)
     {
         $file=Storage::disk('images')->get($filename);
+        
+        dd($file);
         return new Response($file, 200);
     }
 
