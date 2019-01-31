@@ -34,10 +34,12 @@ class HomeController extends Controller
                 ]);
             } elseif ($request->user()->hasRole('site')) {
                 if ($this->withoutInteractionDays() == 5) {
+                    $images = Image::orderBy('id', 'desc')->paginate(20);
                     # 5 days without interaction
                     $inactivity = true;
                     return view('sites.index', [
-                    'inactivity'=> $inactivity
+                    'inactivity'=> $inactivity,
+                    'images' => $images
                     ]);
                 } elseif ($this->withoutInteractionDays() == 7) {
                     # 7 days without interaction - inactive

@@ -1,5 +1,6 @@
 @extends('layouts.app') 
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
@@ -18,7 +19,7 @@
                         <a href="{{ route('profile',['id'=>$image->user->id]) }}">
                                     {{ ucwords($image->user->name.' '.$image->user->surname)  }}
                                         <span class="nickname">
-                                            {{ '| @'.$image->user->nick }}
+                                            {{ $image->user->nick }}
                                         </span>
                                     </a>
                     </div>
@@ -111,6 +112,7 @@
 
                         <hr> @foreach ($image->comments as $comment )
                         <div class="comment">
+
                             <span class="nickname">{{$comment->user->nick}}</span>
                             <span class="nickname date"> {{' | '.\FormatTime::LongTimeFilter($comment->created_at)}}</span>
                             <br>
