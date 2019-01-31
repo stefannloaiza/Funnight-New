@@ -7,6 +7,7 @@ use App\Role;
 use App\User;
 use App\Ciudad;
 use App\Comida;
+use App\Follow;
 use App\Musica;
 use App\Ambiente;
 use App\Establecimiento;
@@ -116,6 +117,13 @@ class UserController extends Controller
         return new Response($file, 200);
     }
 
+    /**
+     *  Metodo para ingresar al perfil de un establecimiento.
+     *
+     * @param [type] $id
+     *
+     * @return void
+     */
     public function profile($id)
     {
         $user = User::find($id);
@@ -124,6 +132,10 @@ class UserController extends Controller
         $comidas = Comida::where('id_comida', $user->tipo_comida)->first();
         $musica = Musica::where('id_musica', $user->tipo_musica)->first();
         $typeEstablecimiento = Establecimiento::where('id_tipo_establecimiento', $user->tipo_establecimiento)->first();
+        
+        // Get follow site.
+        $authUser = auth()->user()->id;
+        $followsearch = Follow::where('user_id', $authUser)->where('site_id', $id)->first();
 
         // dd($user);
         return view('user.profile', [
@@ -132,8 +144,8 @@ class UserController extends Controller
             'ambientes' => $ambientes,
            'comidas' => $comidas,
            'musica' => $musica,
-           'tipoEstablecimiento' =>  $typeEstablecimiento
-
+           'tipoEstablecimiento' =>  $typeEstablecimiento,
+           'follow' =>  $followsearch
         ]);
     }
 
@@ -142,13 +154,10 @@ class UserController extends Controller
         //conseguir usuario identificado
         $user = \Auth::user();
         $id = $user->id;
-
         $user->userActive = 0;
-
         $user->save();
 
-        $inactive = true;
-                        
+        $inactive = true;   
         return view('auth.login', [
                         'inactive'=> $inactive
                         ]);
@@ -240,8 +249,6 @@ class UserController extends Controller
 
         $users = $users->get();
         
-        // dd($users);
-
         return view('user.gustos', [
 
            'users' => $users,
@@ -261,9 +268,50 @@ class UserController extends Controller
      *
      * @return void
      */
-    public function seguir()
+    public function seguir($site_id)
     {
-        // return redirect();
-        return redirect()->back();
+        // Se busca primeor si ya sigue este usuario.
+
+        $authUser = auth()->user()->id;
+
+        $followsearch = Follow::where('user_id', $authUser)->where('site_id', $site_id)->first();
+        
+        if (is_null($followsearch)) {
+            # create
+            $follow = new Follow;
+            
+            $follow->user_id = $authUser;
+            $follow->site_id = $site_id;
+
+            $follow->save();
+        }
+        
+        return response()->json([
+            'finish'=>true,
+            'message'=>'Has seguido un sitio correctamente'
+            ]);
+    }
+
+    /**
+     * Metodo para seguir un usuario establecimiento
+     *
+     * @param Type $var
+     *
+     * @return void
+     */
+    public function dejarSeguir($site_id)
+    {
+        // Se borra lo que el usuario tenga.
+
+        $authUser = auth()->user()->id;
+
+        $follow = Follow::where('user_id', $authUser)->where('site_id', $site_id)->delete();
+
+        // $follow->delete();
+
+        return response()->json([
+                'finish'=>true,
+                'message'=>'Has dejado de seguir correctamente'
+                ]);
     }
 }

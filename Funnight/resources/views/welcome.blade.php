@@ -51,7 +51,7 @@
 
         .content {
             text-align: center;
-            margin: 15%;
+            margin: 12em;
             margin-bottom: 0;
         }
 

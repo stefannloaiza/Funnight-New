@@ -26,8 +26,10 @@ Route::get('/configuracion', 'UserController@config')->name('config');
 Route::post('/user/update', 'UserController@update')->name('user.update');
 Route::get('/user/avatar/{filename}', 'UserController@getImage')->name('user.avatar');
 Route::get('/perfil/{id}', 'UserController@profile')->name('profile');
-Route::get('/seguir', 'UserController@seguir')->name('seguir');
 Route::get('/gente/{search?}', 'UserController@index')->name('user.index');
+Route::get('/seguir/{site_id}', 'UserController@seguir')->name('seguir');
+Route::get('/dejarSeguir/{site_id}', 'UserController@dejarSeguir')->name('dejarSeguir');
+
 // Route::get('/gustos/{search?}', 'UserController@gustos')->name('user.gustos');
 
 Route::get('/gustosview', 'UserController@gustosview')->name('user.gustosview');
