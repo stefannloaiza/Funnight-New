@@ -31,7 +31,7 @@
 
 
                     <div class="description">
-                        <span class="nickname">{{'@'.$image->user->nick}}</span>
+                        <span class="nickname">{{$image->user->nick}}</span>
                         <span class="nickname date">{{' | '.\FormatTime::LongTimeFilter($image->created_at)}}</span>
                         <br><br>
                         <p>{{ ucfirst($image->description) }}</p>
@@ -111,26 +111,26 @@
 
                         <hr> @foreach ($image->comments as $comment )
                         <div class="comment">
-                            <span class="nickname">{{'@'.$comment->user->nick}}</span>
+                            <span class="nickname">{{$comment->user->nick}}</span>
                             <span class="nickname date"> {{' | '.\FormatTime::LongTimeFilter($comment->created_at)}}</span>
                             <br>
-                            <p>{{ $comment->content }}
-                                <br>
-                                <br> 
-                            @if(Auth::check() && ($comment->user_id == Auth::user()->id || $comment->image->user_id == Auth::user()->id))
-                                <a href="{{ route('comment.delete',['id'=>$comment->id]) }}" class="btn btn-sm btn-danger">            
-                                    Eliminar
-                                </a>
+                            <p>{{ $comment->content }}</p>
 
-                                <form action="{{url('comment')}}/{{'update'}}/{{$comment->id}}" method="GET">
-                                    {{--
-                                    <form action="{{route('actualizarcomentario')}}" method="GET"> --}}
-                                        <button class="btn btn-sm btn btn-warning">
+                            @if(Auth::check() && ($comment->user_id == Auth::user()->id || $comment->image->user_id== Auth::user()->id))
+                            <a href="{{ route('comment.delete',['id'=>$comment->id]) }}" class="btn btn-sm btn-danger">            
+                                Eliminar
+                            </a>
+
+
+                            <form action="{{url('comment')}}/{{'update'}}/{{$comment->id}}" method="GET">
+                                {{--
+                                <form action="{{route('actualizarcomentario')}}" method="GET"> --}}
+                                    <button class="btn btn-sm btn btn-warning">
                                                 Actualizar
-                                    </button>
-                                    </form>
-                            @endif
-                            </p>
+                                            </button>
+                                </form>
+
+                                @endif
                         </div>
                         @endforeach
                     </div>

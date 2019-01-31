@@ -3,15 +3,13 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-    @include('includes.message') @foreach ($images as $image)
-
-            @include('includes.image',['image'=>$image])
-
-           
-            @endforeach
+            {{--
+    @include('includes.message') @foreach ($images as $image) {{--
+    @include('includes.image',['image'=>$image]) --}} {{--
+            @endforeach --}}
             <!-- PAGINACION -->
             <div class="clearfix"></div>
-            {{ $images->links() }}
+            {{-- {{ $images->links() }} --}}
         </div>
     </div>
 </div>

@@ -62,6 +62,18 @@
                             </div>
                         </div>
 
+                        {{--
+                        <div class="form-group row">
+                            <label for="typeSite" class="col-md-4 col-form-label text-md-right">{{ __('Tipo Establecimiento') }}</label>
+
+                            <select class="form-control" name="typeSite" id="typeSite" style="height: auto;">
+                                <option value="">Selecciona el tipo de establecimiento</option>
+                                @foreach ($tipoEstablecimiento as $type)
+                                    <option value="{{ $type->id_tipo_establecimiento }}">{{ $type->nombre }}</option> 
+                                @endforeach
+                            </select>
+                        </div> --}}
+
 
 
                         <div class="form-group row">

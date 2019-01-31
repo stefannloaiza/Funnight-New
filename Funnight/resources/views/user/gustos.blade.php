@@ -3,7 +3,6 @@
 <div class="container">
     <div class="row justify-content-center searchdata">
         <div class="col-md-10">
-
             <h1>Gustos</h1>
             <hr>
             <form method="GET" action="{{ route('user.gustos') }}" id="buscadorgustos">
@@ -14,10 +13,10 @@
                     </div>
                     <div class="form-group col btn-search">
 
-                            <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary">
                                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar
-                            </button>
-                        {{-- <input type="submit" value="buscar" class="btn btn-success" /> --}}
+                            </button> {{-- <input type="submit" value="buscar" class="btn btn-success"
+                        /> --}}
                     </div>
                 </div>
                 <div class="panel-body">

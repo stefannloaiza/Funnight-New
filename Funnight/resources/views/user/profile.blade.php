@@ -14,18 +14,16 @@
                 @endif
 
                 <div class="user-info">
-                    <h1>{{'@'.$user->nick}}</h1>
+                    <h1>{{$user->nick}}</h1>
                     <h2>{{$user->name.' '.$user->surname}}</h2>
                     <p>{{'Se unio: '.\FormatTime::LongTimeFilter($user->created_at)}}</p>
 
                     @if( $user->hasRole('site') )
-                        <button name="" id="" type="button" class="btn btn-success">
+                    <button name="" id="" type="button" class="btn btn-success">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Seguir
-                        </button> 
-                        {{-- <button name="" id="" type="button" class="btn btn-primary">
+                        </button> {{-- <button name="" id="" type="button" class="btn btn-primary">
                             <span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Marcar como favorito
-                        </button>  --}}
-                    @endif
+                        </button> --}} @endif
                 </div>
 
                 {{-- Calificacion por estrellas 1--}}
@@ -61,15 +59,12 @@
             </div>
             <div class="clearfix"></div>
             <div class="images_profile">
-                <h2>Publicaciones</h2>
-                <hr> 
-                @if ($user->images != null && $user->images != "")
-                    @foreach ($user->images as $image)
-                        @include('includes.image',['image'=>$image]) 
-                    @endforeach
-                @else
-                    <small>Este usuario no tiene publicaciones.</small>
-                @endif
+                {{--
+                <h2>Publicaciones</h2> --}}
+                <hr> @if ($user->images != null && $user->images != "") @foreach ($user->images as $image)
+    @include('includes.image',['image'=>$image])
+                @endforeach @else
+                <small>Este usuario no tiene publicaciones.</small> @endif
             </div>
         </div>
     </div>

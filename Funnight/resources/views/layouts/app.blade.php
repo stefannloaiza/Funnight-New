@@ -130,14 +130,14 @@
 
                         @if( Auth::user()->hasRole('site') )
                         <li class="nav-item">
-                            <a href="{{route('image.create')}}" class="nav-link">Subir Imagen</a>
+                            <a href="{{route('image.create')}}" class="nav-link">Publicacion</a>
                         </li>
                         @endif
                         <li>
 
                         </li>
                         <li>
-                            @include('includes.avatar')
+    @include('includes.avatar')
                         </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"

@@ -72,6 +72,7 @@ Route::get('/ajaxGetCiudad', 'CiudadController@ajaxGetCiudad');
 // Administrador
 
 Route::get('/administracion', 'ReportController@admin')->name('administrar');
+Route::get('/admin', 'UserController@index')->name('admin.index');
 
 // RATINGS
 Route::get('rating/{user_id}/{ratingData}', 'UserController@ratingUser');

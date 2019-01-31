@@ -11,7 +11,7 @@
             <a href="{{ route('profile',['id'=>$image->user->id]) }}">
             {{ ucwords($image->user->name.' '.$image->user->surname)  }}
                 <span class="nickname">
-                    {{ '| @'.$image->user->nick }}
+                    {{ '| '.$image->user->nick }}
                 </span>
             </a>
         </div>
@@ -26,13 +26,11 @@
 
         <div class="description">
 
-            <span class="nickname">{{'@'.$image->user->nick}} </span><span class="nickname date"> {{' | '.\FormatTime::LongTimeFilter($image->created_at)}}</span>
+            <span class="nickname">{{$image->user->nick}} </span><span class="nickname date"> {{' | '.\FormatTime::LongTimeFilter($image->created_at)}}</span>
             <br><br>
             <p>{{ ucfirst($image->description) }}</p>
         </div>
-        <hr>
-
-        {{-- cierre calificaion por estrellas 1 --}}
+        <hr> {{-- cierre calificaion por estrellas 1 --}}
 
         <div class="likes">
 
@@ -44,6 +42,8 @@
 
             <span class="number_likes">{{ count($image->likes) }}</span>
         </div>
+
+
 
         <div class="comments">
             <a href="{{ route('image.detail',['id'=>$image->id]) }}" class="btn btn-sm btn-warning btn-comments">

@@ -7,7 +7,7 @@
         <div class="col-md-8">
 
             <div class="card">
-                <div class="card-header">Subir nueva imagen</div>
+                <div class="card-header">Subir nueva Publicación</div>
 
 
                 <div class="card-body">
@@ -40,7 +40,7 @@
                         <div class="form-group row">
 
                             <div class="col-md-6  offset-md-3">
-                                <input type="submit" class="btn btn-primary" value="Subir imagen">
+                                <input type="submit" class="btn btn-primary" value="Subir Publicacion">
 
                             </div>
                         </div>
