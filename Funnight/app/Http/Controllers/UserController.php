@@ -83,11 +83,20 @@ class UserController extends Controller
                 'name' => 'required|string|max:255',
                 'surname' => 'required|string|max:255',
                 'nick' => 'required|string|max:255|unique:users,nick,'.$id,
+<<<<<<< HEAD
                 'email' => 'required|string|email|max:255|unique:users,email,'.$id
         ]);
 
         // dd($request);
        
+=======
+                'email' => 'required|string|email|max:255|unique:users,email,'.$id,
+                
+        
+                
+    ]);
+        
+>>>>>>> daf1047b2e2f2dd5c42a1391c0591e3551447e98
         //recoger datos del formulario
         $name =$request->input('name');
         $surname =$request->input('surname');

@@ -87,6 +87,20 @@
                                             </span> @endif
                                 </div>
                             </div>
+=======
+                        {{--
+                        <div class="col-md-6">
+                            <select class="form-control" name="pais" id="paisUser" style="height: auto;">
+                                <option value="">Selecciona el pais</option>
+                                @foreach ($paises as $pais)
+                                    <option value="{{ $pais->id }}">{{ $pais->nombre }}</option> 
+                                @endforeach
+                            </select> @if ($errors->has('pais'))
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('pais') }}</strong>
+                                </span> @endif
+                        </div> --}}
+>>>>>>> daf1047b2e2f2dd5c42a1391c0591e3551447e98
 
                             <div class="form-group row">
                                 <label for="ciudad" class="col-md-4 col-form-label text-md-right">{{ __('Ciudad Usuario') }}</label>
