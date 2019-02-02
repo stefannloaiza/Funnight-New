@@ -14,8 +14,8 @@
                     <div class="form-group col btn-search">
                         <button type="submit" class="btn btn-primary">
                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar
-                        </button>
-                        {{-- <input type="submit" value="Buscar" class="btn btn-success" /> --}}
+                        </button> {{-- <input type="submit" value="Buscar" class="btn btn-success"
+                        /> --}}
                     </div>
                 </div>
             </form>
@@ -23,15 +23,15 @@
 
             <div class="profile-user">
                 <div class="container-avatar">
-                        @if($user->image <> null && $user->image <> "")
-                            <img src="{{ route('user.avatar',['filename'=>$user->image]) }}" class="avatar" />
-                        @else
-                            <img src="{{ asset('img/profile1.jpg') }}" class="avatar center" />
-                        @endif
-                    </div>
+                    @if($user->image
+                    <> null && $user->image
+                        <> "")
+                            <img src="{{ route('user.avatar',['filename'=>$user->image]) }}" class="avatar" /> @else
+                            <img src="{{ asset('img/profile1.jpg') }}" class="avatar center" /> @endif
+                </div>
 
                 <div class="user-info">
-                    <h2>{{'@'.$user->nick}}</h2>
+                    <h2>{{$user->nick}}</h2>
                     <h3>{{$user->name.' '.$user->surname}}</h3>
                     <p>{{'Se unio: '.\FormatTime::LongTimeFilter($user->created_at)}}</p>
                     <a href="{{route('profile',['id'=> $user->id])}}" class="btn btn-info">

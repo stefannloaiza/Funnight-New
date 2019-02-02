@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="form-group col">
 
-                        <input type="text" id="search"  class="form-control" />
+                        <input type="text" id="search" class="form-control" />
                     </div>
                     <div class="form-group col btn-search">
 
@@ -29,7 +29,7 @@
                 @endif
 
                 <div class="user-info">
-                    <h2>{{'@'.$user->nick}}</h2>
+                    <h2>{{$user->nick}}</h2>
                     <h3>{{$user->name.' '.$user->surname}}</h3>
                     <p>{{'Se unio: '.\FormatTime::LongTimeFilter($user->created_at)}}</p>
                     <a href="{{route('profile',['id'=> $user->id])}}" class="btn btn-success">Ver Perfil</a>

@@ -71,8 +71,7 @@
             @endif @if ($user->hasRole('user'))
             <div class="images_profile">
                 <h2>Establecimientos Seguidos</h2>
-                <hr>
-                @foreach ($follows as $follow)
+                <hr> @foreach ($follows as $follow)
 
                 <div class="profile-user">
                     <div class="container-avatar">
@@ -84,7 +83,7 @@
                     </div>
 
                     <div class="user-info">
-                        <h2>{{'@'.$follow->nick}}</h2>
+                        <h2>{{$follow->nick}}</h2>
                         <h3>{{$follow->name.' '.$follow->surname}}</h3>
                         <p>{{'Se unio: '.\FormatTime::LongTimeFilter($follow->created_at)}}</p>
                         <a href="{{route('profile',['id'=> $follow->id])}}" class="btn btn-info">

@@ -52,18 +52,6 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-<<<<<<< HEAD
-
-        // variables de otras tablas
-        //$paises = Pais::all();
-        // $comidas = Comida::all();
-        // $musica = Musica::all();
-        // $ambientes = Ambiente::all();
-        // $typeEstablecimiento = Establecimiento::all();
-        //$paises = Pais::all();
-
-=======
->>>>>>> 33833f2b1df5d1bf00ccaba9d8447e0ffc0f65e5
         //conseguir usuario identificado
         $user = \Auth::user();
         $id = $user->id;
@@ -85,11 +73,6 @@ class UserController extends Controller
         $surname =$request->input('surname');
         $nick =$request->input('nick');
         $email =$request->input('email');
-<<<<<<< HEAD
-        // $typeEstablecimiento =$request->input('tipoEstablecimiento');
-        $paises =$request->input('pais');
-=======
->>>>>>> 33833f2b1df5d1bf00ccaba9d8447e0ffc0f65e5
         
         //asignar nuevos valores al objeto del usuario
         $user->name = $name;
