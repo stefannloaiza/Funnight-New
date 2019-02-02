@@ -44,9 +44,31 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * Metodo de configuracion de los datos del usuario autenticado.
+     *
+     * @return view
+     */
     public function config()
     {
-        return view('user.config');
+        $roles = Role::where('id', '!=', '1')->get();
+        $paises = Pais::all();
+        $ciudades = Ciudad::where('paisId', '=', \Auth::user()->paisActual)->get();
+
+        $comidas = Comida::all();
+        $musica = Musica::all();
+        $ambientes = Ambiente::all();
+        $typeEstablecimiento = Establecimiento::all();
+        
+        return view('user.config', [
+            'roles' => $roles,
+            'paises' => $paises,
+            'ciudades' => $ciudades,
+            'comidas' => $comidas,
+            'musica' => $musica,
+            'ambientes' => $ambientes,
+            'tipoEstablecimiento' => $typeEstablecimiento,
+        ]);
     }
 
 
@@ -58,26 +80,53 @@ class UserController extends Controller
 
         //validacion del formulario
         $validate=$this->validate($request, [
-            
                 'name' => 'required|string|max:255',
                 'surname' => 'required|string|max:255',
                 'nick' => 'required|string|max:255|unique:users,nick,'.$id,
                 'email' => 'required|string|email|max:255|unique:users,email,'.$id
-                
-    ]);
+        ]);
+
+        // dd($request);
        
         //recoger datos del formulario
         $name =$request->input('name');
         $surname =$request->input('surname');
         $nick =$request->input('nick');
         $email =$request->input('email');
+
+        $pais = $request->input('pais');
+        $ciudad = $request->input('ciudad');
+        $zona = $request->input('zona');
+        $genero = $request->input('genero');
+        $direccion = $request->input('direccion');
+        $fechaNac = $request->input('fechaNac');
+        $telefono = $request->input('telefono');
+        $celular = $request->input('celular');
+        
+        $tipo_establecimiento = $request->input('establecimiento');
+        $comidaUser = $request->input('comidaUser');
+        $ambienteUser = $request->input('ambienteUser');
+        $musicaUser = $request->input('musicaUser');
         
         //asignar nuevos valores al objeto del usuario
         $user->name = $name;
         $user->surname = $surname;
         $user->nick = $nick;
         $user->email = $email;
-        // $user->typeEstablecimiento = $typeEstablecimiento;
+
+        $user->paisActual = $pais;
+        $user->ciudadActual = $ciudad;
+        $user->zona = $zona;
+        $user->genero = $genero;
+        $user->direccion_residencia = $direccion;
+        $user->fechaNacimiento = $fechaNac;
+        $user->telefono = $telefono;
+        $user->celular = $celular;
+        
+        $user->tipo_establecimiento = $tipo_establecimiento;
+        $user->tipo_comida = $comidaUser;
+        $user->tipo_musica = $ambienteUser;
+        $user->tipo_ambiente = $musicaUser;
 
         //subir imagen
         $image_path = $request->file('image_path');
@@ -93,6 +142,7 @@ class UserController extends Controller
 
         //Ejecutar consulta y cambios en la BD
         $user->update();
+        
         return redirect()->route('config')
                         ->with(['message'=>'Usuario actualizado correctamente']);
     }
@@ -125,12 +175,9 @@ class UserController extends Controller
         $arraySite = array();
 
         foreach ($followsearch as $follow) {
-            #
             $site = User::find($follow->site_id);
             array_push($arraySite, $site);
         }
-
-        // dd($arraySite);
         
         return view('user.profile', [
            'user'=> $user,
