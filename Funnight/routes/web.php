@@ -30,11 +30,8 @@ Route::get('/gente/{search?}', 'UserController@index')->name('user.index');
 Route::get('/seguir/{site_id}', 'UserController@seguir')->name('seguir');
 Route::get('/dejarSeguir/{site_id}', 'UserController@dejarSeguir')->name('dejarSeguir');
 
-// Route::get('/gustos/{search?}', 'UserController@gustos')->name('user.gustos');
-
 Route::get('/gustosview', 'UserController@gustosview')->name('user.gustosview');
 Route::get('/gustos', 'UserController@gustos')->name('user.gustos');
-
 
 // Establecimiento
 Route::get('/sites', 'EstablecimientoController@index')->name('sites.index');
@@ -48,6 +45,7 @@ Route::post('/sites/update', 'EstablecimientoController@update')->name('sites.up
 Route::get('/subir-imagen', 'ImageController@create')->name('image.create');
 Route::post('/image/save', 'ImageController@save')->name('image.save');
 Route::get('/image/file/{filename}', 'ImageController@getImage')->name('image.file');
+Route::get('/image/existFile/{filename}', 'ImageController@existImage')->name('image.exist');
 Route::get('/image/{id}', 'ImageController@detail')->name('image.detail');
 Route::get('/image/delete/{id}', 'ImageController@delete')->name('image.delete');
 Route::get('/imagen/editar/{id}', 'ImageController@edit')->name('image.edit');

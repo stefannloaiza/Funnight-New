@@ -52,15 +52,6 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-
-        // variables de otras tablas
-        // $paises = Pais::all();
-        // $comidas = Comida::all();
-        // $musica = Musica::all();
-        // $ambientes = Ambiente::all();
-        // $typeEstablecimiento = Establecimiento::all();
-
-
         //conseguir usuario identificado
         $user = \Auth::user();
         $id = $user->id;
@@ -80,12 +71,8 @@ class UserController extends Controller
         $surname =$request->input('surname');
         $nick =$request->input('nick');
         $email =$request->input('email');
-        // $typeEstablecimiento =$request->input('tipoEstablecimiento');
-        
         
         //asignar nuevos valores al objeto del usuario
-     
-      
         $user->name = $name;
         $user->surname = $surname;
         $user->nick = $nick;
@@ -134,10 +121,17 @@ class UserController extends Controller
         $typeEstablecimiento = Establecimiento::where('id_tipo_establecimiento', $user->tipo_establecimiento)->first();
         
         // Get follow site.
-        $authUser = auth()->user()->id;
-        $followsearch = Follow::where('user_id', $authUser)->where('site_id', $id)->first();
+        $followsearch = Follow::where('user_id', $id)->get();
+        $arraySite = array();
 
-        // dd($user);
+        foreach ($followsearch as $follow) {
+            #
+            $site = User::find($follow->site_id);
+            array_push($arraySite, $site);
+        }
+
+        // dd($arraySite);
+        
         return view('user.profile', [
            'user'=> $user,
            'paises' => $paises,
@@ -145,7 +139,7 @@ class UserController extends Controller
            'comidas' => $comidas,
            'musica' => $musica,
            'tipoEstablecimiento' =>  $typeEstablecimiento,
-           'follow' =>  $followsearch
+           'follows' =>  $arraySite
         ]);
     }
 
@@ -157,7 +151,7 @@ class UserController extends Controller
         $user->userActive = 0;
         $user->save();
 
-        $inactive = true;   
+        $inactive = true;
         return view('auth.login', [
                         'inactive'=> $inactive
                         ]);

@@ -38,7 +38,7 @@ window.addEventListener("load", function () {
                         console.log('has dado like a la publicacion');
                         setTimeout(function () {
                             countLikes();
-                        }, 1000);
+                        }, 600);
                     } else {
                         console.log('Error al dar like');
                     }
@@ -114,7 +114,7 @@ window.addEventListener("load", function () {
 
         setTimeout(function () {
             rateImage();
-        }, 1000);
+        }, 600);
     });
 
 

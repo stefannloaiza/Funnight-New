@@ -6,11 +6,11 @@
 
             <div class="profile-user">
                 <div class="container-avatar">
-                    @if($user->image <> null && $user->image <> "")
-                        <img src="{{ route('user.avatar',['filename'=>$user->image]) }}" class="avatar" />
-                    @else
-                        <img src="{{ asset('img/profile1.jpg') }}" class="avatar center" />
-                    @endif
+                    @if($user->image
+                    <> null && $user->image
+                        <> "")
+                            <img src="{{ route('user.avatar',['filename'=>$user->image]) }}" class="avatar" /> @else
+                            <img src="{{ asset('img/profile1.jpg') }}" class="avatar center" /> @endif
                 </div>
                 <div class="user-info">
                     <h1>{{$user->nick}}</h1>
@@ -58,6 +58,7 @@
                 <hr>
             </div>
             <div class="clearfix"></div>
+            @if ($user->hasRole('site'))
             <div class="images_profile">
 
                 <h2>Publicaciones</h2>
@@ -67,6 +68,36 @@
                 @endforeach @else
                 <small>Este usuario no tiene publicaciones.</small> @endif
             </div>
+            @endif @if ($user->hasRole('user'))
+            <div class="images_profile">
+                <h2>Establecimientos Seguidos</h2>
+                <hr>
+                @foreach ($follows as $follow)
+
+                <div class="profile-user">
+                    <div class="container-avatar">
+                        @if($follow->image
+                        <> null && $follow->image
+                            <> "")
+                                <img src="{{ route('user.avatar',['filename'=>$follow->image]) }}" class="avatar" /> @else
+                                <img src="{{ asset('img/profile1.jpg') }}" class="avatar center" /> @endif
+                    </div>
+
+                    <div class="user-info">
+                        <h2>{{'@'.$follow->nick}}</h2>
+                        <h3>{{$follow->name.' '.$follow->surname}}</h3>
+                        <p>{{'Se unio: '.\FormatTime::LongTimeFilter($follow->created_at)}}</p>
+                        <a href="{{route('profile',['id'=> $follow->id])}}" class="btn btn-info">
+                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver Perfil
+                            </a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <hr>
+                </div>
+
+                @endforeach
+            </div>
+            @endif
         </div>
     </div>
 
