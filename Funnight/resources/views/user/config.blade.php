@@ -63,15 +63,16 @@
                         </div>
 
                         {{--
-                        <div class="form-group row">
-                            <label for="typeSite" class="col-md-4 col-form-label text-md-right">{{ __('Tipo Establecimiento') }}</label>
-
-                            <select class="form-control" name="typeSite" id="typeSite" style="height: auto;">
-                                <option value="">Selecciona el tipo de establecimiento</option>
-                                @foreach ($tipoEstablecimiento as $type)
-                                    <option value="{{ $type->id_tipo_establecimiento }}">{{ $type->nombre }}</option> 
+                        <div class="col-md-6">
+                            <select class="form-control" name="pais" id="paisUser" style="height: auto;">
+                                <option value="">Selecciona el pais</option>
+                                @foreach ($paises as $pais)
+                                    <option value="{{ $pais->id }}">{{ $pais->nombre }}</option> 
                                 @endforeach
-                            </select>
+                            </select> @if ($errors->has('pais'))
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('pais') }}</strong>
+                                </span> @endif
                         </div> --}}
 
 

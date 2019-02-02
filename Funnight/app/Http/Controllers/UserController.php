@@ -54,12 +54,12 @@ class UserController extends Controller
     {
 
         // variables de otras tablas
-        // $paises = Pais::all();
+        //$paises = Pais::all();
         // $comidas = Comida::all();
         // $musica = Musica::all();
         // $ambientes = Ambiente::all();
         // $typeEstablecimiento = Establecimiento::all();
-
+        //$paises = Pais::all();
 
         //conseguir usuario identificado
         $user = \Auth::user();
@@ -71,17 +71,19 @@ class UserController extends Controller
                 'name' => 'required|string|max:255',
                 'surname' => 'required|string|max:255',
                 'nick' => 'required|string|max:255|unique:users,nick,'.$id,
-                'email' => 'required|string|email|max:255|unique:users,email,'.$id
+                'email' => 'required|string|email|max:255|unique:users,email,'.$id,
+                
+        
                 
     ]);
-       
+        
         //recoger datos del formulario
         $name =$request->input('name');
         $surname =$request->input('surname');
         $nick =$request->input('nick');
         $email =$request->input('email');
         // $typeEstablecimiento =$request->input('tipoEstablecimiento');
-        
+        $paises =$request->input('pais');
         
         //asignar nuevos valores al objeto del usuario
      
@@ -90,6 +92,7 @@ class UserController extends Controller
         $user->surname = $surname;
         $user->nick = $nick;
         $user->email = $email;
+        
         // $user->typeEstablecimiento = $typeEstablecimiento;
 
         //subir imagen
@@ -157,7 +160,7 @@ class UserController extends Controller
         $user->userActive = 0;
         $user->save();
 
-        $inactive = true;   
+        $inactive = true;
         return view('auth.login', [
                         'inactive'=> $inactive
                         ]);

@@ -43,29 +43,30 @@ class ReportController extends Controller
         ->orderBy('cantidad', 'desc')
         ->limit(5)
         ->get();
-
-
-        // SELECT COUNT(likes.id) as cantidadlikes,users.name, users.surname,users.nick,images.image_path FROM `images`,`users`,`likes`
-        // WHERE images.id=likes.image_id
-        // AND users.id=images.user_id
-        // GROUP BY image_id
-        // ORDER BY cantidadlikes DESC
-        // LIMIT 5
-
-        
-
-
-        // DB::table('users')
-        //     ->where('name', '=', 'John')
-        //     ->where(function ($query) {
-        //         $query->where('votes', '>', 100)
-        //               ->orWhere('title', '=', 'Admin');
-        //     })
-        //     ->get();
-
-        //  $likes = Like::all();
- 
+  
         $view = \View::make('reporte/topusers', compact('likes'))->render();
+        $pdf= \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        return $pdf->stream('informe'.'.pdf');
+    }
+
+    //reporte top establecimientos PDF
+    
+    public function topestablecimiento()
+    {
+        $users = \DB::table('users')
+        
+        ->join('ratings', 'users.id', '=', 'ratings.rateable_id')
+        ->select(\DB::raw('avg(rating) as stars, name'))
+        ->where('role', '=', 3)
+        ->groupBy('name')
+        ->orderBy('stars', 'desc')
+        ->limit(5)
+        ->get();
+
+       
+  
+        $view = \View::make('reporte/topestablecimiento', compact('users'))->render();
         $pdf= \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
         return $pdf->stream('informe'.'.pdf');
@@ -77,6 +78,13 @@ class ReportController extends Controller
     {
         // $products = Product::all();
         return view('reporte/topusersexcel', compact('topusersexcel'));
+    }
+
+    // nuevo reporte 2
+    public function index2()
+    {
+        // $products = Product::all();
+        return view('reporte/topestablecimientoexcel', compact('topestablecimientoexcel'));
     }
     public function excel()
     {
@@ -120,6 +128,41 @@ class ReportController extends Controller
                 foreach ($likes as $index=> $like) {
                     $sheet->row($index+2, [
                         $like->name, $like->surname, $like->nick, $like->cantidad, $like->description
+                    ]);
+                }
+
+                $sheet->setOrientation('landscape');
+                // dd($likes);
+            });
+        })->export('xls');
+    }
+
+    public function excel2()
+    {
+        
+        /**
+         * toma en cuenta que para ver los mismos
+         * datos debemos hacer la misma consulta
+        **/
+        Excel::create('Laravel Excel', function ($excel) {
+            $users = \DB::table('users')
+        
+        ->join('ratings', 'users.id', '=', 'ratings.rateable_id')
+        ->select(\DB::raw('avg(rating) as stars, name'))
+        ->where('role', '=', 3)
+        ->groupBy('name')
+        ->orderBy('stars', 'desc')
+        ->limit(5)
+        ->get();
+
+            $excel->sheet('Excel sheet', function ($sheet) use ($users) {
+                $sheet->row(1, [
+                    'Nombre', 'stars',
+                ]);
+
+                foreach ($users as $index=> $user) {
+                    $sheet->row($index+2, [
+                        $user->name, $user->stars
                     ]);
                 }
 

@@ -16,8 +16,18 @@
     <br/>
     <br/>
     <br/>
-    <a type="submit" href="{{route('topusers')}}" style="margin: 15px" class="btn btn-primary">Imagenes con mayor cantidad de Likes</a>
+    <div>
+        <a type="submit" href="{{route('topusers')}}" style="margin: 15px" class="btn btn-primary">Imagenes con mayor cantidad de Likes Pdf</a>
 
 
+        <a type="submit" href="{{route('topusersexcel')}}" style="margin: 15px" class="btn btn-success">Imagenes con mayor cantidad de Likes Excel</a>
+    </div>
+    <br/>
+    <div>
+        <a type="submit" href="{{route('topestablecimiento')}}" style="margin: 15px" class="btn btn-primary">Establecimientos TOP 5 con mayor cantidad de estrellas Pdf</a>
 
-    <a type="submit" href="{{route('topusersexcel')}}" style="margin: 15px" class="btn btn-success">Imagenes con mayor cantidad de Likes Excel</a>    {{-- reporte pendiente Establecimiento con mayor puntaje en estrellas --}}
+        <a type="submit" href="{{route( 'topestablecimientoexcel')}}" style="margin: 15px" class="btn btn-success">Establecimientos TOP 5 con mayor cantidad de estrellas Excel</a>
+    </div>
+    <div>
+        <a type="submit" href="{{route( 'home')}}" style="margin: 15px" class="btn btn-danger">Volver al Menu Principal</a>
+    </div>

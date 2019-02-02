@@ -30,6 +30,8 @@ class ImageController extends Controller
 
         'description'=> 'required',
         'image_path' => 'required|image'
+        //'video' => 'mimetypes:video/avi,video/mpeg,video/quicktime'
+        //'file' => 'mimes:video/qu.mp4 | max:2000
     ]);
 
         // Recogiendo datos

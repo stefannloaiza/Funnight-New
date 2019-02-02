@@ -119,18 +119,18 @@
                             <p>{{ $comment->content }}</p>
 
                             @if(Auth::check() && ($comment->user_id == Auth::user()->id || $comment->image->user_id== Auth::user()->id))
-                            <a href="{{ route('comment.delete',['id'=>$comment->id]) }}" class="btn btn-sm btn-danger">            
-                                Eliminar
-                            </a>
-
-
                             <form action="{{url('comment')}}/{{'update'}}/{{$comment->id}}" method="GET">
-                                {{--
+                                <a href="{{ route('comment.delete',['id'=>$comment->id]) }}" class="btn btn-sm btn-danger">            
+                                    Eliminar
+                                </a> {{--
                                 <form action="{{route('actualizarcomentario')}}" method="GET"> --}}
                                     <button class="btn btn-sm btn btn-warning">
                                                 Actualizar
                                             </button>
                                 </form>
+
+
+
 
                                 @endif
                         </div>
