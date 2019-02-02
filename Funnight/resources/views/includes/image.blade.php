@@ -2,14 +2,14 @@
     <div class="card-header">
 
         <div class="container-avatar">
-                @if ($image->user->image <> null && $image->user->image <> "" )
-                    <img src="{{ route('user.avatar',['filename'=>$image->user->image]) }}" class="avatar" />
-                @else
-                    <img src="{{ asset('img/profile1.jpg') }}" class="avatar" />
-                @endif
+            @if ($image->user->image
+            <> null && $image->user->image
+                <> "" )
+                    <img src="{{ route('user.avatar',['filename'=>$image->user->image]) }}" class="avatar" /> @else
+                    <img src="{{ asset('img/profile1.jpg') }}" class="avatar" /> @endif
         </div>
 
-        
+
         <div class="data-user">
             <a href="{{ route('profile',['id'=>$image->user->id]) }}">
             {{ ucwords($image->user->name.' '.$image->user->surname)  }}
@@ -23,16 +23,11 @@
     <div class="card-body">
         <div class="image-container">
             <a href="{{ route('image.detail',['id'=>$image->id]) }}">
-                @if ($image->image_path <> null && $image->image_path <> "" )
-                    <img src="{{ route('image.file',['filename'=>$image->image_path]) }}" class="imageSites"/>
-                @else
-                    <img src="{{ asset('img/noimage.jpg') }}" class="imageSites" />
-                @endif
+                <img src="{{ route('image.file',['filename'=>$image->image_path]) }}" class="imageSites"/>
             </a>
         </div>
 
         <div class="description">
-
             <span class="nickname">{{$image->user->nick}} </span><span class="nickname date"> {{' | '.\FormatTime::LongTimeFilter($image->created_at)}}</span>
             <br><br>
             <p>{{ ucfirst($image->description) }}</p>

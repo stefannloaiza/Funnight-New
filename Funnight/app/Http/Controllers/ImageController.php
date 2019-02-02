@@ -61,11 +61,23 @@ class ImageController extends Controller
         ]);
     }
 
+    public function existImage($filename)
+    {
+        $exists = Storage::disk('images')->exists($filename);
+        // dd($exists);
+        if ($exists) {
+            # exists
+            return "true";
+        } else {
+            # not exists
+            return "false";
+        }
+    }
+
     public function getImage($filename)
     {
         $file=Storage::disk('images')->get($filename);
-        
-        dd($file);
+
         return new Response($file, 200);
     }
 

@@ -1,4 +1,4 @@
-<div class="container-avatar">
+<div class="container-avatar imagePerson">
     @if (Auth::user()->image <> null && Auth::user()->image <> "")
         <img src="{{ route('user.avatar',['filename'=>Auth::user()->image]) }}" class="avatar" />
     @else

@@ -113,11 +113,9 @@ overflow: hidden;
     font-size: 11px;
 }
 
- .profile-user{
-     /* height: 200px;
-    margin-bottom: 40px;
-    padding-bottom: 20px;  */
-} 
+.imagePerson{
+    margin-top: 5px;
+}
 
 .profile-user .container-avatar{
     width: 200px;

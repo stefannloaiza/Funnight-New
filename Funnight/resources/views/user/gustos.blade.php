@@ -80,7 +80,6 @@
             </form>
             <hr>
             <div>
-
                 @foreach ($users as $user)
 
                 <div class="profile-user">

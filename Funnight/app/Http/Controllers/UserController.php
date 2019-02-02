@@ -52,6 +52,7 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
+<<<<<<< HEAD
 
         // variables de otras tablas
         //$paises = Pais::all();
@@ -61,6 +62,8 @@ class UserController extends Controller
         // $typeEstablecimiento = Establecimiento::all();
         //$paises = Pais::all();
 
+=======
+>>>>>>> 33833f2b1df5d1bf00ccaba9d8447e0ffc0f65e5
         //conseguir usuario identificado
         $user = \Auth::user();
         $id = $user->id;
@@ -82,12 +85,13 @@ class UserController extends Controller
         $surname =$request->input('surname');
         $nick =$request->input('nick');
         $email =$request->input('email');
+<<<<<<< HEAD
         // $typeEstablecimiento =$request->input('tipoEstablecimiento');
         $paises =$request->input('pais');
+=======
+>>>>>>> 33833f2b1df5d1bf00ccaba9d8447e0ffc0f65e5
         
         //asignar nuevos valores al objeto del usuario
-     
-      
         $user->name = $name;
         $user->surname = $surname;
         $user->nick = $nick;
@@ -137,10 +141,17 @@ class UserController extends Controller
         $typeEstablecimiento = Establecimiento::where('id_tipo_establecimiento', $user->tipo_establecimiento)->first();
         
         // Get follow site.
-        $authUser = auth()->user()->id;
-        $followsearch = Follow::where('user_id', $authUser)->where('site_id', $id)->first();
+        $followsearch = Follow::where('user_id', $id)->get();
+        $arraySite = array();
 
-        // dd($user);
+        foreach ($followsearch as $follow) {
+            #
+            $site = User::find($follow->site_id);
+            array_push($arraySite, $site);
+        }
+
+        // dd($arraySite);
+        
         return view('user.profile', [
            'user'=> $user,
            'paises' => $paises,
@@ -148,7 +159,7 @@ class UserController extends Controller
            'comidas' => $comidas,
            'musica' => $musica,
            'tipoEstablecimiento' =>  $typeEstablecimiento,
-           'follow' =>  $followsearch
+           'follows' =>  $arraySite
         ]);
     }
 
