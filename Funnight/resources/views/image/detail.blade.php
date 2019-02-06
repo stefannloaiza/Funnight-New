@@ -28,6 +28,7 @@
                 <div class="card-body">
                     <div class="image-container" style="max-height: none;">
                         <img src="{{route('image.file',['filename'=>$image->image_path])}}" />
+                        
                     </div>
 
 
@@ -96,6 +97,7 @@
                         <hr>
                         <form method="POST" action="{{route('comment.save')}}">
                             @csrf
+                            
                             <input type="hidden" name="image_id" value="{{$image->id}}" />
                             <p>
                                 <textarea class="form-control {{ $errors->has('content') ? 'is-invalid' : ''}}" name="content"></textarea>                                @if($errors->has('content'))
@@ -113,6 +115,11 @@
                         <hr> @foreach ($image->comments as $comment )
                         <div class="comment">
 
+                            {{-- @if($image->image_path <> null && $image->image_path <> "")
+                            <img src="{{ route('user.avatar',['filename'=>$image->image_path]) }}"/> 
+                            @else
+                            <img src="{{ asset('img/profile1.jpg') }}" class="avatar center" /> 
+                            @endif --}}
                             <span class="nickname">{{$comment->user->nick}}</span>
                             <span class="nickname date"> {{' | '.\FormatTime::LongTimeFilter($comment->created_at)}}</span>
                             <br>

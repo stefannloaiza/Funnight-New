@@ -13,17 +13,44 @@
                             <img src="{{ asset('img/profile1.jpg') }}" class="avatar center" /> @endif
                 </div>
                 <div class="user-info">
-                    <h1>{{$user->nick}}</h1>
-                    <h2>{{$user->name.' '.$user->surname}}</h2>
+                    <h1>{{ ucfirst($user->nick) }}</h1>
+                    <h2>{{ ucwords($user->name.' '.$user->surname) }}</h2>
                     <p>{{'Se unio: '.\FormatTime::LongTimeFilter($user->created_at)}}</p>
 
                     @if( $user->hasRole('site') )
-                    <button name="followSite" id="{{ $user->id }}" type="button" class="btn btn-primary btn-block followSite">
+                        @if (isset($follow))
+                            <button name="followSite" id="{{ $user->id }}" type="button" class="btn btn-primary btn-block followSite" hidden="hidden">
                                 Seguir
                             </button>
-                    <button name="unfollowSite" id="{{ $user->id }}" type="button" class="btn btn-success btn-block unfollowSite" hidden>
+                            <button name="unfollowSite" id="{{ $user->id }}" type="button" class="btn btn-success btn-block unfollowSite">
                                 <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Seguido
-                            </button> @endif
+                            </button> 
+                        @else
+                            <button name="followSite" id="{{ $user->id }}" type="button" class="btn btn-primary btn-block followSite">
+                                Seguir
+                            </button>
+                            <button name="unfollowSite" id="{{ $user->id }}" type="button" class="btn btn-success btn-block unfollowSite" hidden="hidden">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Seguido
+                            </button> 
+                        @endif
+                    @endif
+                    @if( $user->hasRole('user') )
+                        @if (isset($friend))
+                            <button name="unFollowFriend" id="{{ $user->id }}" type="button" class="btn btn-success btn-block unFollowFriend">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Amigo seguido
+                            </button> 
+                            <button name="followFriend" id="{{ $user->id }}" type="button" class="btn btn-primary btn-block followFriend" hidden="hidden">
+                                Amigo
+                            </button>
+                        @else
+                            <button name="followFriend" id="{{ $user->id }}" type="button" class="btn btn-primary btn-block followFriend">
+                                Amigo
+                            </button>
+                            <button name="unFollowFriend" id="{{ $user->id }}" type="button" class="btn btn-success btn-block unFollowFriend" hidden="hidden">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Amigo seguido
+                            </button> 
+                        @endif
+                    @endif
                 </div>
 
                 {{-- Calificacion por estrellas 1--}}
@@ -97,6 +124,7 @@
                 @endforeach
             </div>
             @endif
+            <br>
         </div>
     </div>
 

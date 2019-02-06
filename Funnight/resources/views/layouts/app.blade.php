@@ -62,15 +62,17 @@
         .card {
             /* width: 80%; */
             border: 0;
+            
+            margin-bottom: 25px;
+            color: wheat;
+            background-color: rgba(11, 11, 11, .9);
+            /* border-bottom: 1px solid rgba(0,0,0,.125);     */
+            border-radius: 7px;
         }
 
         .row {
             /* background-color: white; */
             border-radius: 5px;
-        }
-
-        .searchdata {
-            background-color: white;
         }
     </style>
 </head>
@@ -119,20 +121,20 @@
                             <a href="{{route('user.gustosview')}}" class="nav-link">Establecimiento</a>
                         </li>
 
-                        {{--
-                        <li class="nav-item">
+                        
+                        {{-- <li class="nav-item">
                             <a href="{{route('sites.show')}}" class="nav-link">Establecimiento</a>
-                        </li> --}}
+                        </li>  --}}
 
                         <li class="nav-item">
                             <a href="{{route('likes')}}" class="nav-link">Favoritas</a>
                         </li>
 
-                        @if( Auth::user()->hasRole('site') )
+                        {{-- @if( Auth::user()->hasRole('site') ) --}}
                         <li class="nav-item">
                             <a href="{{route('image.create')}}" class="nav-link">Publicacion</a>
                         </li>
-                        @endif
+                        {{-- @endif --}}
                         <li>
                             @include('includes.avatar')
                         </li>

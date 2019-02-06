@@ -9,6 +9,7 @@ use App\Ciudad;
 use App\Comida;
 use App\Follow;
 use App\Musica;
+use App\Friends;
 use App\Ambiente;
 use App\Establecimiento;
 use Illuminate\Http\Request;
@@ -83,20 +84,11 @@ class UserController extends Controller
                 'name' => 'required|string|max:255',
                 'surname' => 'required|string|max:255',
                 'nick' => 'required|string|max:255|unique:users,nick,'.$id,
-<<<<<<< HEAD
                 'email' => 'required|string|email|max:255|unique:users,email,'.$id
         ]);
 
         // dd($request);
        
-=======
-                'email' => 'required|string|email|max:255|unique:users,email,'.$id,
-                
-        
-                
-    ]);
-        
->>>>>>> daf1047b2e2f2dd5c42a1391c0591e3551447e98
         //recoger datos del formulario
         $name =$request->input('name');
         $surname =$request->input('surname');
@@ -172,6 +164,10 @@ class UserController extends Controller
      */
     public function profile($id)
     {
+        //Get user auth
+        $authUser = auth()->user()->id;
+
+        // Datas
         $user = User::find($id);
         $paises = Pais::find($user->paisActual);
         $ambientes = Ambiente::where('id_ambiente', $user->tipo_ambiente)->first();
@@ -180,13 +176,12 @@ class UserController extends Controller
         $typeEstablecimiento = Establecimiento::where('id_tipo_establecimiento', $user->tipo_establecimiento)->first();
         
         // Get follow site.
-        $followsearch = Follow::where('user_id', $id)->get();
-        $arraySite = array();
+        $followsearch = Follow::where('user_id', $authUser)->where('site_id', $id)->first();
 
-        foreach ($followsearch as $follow) {
-            $site = User::find($follow->site_id);
-            array_push($arraySite, $site);
-        }
+        // Get friend.
+        $friendSearch = Friends::where('user_id', $authUser)->where('friend_id', $id)->first();
+
+        // dd($friendSearch);
         
         return view('user.profile', [
            'user'=> $user,
@@ -194,8 +189,9 @@ class UserController extends Controller
             'ambientes' => $ambientes,
            'comidas' => $comidas,
            'musica' => $musica,
-           'tipoEstablecimiento' =>  $typeEstablecimiento,
-           'follows' =>  $arraySite
+           'tipoEstablecimiento' => $typeEstablecimiento,
+           'follow' => $followsearch,
+           'friend' => $friendSearch
         ]);
     }
 
@@ -357,7 +353,50 @@ class UserController extends Controller
 
         $follow = Follow::where('user_id', $authUser)->where('site_id', $site_id)->delete();
 
-        // $follow->delete();
+        return response()->json([
+                'finish'=>true,
+                'message'=>'Has dejado de seguir correctamente'
+                ]);
+    }
+
+    /**
+     * Metodo para seguir un amigo
+     *
+     * @param [type] $friend_id
+     *
+     * @return void
+     */
+    public function seguirAmigo($friend_id)
+    {
+        // Se busca primero si ya sigue este usuario.
+
+        $authUser = auth()->user()->id;
+
+        $friendSearch = Friends::where('user_id', $authUser)->where('friend_id', $friend_id)->first();
+       
+        if (is_null($friendSearch)) {
+            # create
+            $friend = new Friends;
+           
+            $friend->user_id = $authUser;
+            $friend->friend_id = $friend_id;
+
+            $friend->save();
+        }
+       
+        return response()->json([
+           'finish'=>true,
+           'message'=>'Has seguido un sitio correctamente'
+           ]);
+    }
+
+    public function dejarAmigo($friend_id)
+    {
+        // Se borra lo que el usuario tenga.
+
+        $authUser = auth()->user()->id;
+
+        $friend = Friends::where('user_id', $authUser)->where('friend_id', $friend_id)->delete();
 
         return response()->json([
                 'finish'=>true,

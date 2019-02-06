@@ -39,11 +39,11 @@
                     </a>
                 </div>
                 <div class="clearfix"></div>
-                <hr>
             </div>
 
             @endforeach
 
+            <br>
 
             <!-- PAGINACION -->
             {{--

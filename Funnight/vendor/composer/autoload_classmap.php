@@ -14,6 +14,7 @@ return array(
     'App\\Establecimiento' => $baseDir . '/app/Establecimiento.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Follow' => $baseDir . '/app/Follow.php',
+    'App\\Friends' => $baseDir . '/app/Friends.php',
     'App\\Helpers\\FormatTime' => $baseDir . '/app/Helpers/FormatTime.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
     'App\\Http\\Controllers\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Auth/LoginController.php',
