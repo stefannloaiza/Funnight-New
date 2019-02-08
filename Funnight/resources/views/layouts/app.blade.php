@@ -34,7 +34,7 @@
     <style>
         html,
         body {
-            background-image: url("../img/fondo2.jpg");
+            background-image: url("{{ asset('img/fondo2.jpg') }}");
             background-attachment: fixed;
             background-repeat: no-repeat;
             background-size: 100%;

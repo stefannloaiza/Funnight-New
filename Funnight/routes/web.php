@@ -25,6 +25,8 @@ Route::post('/home', 'HomeController@ratingData')->name('home.rating');
 Route::get('/configuracion', 'UserController@config')->name('config');
 Route::post('/user/update', 'UserController@update')->name('user.update');
 Route::get('/user/avatar/{filename}', 'UserController@getImage')->name('user.avatar');
+Route::get('/user/friends/{id}', 'UserController@friendList')->name('user.friendList');
+
 Route::get('/perfil/{id}', 'UserController@profile')->name('profile');
 Route::get('/gente/{search?}', 'UserController@index')->name('user.index');
 Route::get('/seguir/{site_id}', 'UserController@seguir')->name('seguir');

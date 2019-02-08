@@ -175,14 +175,23 @@ class UserController extends Controller
         $musica = Musica::where('id_musica', $user->tipo_musica)->first();
         $typeEstablecimiento = Establecimiento::where('id_tipo_establecimiento', $user->tipo_establecimiento)->first();
         
-        // Get follow site.
+        // Get follow site search.
         $followsearch = Follow::where('user_id', $authUser)->where('site_id', $id)->first();
 
         // Get friend.
         $friendSearch = Friends::where('user_id', $authUser)->where('friend_id', $id)->first();
-
-        // dd($friendSearch);
         
+        // Get follows site list.
+        $followsUsers = Follow::where('user_id', $authUser)->get();
+        $arraySites = array();
+
+        // Get sites follows.
+        foreach ($followsUsers as $follows) {
+            # code...
+            $site = User::find($follows->site_id);
+            array_push($arraySites, $site);
+        }
+
         return view('user.profile', [
            'user'=> $user,
            'paises' => $paises,
@@ -190,7 +199,8 @@ class UserController extends Controller
            'comidas' => $comidas,
            'musica' => $musica,
            'tipoEstablecimiento' => $typeEstablecimiento,
-           'follow' => $followsearch,
+           'followSite' => $followsearch,
+           'follows' => $arraySites,
            'friend' => $friendSearch
         ]);
     }
@@ -402,5 +412,24 @@ class UserController extends Controller
                 'finish'=>true,
                 'message'=>'Has dejado de seguir correctamente'
                 ]);
+    }
+
+    public function friendList($id)
+    {
+
+        // Get follows site list.
+        $followsUsers = Friends::where('user_id', $id)->get();
+        $arrayFriends = array();
+
+        // Get sites follows.
+        foreach ($followsUsers as $follows) {
+            # code...
+            $friends = User::find($follows->friend_id);
+            array_push($arrayFriends, $friends);
+        }
+
+        return view('user.friends', [
+            'friends' => $arrayFriends
+         ]);
     }
 }
