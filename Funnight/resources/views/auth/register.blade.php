@@ -141,7 +141,7 @@
                                     <select class="form-control" name="zona" id="zonaUser" style="height: auto;">
                                         <option value="">Selecciona la zona</option>
                                         <option value="NOR">Norte</option>
-                                        <option value="SUR">Sur</option>N</option>
+                                        <option value="SUR">Sur</option>
                                         <option value="EST">Este</option>
                                         <option value="OES">Oeste</option>
                                     </select> @if ($errors->has('zona'))

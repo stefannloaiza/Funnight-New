@@ -10,6 +10,7 @@ use App\Comida;
 use App\Follow;
 use App\Image;
 use App\Musica;
+use App\Friends;
 use App\Ambiente;
 use App\Establecimiento;
 use App\Precio;
@@ -47,9 +48,31 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * Metodo de configuracion de los datos del usuario autenticado.
+     *
+     * @return view
+     */
     public function config()
     {
-        return view('user.config');
+        $roles = Role::where('id', '!=', '1')->get();
+        $paises = Pais::all();
+        $ciudades = Ciudad::where('paisId', '=', \Auth::user()->paisActual)->get();
+
+        $comidas = Comida::all();
+        $musica = Musica::all();
+        $ambientes = Ambiente::all();
+        $typeEstablecimiento = Establecimiento::all();
+        
+        return view('user.config', [
+            'roles' => $roles,
+            'paises' => $paises,
+            'ciudades' => $ciudades,
+            'comidas' => $comidas,
+            'musica' => $musica,
+            'ambientes' => $ambientes,
+            'tipoEstablecimiento' => $typeEstablecimiento,
+        ]);
     }
 
 
@@ -61,29 +84,53 @@ class UserController extends Controller
 
         //validacion del formulario
         $validate=$this->validate($request, [
-            
                 'name' => 'required|string|max:255',
                 'surname' => 'required|string|max:255',
                 'nick' => 'required|string|max:255|unique:users,nick,'.$id,
-                'email' => 'required|string|email|max:255|unique:users,email,'.$id,
-                
-        
-                
-    ]);
-        
+                'email' => 'required|string|email|max:255|unique:users,email,'.$id
+        ]);
+
+        // dd($request);
+       
         //recoger datos del formulario
         $name =$request->input('name');
         $surname =$request->input('surname');
         $nick =$request->input('nick');
         $email =$request->input('email');
+
+        $pais = $request->input('pais');
+        $ciudad = $request->input('ciudad');
+        $zona = $request->input('zona');
+        $genero = $request->input('genero');
+        $direccion = $request->input('direccion');
+        $fechaNac = $request->input('fechaNac');
+        $telefono = $request->input('telefono');
+        $celular = $request->input('celular');
+        
+        $tipo_establecimiento = $request->input('establecimiento');
+        $comidaUser = $request->input('comidaUser');
+        $ambienteUser = $request->input('ambienteUser');
+        $musicaUser = $request->input('musicaUser');
         
         //asignar nuevos valores al objeto del usuario
         $user->name = $name;
         $user->surname = $surname;
         $user->nick = $nick;
         $user->email = $email;
+
+        $user->paisActual = $pais;
+        $user->ciudadActual = $ciudad;
+        $user->zona = $zona;
+        $user->genero = $genero;
+        $user->direccion_residencia = $direccion;
+        $user->fechaNacimiento = $fechaNac;
+        $user->telefono = $telefono;
+        $user->celular = $celular;
         
-        // $user->typeEstablecimiento = $typeEstablecimiento;
+        $user->tipo_establecimiento = $tipo_establecimiento;
+        $user->tipo_comida = $comidaUser;
+        $user->tipo_musica = $ambienteUser;
+        $user->tipo_ambiente = $musicaUser;
 
         //subir imagen
         $image_path = $request->file('image_path');
@@ -99,6 +146,7 @@ class UserController extends Controller
 
         //Ejecutar consulta y cambios en la BD
         $user->update();
+        
         return redirect()->route('config')
                         ->with(['message'=>'Usuario actualizado correctamente']);
     }
@@ -119,6 +167,10 @@ class UserController extends Controller
      */
     public function profile($id)
     {
+        //Get user auth
+        $authUser = auth()->user()->id;
+
+        // Datas
         $user = User::find($id);
         $paises = Pais::find($user->paisActual);
         $ambientes = Ambiente::where('id_ambiente', $user->tipo_ambiente)->first();
@@ -127,16 +179,10 @@ class UserController extends Controller
         $typeEstablecimiento = Establecimiento::where('id_tipo_establecimiento', $user->tipo_establecimiento)->first();
      
         
-        // Get follow site.
-        $followsearch = Follow::where('user_id', $id)->get();
-        $arraySite = array();
+        // Get follow site search.
+        $followsearch = Follow::where('user_id', $authUser)->where('site_id', $id)->first();
 
-        foreach ($followsearch as $follow) {
-            #
-            $site = User::find($follow->site_id);
-            array_push($arraySite, $site);
-        }
-
+<<<<<<< HEAD
         // Get images with comments->content.
         
         $comments= Comment::where('user_id', $id)->limit(10)->get();
@@ -151,16 +197,38 @@ class UserController extends Controller
         $pubsArray = array_unique($pubsArray);
         // dd(array_unique($pubsArray));
         // FIN get images with comments->content
+=======
+        // Get friend.
+        $friendSearch = Friends::where('user_id', $authUser)->where('friend_id', $id)->first();
+>>>>>>> 1d754dd73da061bfc199b502c3869d2fcca13968
         
+        // Get follows site list.
+        $followsUsers = Follow::where('user_id', $authUser)->get();
+        $arraySites = array();
+
+        // Get sites follows.
+        foreach ($followsUsers as $follows) {
+            # code...
+            $site = User::find($follows->site_id);
+            array_push($arraySites, $site);
+        }
+
         return view('user.profile', [
            'user'=> $user,
            'paises' => $paises,
             'ambientes' => $ambientes,
            'comidas' => $comidas,
            'musica' => $musica,
+<<<<<<< HEAD
            'tipoEstablecimiento' =>  $typeEstablecimiento,
            'follows' =>  $arraySite,
            'pubs' =>  $pubsArray,
+=======
+           'tipoEstablecimiento' => $typeEstablecimiento,
+           'followSite' => $followsearch,
+           'follows' => $arraySites,
+           'friend' => $friendSearch
+>>>>>>> 1d754dd73da061bfc199b502c3869d2fcca13968
         ]);
     }
 
@@ -332,11 +400,73 @@ class UserController extends Controller
 
         $follow = Follow::where('user_id', $authUser)->where('site_id', $site_id)->delete();
 
-        // $follow->delete();
+        return response()->json([
+                'finish'=>true,
+                'message'=>'Has dejado de seguir correctamente'
+                ]);
+    }
+
+    /**
+     * Metodo para seguir un amigo
+     *
+     * @param [type] $friend_id
+     *
+     * @return void
+     */
+    public function seguirAmigo($friend_id)
+    {
+        // Se busca primero si ya sigue este usuario.
+
+        $authUser = auth()->user()->id;
+
+        $friendSearch = Friends::where('user_id', $authUser)->where('friend_id', $friend_id)->first();
+       
+        if (is_null($friendSearch)) {
+            # create
+            $friend = new Friends;
+           
+            $friend->user_id = $authUser;
+            $friend->friend_id = $friend_id;
+
+            $friend->save();
+        }
+       
+        return response()->json([
+           'finish'=>true,
+           'message'=>'Has seguido un sitio correctamente'
+           ]);
+    }
+
+    public function dejarAmigo($friend_id)
+    {
+        // Se borra lo que el usuario tenga.
+
+        $authUser = auth()->user()->id;
+
+        $friend = Friends::where('user_id', $authUser)->where('friend_id', $friend_id)->delete();
 
         return response()->json([
                 'finish'=>true,
                 'message'=>'Has dejado de seguir correctamente'
                 ]);
+    }
+
+    public function friendList($id)
+    {
+
+        // Get follows site list.
+        $followsUsers = Friends::where('user_id', $id)->get();
+        $arrayFriends = array();
+
+        // Get sites follows.
+        foreach ($followsUsers as $follows) {
+            # code...
+            $friends = User::find($follows->friend_id);
+            array_push($arrayFriends, $friends);
+        }
+
+        return view('user.friends', [
+            'friends' => $arrayFriends
+         ]);
     }
 }

@@ -162,6 +162,7 @@ window.addEventListener("load", function () {
                 success: function (response) {
                     if (response.finish) {
 
+                        $(".followSite").removeAttr('hidden');
                         $(".followSite").show();
                         $('.unfollowSite').hide();
 
@@ -175,4 +176,61 @@ window.addEventListener("load", function () {
     }
     // Execute
     unFollowSite();
+
+
+    /**
+     * Metodo para que un usuario siga otro usuario como amigo.
+     */
+    function followFriend() {
+        $('.followFriend').click(function () {
+            console.log('following...');
+
+            $.ajax({
+                url: url + '/seguirAmigo/' + $(this).attr('id'),
+                type: 'GET',
+                success: function (response) {
+                    if (response.finish) {
+
+                        $(".unFollowFriend").removeAttr('hidden');
+                        $(".unFollowFriend").show();
+                        $('.followFriend').hide();
+
+                    } else {
+                        console.log('Error al borrar');
+                    }
+                }
+            });
+
+        });
+    }
+    // Run
+    followFriend();
+
+
+    /**
+     * Metodo para dejar de seguir un amigo.
+     */
+    function unFollowFriend() {
+        $('.unFollowFriend').click(function () {
+            console.log('unFollowing...');
+
+            $.ajax({
+                url: url + '/dejarAmigo/' + $(this).attr('id'),
+                type: 'GET',
+                success: function (response) {
+                    if (response.finish) {
+
+                        $(".followFriend").removeAttr('hidden');
+                        $(".followFriend").show();
+                        $('.unFollowFriend').hide();
+
+                    } else {
+                        console.log('Error al borrar');
+                    }
+                }
+            });
+
+        });
+    }
+    unFollowFriend();
 });

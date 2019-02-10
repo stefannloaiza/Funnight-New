@@ -29,9 +29,7 @@ class ImageController extends Controller
         $validate = $this->validate($request, [
 
         'description'=> 'required',
-        'image_path' => 'required|image'
-        //'video' => 'mimetypes:video/avi,video/mpeg,video/quicktime'
-        //'file' => 'mimes:video/qu.mp4 | max:2000
+        'image_path' => 'required|mimes:jpeg,png,jpg,mp4|max:10240'
     ]);
 
         // Recogiendo datos
@@ -44,20 +42,29 @@ class ImageController extends Controller
         $image->user_id= $user->id;
         
         $image->description = $description;
-       
         
         //subir fichero
         if ($image_path) {
             $image_path_name = time().$image_path->getClientOriginalName();
-            Storage::disk('images')->put($image_path_name, File::get($image_path));
+
+            //save by mimetype
+            if ($image_path->getClientMimeType() == "video/mp4") {
+                // dd($image_path);
+                # videos...
+                Storage::disk('videos')->put($image_path_name, File::get($image_path));
+            } else {
+                # images...
+                Storage::disk('images')->put($image_path_name, File::get($image_path));
+            }
+            
             $image->image_path = $image_path_name;
         }
 
+        // save
         $image->save();
 
         return redirect()->route('home')->with([
             'message'=> 'La foto ha sido subida correctamente!!'
-
         ]);
     }
 

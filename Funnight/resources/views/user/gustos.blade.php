@@ -5,7 +5,7 @@
         <div class="col-md-10">
             <h1>Busca tus Favoritos</h1>
             <hr>
-            <form method="GET" action="{{ route('user.gustos') }}" id="buscadorgustos">
+            <form method="GET" action="{{ route('user.gustos') }}" id="buscadorgustos" class="gustosSearch">
                 <div class="row">
                     <div class="form-group col">
 
@@ -109,10 +109,10 @@
                         </a>
                     </div>
                     <div class="clearfix"></div>
-                    <hr>
                 </div>
 
                 @endforeach
+                <br>
             </div>
         </div>
 @endsection

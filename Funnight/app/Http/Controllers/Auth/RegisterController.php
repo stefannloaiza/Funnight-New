@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Pais;
+use App\Role;
 use App\User;
 use DateTime;
 use App\Ciudad;
-use App\Role;
-use App\Pais;
-use App\Musica;
 use App\Comida;
+use App\Musica;
 use App\Ambiente;
 use App\Establecimiento;
 use App\Precio;

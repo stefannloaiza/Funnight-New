@@ -34,7 +34,7 @@
     <style>
         html,
         body {
-            background-image: url("../img/fondo2.jpg");
+            background-image: url("{{ asset('img/fondo2.jpg') }}");
             background-attachment: fixed;
             background-repeat: no-repeat;
             background-size: 100%;
@@ -62,15 +62,17 @@
         .card {
             /* width: 80%; */
             border: 0;
+            
+            margin-bottom: 25px;
+            color: aquamarine;
+            background-color: rgba(11, 11, 11, .9);
+            /* border-bottom: 1px solid rgba(0,0,0,.125);     */
+            border-radius: 7px;
         }
 
         .row {
             /* background-color: white; */
             border-radius: 5px;
-        }
-
-        .searchdata {
-            background-color: white;
         }
     </style>
 </head>
@@ -118,12 +120,7 @@
                         <li class="nav-item">
                             <a href="{{route('user.gustosview')}}" class="nav-link">Establecimiento</a>
                         </li>
-
-                        {{--
-                        <li class="nav-item">
-                            <a href="{{route('sites.show')}}" class="nav-link">Establecimiento</a>
-                        </li> --}}
-
+                        
                         <li class="nav-item">
                             <a href="{{route('likes')}}" class="nav-link">Favoritas</a>
                         </li>
