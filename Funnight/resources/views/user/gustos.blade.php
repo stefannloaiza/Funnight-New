@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row justify-content-center searchdata">
         <div class="col-md-10">
-            <h1>Gustos</h1>
+            <h1>Busca tus Favoritos</h1>
             <hr>
             <form method="GET" action="{{ route('user.gustos') }}" id="buscadorgustos">
                 <div class="row">
@@ -21,7 +21,7 @@
                 </div>
                 <div class="panel-body">
                     <div>
-                        <h2>Puedes buscar de la siguiente forma por tipo:</h2>
+                        <h2>Filtrar por tipo de:</h2>
                     </div>
                     <table class="table table-striped table-condensed">
                         <tr>
@@ -30,6 +30,7 @@
                             <th class="text-center">Establecimiento</th>
                             <th class="text-center">Musica</th>
                             <th class="text-center">Pais</th>
+                            <th class="text-center">Precio</th>
                         </tr>
                         <tr>
                             <td>
@@ -69,6 +70,14 @@
                                 <option value="">Selecciona el pais</option>
                                 @foreach ($paises as $pais)
                                     <option value="{{ $pais->id }}">{{ $pais->nombre }}</option> 
+                                @endforeach
+                            </select>
+                            </td>
+                            <td>
+                                <select class="form-control" name="precio" id="precioSite" style="height: auto;">
+                                <option value="">Selecciona el precio</option>
+                                @foreach ($precio as $preci)
+                                    <option value="{{ $preci->id_precio }}">{{ $preci->valor }}</option> 
                                 @endforeach
                             </select>
                             </td>

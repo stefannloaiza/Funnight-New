@@ -502,6 +502,7 @@ class ComposerStaticInite1c1a6ce56e84d7d8c04e3d81314f21a
         'App\\Role' => __DIR__ . '/../..' . '/app/Role.php',
         'App\\Traits\\UserAuthentication' => __DIR__ . '/../..' . '/app/Traits/UserAuthentication.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'App\\precio' => __DIR__ . '/../..' . '/app/precio.php',
         'Barryvdh\\DomPDF\\Facade' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/Facade.php',
         'Barryvdh\\DomPDF\\PDF' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/PDF.php',
         'Barryvdh\\DomPDF\\ServiceProvider' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/ServiceProvider.php',

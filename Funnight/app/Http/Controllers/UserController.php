@@ -8,9 +8,12 @@ use App\User;
 use App\Ciudad;
 use App\Comida;
 use App\Follow;
+use App\Image;
 use App\Musica;
 use App\Ambiente;
 use App\Establecimiento;
+use App\Precio;
+use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
@@ -122,6 +125,7 @@ class UserController extends Controller
         $comidas = Comida::where('id_comida', $user->tipo_comida)->first();
         $musica = Musica::where('id_musica', $user->tipo_musica)->first();
         $typeEstablecimiento = Establecimiento::where('id_tipo_establecimiento', $user->tipo_establecimiento)->first();
+     
         
         // Get follow site.
         $followsearch = Follow::where('user_id', $id)->get();
@@ -133,7 +137,20 @@ class UserController extends Controller
             array_push($arraySite, $site);
         }
 
-        // dd($arraySite);
+        // Get images with comments->content.
+        
+        $comments= Comment::where('user_id', $id)->limit(10)->get();
+        $pubsArray = array();
+
+        foreach ($comments as $comment) {
+            #Get all pubs
+            $images = Image::find($comment->image_id);
+            array_push($pubsArray, $images);
+        }
+        
+        $pubsArray = array_unique($pubsArray);
+        // dd(array_unique($pubsArray));
+        // FIN get images with comments->content
         
         return view('user.profile', [
            'user'=> $user,
@@ -142,7 +159,8 @@ class UserController extends Controller
            'comidas' => $comidas,
            'musica' => $musica,
            'tipoEstablecimiento' =>  $typeEstablecimiento,
-           'follows' =>  $arraySite
+           'follows' =>  $arraySite,
+           'pubs' =>  $pubsArray,
         ]);
     }
 
@@ -194,6 +212,7 @@ class UserController extends Controller
         $musica = Musica::all();
         $ambientes = Ambiente::all();
         $typeEstablecimiento = Establecimiento::all();
+        $precio= Precio::all();
         
         return view('user.gustos', [
 
@@ -203,7 +222,9 @@ class UserController extends Controller
             'comidas' => $comidas,
             'musica' => $musica,
             'ambientes' => $ambientes,
-            'tipoEstablecimiento' => $typeEstablecimiento
+            'tipoEstablecimiento' => $typeEstablecimiento,
+            'precio' => $precio
+
          ]);
     }
     
@@ -214,6 +235,7 @@ class UserController extends Controller
         $musica = Musica::all();
         $ambientes = Ambiente::all();
         $typeEstablecimiento = Establecimiento::all();
+        $precio= Precio::all();
 
         $users = User::where('role', '3');
         
@@ -242,6 +264,11 @@ class UserController extends Controller
             $users->where('paisActual', '=', $request['pais']);
         }
 
+        if ($request['precio'] != null && $request['precio'] != "") {
+            // dd($request);
+            $users->where('precio', '=', $request['precio']);
+        }
+
         $users->orderBy('id', 'desc')->paginate(50);
 
         $users = $users->get();
@@ -254,7 +281,8 @@ class UserController extends Controller
            'comidas' => $comidas,
            'musica' => $musica,
            'ambientes' => $ambientes,
-           'tipoEstablecimiento' => $typeEstablecimiento
+           'tipoEstablecimiento' => $typeEstablecimiento,
+           'precio' => $precio
         ]);
     }
 

@@ -57,7 +57,21 @@
                 </table>
                 <hr>
             </div>
+
+
+            {{-- inicio publicaciones comentadas--}} @if ($user->hasRole('user'))
+            <div class="images_profile">
+
+                <h2>Publicaciones comentadas</h2>
+
+                <hr> {{-- @if ($user->images != null && $user->images != "") --}} @foreach ($pubs as $pub)
+    @include('includes.image',['image'=>$pub])
+                @endforeach {{-- @else
+                <small>Este usuario no tiene publicaciones.</small> @endif --}}
+            </div>
+            @endif {{-- fin publicaciones comentadas --}}
             <div class="clearfix"></div>
+
             @if ($user->hasRole('site'))
             <div class="images_profile">
 

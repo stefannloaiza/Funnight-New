@@ -48,6 +48,7 @@ return array(
     'App\\Role' => $baseDir . '/app/Role.php',
     'App\\Traits\\UserAuthentication' => $baseDir . '/app/Traits/UserAuthentication.php',
     'App\\User' => $baseDir . '/app/User.php',
+    'App\\precio' => $baseDir . '/app/precio.php',
     'Barryvdh\\DomPDF\\Facade' => $vendorDir . '/barryvdh/laravel-dompdf/src/Facade.php',
     'Barryvdh\\DomPDF\\PDF' => $vendorDir . '/barryvdh/laravel-dompdf/src/PDF.php',
     'Barryvdh\\DomPDF\\ServiceProvider' => $vendorDir . '/barryvdh/laravel-dompdf/src/ServiceProvider.php',

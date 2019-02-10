@@ -37,7 +37,7 @@ class ReportController extends Controller
         
         ->join('users', 'users.id', '=', 'images.user_id')
         ->join('likes', 'images.id', '=', 'likes.image_id')
-        ->select(\DB::raw('count(likes.id) as cantidad, name,surname,nick,description'))
+        ->select(\DB::raw('count(likes.id) as cantidad, name,surname,nick,description,userActive'))
         // ->where('users.id', '=', 'likes.user_id')
         ->groupBy('image_id')
         ->orderBy('cantidad', 'desc')

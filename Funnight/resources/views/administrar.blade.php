@@ -17,10 +17,10 @@
     <br/>
     <br/>
     <div>
-        <a type="submit" href="{{route('topusers')}}" style="margin: 15px" class="btn btn-primary">Imagenes con mayor cantidad de Likes Pdf</a>
+        <a type="submit" href="{{route('topusers')}}" style="margin: 15px" class="btn btn-primary">Publicaciones con mayor cantidad de Likes Pdf</a>
 
 
-        <a type="submit" href="{{route('topusersexcel')}}" style="margin: 15px" class="btn btn-success">Imagenes con mayor cantidad de Likes Excel</a>
+        <a type="submit" href="{{route('topusersexcel')}}" style="margin: 15px" class="btn btn-success">Publicaciones con mayor cantidad de Likes Excel</a>
     </div>
     <br/>
     <div>

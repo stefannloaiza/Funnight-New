@@ -116,23 +116,27 @@
                             <span class="nickname">{{$comment->user->nick}}</span>
                             <span class="nickname date"> {{' | '.\FormatTime::LongTimeFilter($comment->created_at)}}</span>
                             <br>
-                            <p>{{ $comment->content }}</p>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <p>{{ $comment->content }}</p>
+                                </div>
 
-                            @if(Auth::check() && ($comment->user_id == Auth::user()->id || $comment->image->user_id== Auth::user()->id))
-                            <form action="{{url('comment')}}/{{'update'}}/{{$comment->id}}" method="GET">
-                                <a href="{{ route('comment.delete',['id'=>$comment->id]) }}" class="btn btn-sm btn-danger">            
-                                    Eliminar
-                                </a> {{--
-                                <form action="{{route('actualizarcomentario')}}" method="GET"> --}}
-                                    <button class="btn btn-sm btn btn-warning">
-                                                Actualizar
+                                <div class="col-md-9">
+
+                                    @if(Auth::check() && ($comment->user_id == Auth::user()->id || $comment->image->user_id== Auth::user()->id))
+                                    <form action="{{url('comment')}}/{{'update'}}/{{$comment->id}}" method="GET">
+                                        <a href="{{ route('comment.delete',['id'=>$comment->id]) }}" class="btn btn-xs btn-danger">
+                                            <span class="glyphicon glyphicon-trash"></span> Eliminar
+                                    </a> {{--
+                                        <form action="{{route('actualizarcomentario')}}" method="GET"> --}}
+                                            <button class="btn btn-xs btn-warning">
+                                                    <span class="glyphicon glyphicon-pencil"></span> Actualizar
                                             </button>
-                                </form>
+                                        </form>
 
-
-
-
-                                @endif
+                                        @endif
+                                </div>
+                            </div>
                         </div>
                         @endforeach
                     </div>

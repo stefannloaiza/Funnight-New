@@ -9,6 +9,7 @@ use App\Comida;
 use App\Musica;
 use App\Ambiente;
 use App\Establecimiento;
+use App\Precio;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,7 @@ trait RegistersUsers
         $musica = Musica::all();
         $ambientes = Ambiente::all();
         $typeEstablecimiento = Establecimiento::all();
+        $precio= Precio::all();
         
         return view('auth.register', [
             'roles' => $roles,
@@ -40,6 +42,7 @@ trait RegistersUsers
             'comidas' => $comidas,
             'musica' => $musica,
             'ambientes' => $ambientes,
+            'precio' => $precio,
             'tipoEstablecimiento' => $typeEstablecimiento,
         ]);
     }

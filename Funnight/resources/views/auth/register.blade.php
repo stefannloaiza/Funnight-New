@@ -217,10 +217,9 @@
                             <hr>
 
                             <h4 class="text-center">
-                                Hablanos de ti. Cuales son tus gustos?
+                                Háblanos de ti. Cuáles son tus gustos?
                             </h4>
                             <br>
-
                             <div class="form-group row">
                                 <label for="establecimiento" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de establecimiento preferido') }}</label>
 
@@ -386,6 +385,18 @@
                             <br>
 
                             <div class="form-group row">
+                                <label for="nit" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese su Nit') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="nit" type="text" class="form-control{{ $errors->has('nit') ? ' is-invalid' : '' }}" name="nit" value="{{ old('nit') }}"
+                                        required autofocus> @if ($errors->has('nit'))
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('nit') }}</strong>
+                                        </span> @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="establecimiento" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de Establecimiento') }}</label>
 
                                 <div class="col-md-6">
@@ -445,6 +456,21 @@
                                     </select> @if ($errors->has('musica'))
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('musica') }}</strong>
+                                        </span> @endif
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="precio" class="col-md-4 col-form-label text-md-right">{{ __('Precio Sugerido') }}</label>
+
+                                <div class="col-md-6">
+                                    <select class="form-control" name="precioSite" id="precioSite" style="height: auto;">
+                                        <option value="">Selecciona tu Precio Sugerido</option>
+                                        @foreach ($precio as $preci)
+                                            <option value="{{ $preci->id_precio }}">{{ $preci->valor }}</option> 
+                                        @endforeach
+                                    </select> @if ($errors->has('precio'))
+                                    <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('precio') }}</strong>
                                         </span> @endif
                                 </div>
                             </div>

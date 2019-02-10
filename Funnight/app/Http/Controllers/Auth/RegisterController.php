@@ -11,6 +11,7 @@ use App\Musica;
 use App\Comida;
 use App\Ambiente;
 use App\Establecimiento;
+use App\Precio;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -122,6 +123,7 @@ class RegisterController extends Controller
                 'password' => Hash::make($data['password']),
 
                  // More data
+                'nit' => $data['nit'],
                 'paisActual' => $data['paisSite'],
                 'ciudadActual' => $data['ciudadSite'],
                 'zona' => $data['zonaSite'],
@@ -132,14 +134,16 @@ class RegisterController extends Controller
                 'tipo_comida'=> $data['comidaSite'],
                 'tipo_ambiente'=> $data['ambienteSite'],
                 'tipo_musica'=> $data['musicaSite'],
+                'precio'=> $data['precioSite'],
                  
                 'genero'=> '',
                 'lastInteraction'=> new DateTime(),
                 // 'fechaNacimiento'=> '',
             ]);
+           
             
             $site->roles()->attach($data['role']);
-
+            
             return $site;
         }
     }
