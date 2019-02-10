@@ -86,6 +86,7 @@
                 <hr>
             </div>
             <div class="clearfix"></div>
+            
             @if ($user->hasRole('site'))
             <div class="images_profile">
 
