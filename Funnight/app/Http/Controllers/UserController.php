@@ -182,7 +182,6 @@ class UserController extends Controller
         // Get follow site search.
         $followsearch = Follow::where('user_id', $authUser)->where('site_id', $id)->first();
 
-<<<<<<< HEAD
         // Get images with comments->content.
         
         $comments= Comment::where('user_id', $id)->limit(10)->get();
@@ -197,10 +196,8 @@ class UserController extends Controller
         $pubsArray = array_unique($pubsArray);
         // dd(array_unique($pubsArray));
         // FIN get images with comments->content
-=======
         // Get friend.
         $friendSearch = Friends::where('user_id', $authUser)->where('friend_id', $id)->first();
->>>>>>> 1d754dd73da061bfc199b502c3869d2fcca13968
         
         // Get follows site list.
         $followsUsers = Follow::where('user_id', $authUser)->get();
@@ -219,16 +216,11 @@ class UserController extends Controller
             'ambientes' => $ambientes,
            'comidas' => $comidas,
            'musica' => $musica,
-<<<<<<< HEAD
            'tipoEstablecimiento' =>  $typeEstablecimiento,
            'follows' =>  $arraySite,
            'pubs' =>  $pubsArray,
-=======
-           'tipoEstablecimiento' => $typeEstablecimiento,
            'followSite' => $followsearch,
-           'follows' => $arraySites,
            'friend' => $friendSearch
->>>>>>> 1d754dd73da061bfc199b502c3869d2fcca13968
         ]);
     }
 

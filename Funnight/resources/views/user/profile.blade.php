@@ -29,7 +29,8 @@
                             </button>
                     <button name="unfollowSite" id="{{ $user->id }}" type="button" class="btn btn-success btn-block unfollowSite" hidden="hidden">
                                 <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Seguido
-                            </button> @endif @endif @if( $user->hasRole('user') && $user->id != Auth::user()->id ) @if (isset($friend))
+                            </button> @endif @endif @if( $user->hasRole('user') && $user->id != Auth::user()->id
+                    ) @if (isset($friend))
                     <button name="unFollowFriend" id="{{ $user->id }}" type="button" class="btn btn-success btn-block unFollowFriend">
                                 <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Amigo seguido
                             </button>
@@ -99,11 +100,8 @@
             </div>
             @endif {{-- fin publicaciones comentadas --}}
             <div class="clearfix"></div>
-<<<<<<< HEAD
 
-=======
-            
->>>>>>> 1d754dd73da061bfc199b502c3869d2fcca13968
+
             @if ($user->hasRole('site'))
             <div class="images_profile">
 
