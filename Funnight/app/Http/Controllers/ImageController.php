@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Like;
+use App\Event;
 use App\Image;
 use App\Comment;
+use App\Promotion;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
@@ -22,27 +24,49 @@ class ImageController extends Controller
         return view('image.create');
     }
 
+    /**
+     * Metodo para guardar
+     */
     public function save(Request $request)
     {
-
-    //validacion
-        $validate = $this->validate($request, [
-
-        'description'=> 'required',
-        'image_path' => 'required|mimes:jpeg,png,jpg,mp4|max:10240'
-    ]);
-
-        // Recogiendo datos
-        $image_path = $request->file('image_path');
-        $description = $request->input('description');
         
-        //asignar valores nuevo objeto
+        // dd($request);
+        // asignar valores nuevo objeto
         $user = \Auth::user();
+
+        // save image
         $image = new Image();
         $image->user_id= $user->id;
+
+        // verify promo or event.
+        if ($request->tipoPub == 1) {
+            # promotion
+
+            // validacion
+            $validate = $this->validate($request, [
+            'description'=> 'required',
+            'image_path' => 'required|mimes:jpeg,png,jpg,mp4|max:10240'
+            ]);
+
+            // Recogiendo datos
+            $image_path = $request->file('image_path');
+            $description = $request->input('description');
+        } else {
+            # event
+
+            // validacion
+            $validate = $this->validate($request, [
+            'description2'=> 'required',
+            'image_path2' => 'required|mimes:jpeg,png,jpg,mp4|max:10240'
+            ]);
+
+            // Recogiendo datos
+            $image_path = $request->file('image_path2');
+            $description = $request->input('description2');
+        }
         
         $image->description = $description;
-        
+
         //subir fichero
         if ($image_path) {
             $image_path_name = time().$image_path->getClientOriginalName();
@@ -60,18 +84,49 @@ class ImageController extends Controller
             $image->image_path = $image_path_name;
         }
 
+        $typePub = $request->tipoPub;
+        $image->typePub = $typePub;
+
         // save
         $image->save();
 
+        // SAVE - PROMOTION or EVENT
+        if ($request->tipoPub == 1) {
+
+            # Get datas
+            $initialDate = $request->input('iniDate');
+            $finalDate = $request->input('finDate');
+
+            # promotion
+            $promotion = new Promotion;
+            
+            $promotion->image_id = $image->id;
+            $promotion->initial_date = $initialDate;
+            $promotion->final_date = $finalDate;
+
+            $promotion->save();
+        } else {
+
+            # Get datas
+            $eventDate = $request->input('eventDate');
+
+            # event
+            $event = new Event;
+            
+            $event->image_id = $image->id;
+            $event->event_date = $eventDate;
+            
+            $event->save();
+        }
+
         return redirect()->route('home')->with([
-            'message'=> 'La foto ha sido subida correctamente!!'
+            'message'=> 'La publicación ha sido subida correctamente!!'
         ]);
     }
 
     public function existImage($filename)
     {
         $exists = Storage::disk('images')->exists($filename);
-        // dd($exists);
         if ($exists) {
             # exists
             return "true";

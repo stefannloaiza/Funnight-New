@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     protected $table = 'comments';
+    public $timestamps = true;
 
     //relacion de muchos a uno
     public function user(){

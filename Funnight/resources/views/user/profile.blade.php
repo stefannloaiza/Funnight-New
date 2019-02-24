@@ -59,8 +59,6 @@
                     </a> @endif
                 </div>
 
-                {{--
-                <div class="clearfix"></div> --}}
                 <div class="user-info">
                 </div>
             </div>
@@ -68,7 +66,7 @@
             <div class="table-responsive">
                 <h2>Mis Gustos!</h2>
                 <hr>
-                <table class="table table-striped ">
+                <table class="table table-striped">
                     <tr>
                         <th class="text-center">Pais</th>
                         <th class="text-center">Tipo de Ambiente</th>
@@ -77,70 +75,153 @@
                         <th class="text-center">Tipo de Establecimiento</th>
                     </tr>
                     <tr class="text-center">
-                        <td>{{$paises->nombre}}</td>
-                        <td>{{$ambientes->nombre}}</td>
-                        <td>{{$musica->nombre}}</td>
-                        <td>{{$comidas->nombre}}</td>
-                        <td>{{$tipoEstablecimiento->nombre}}</td>
+                        <td>{{ $paises->nombre }}</td>
+                        <td>{{ $ambientes->nombre }}</td>
+                        <td>{{ $musica->nombre }}</td>
+                        <td>{{ $comidas->nombre }}</td>
+                        <td>{{ $tipoEstablecimiento->nombre }}</td>
                     </tr>
                 </table>
                 <hr>
             </div>
 
-
-            {{-- inicio publicaciones comentadas--}} @if ($user->hasRole('user'))
-            <div class="images_profile">
-
-                <h2>Publicaciones comentadas</h2>
-
-                <hr> {{-- @if ($user->images != null && $user->images != "") --}} @foreach ($pubs as $pub)
-    @include('includes.image',['image'=>$pub])
-                @endforeach {{-- @else
-                <small>Este usuario no tiene publicaciones.</small> @endif --}}
+            <h2>Actividad</h2>
+            <hr>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-info btn-lg btn-block">Establecimientos seguidos</button>
+                </div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-primary btn-lg btn-block">Est. seguidos por mis amigos</button>
+                </div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-primary btn-lg btn-block">Est. con mis gustos</button>
+                </div>
             </div>
+
+            <br>
+            
+            @if ($user->hasRole('user'))
+
+            <div class="images_profile">
+                <h2>Establecimientos Seguidos</h2>
+                <hr> 
+                @foreach ($follows as $follow)
+                    <div class="profile-user">
+                        <div class="container-avatar">
+                            @if ($follow->image <> null && $follow->image <> "")
+                                <img src="{{ route('user.avatar',['filename' => $follow->image]) }}" class="avatar" /> 
+                            @else
+                                <img src="{{ asset('img/profile1.jpg') }}" class="avatar center" /> 
+                            @endif
+                        </div>
+
+                        <div class="user-info">
+                            <h2>{{ $follow->nick }}</h2>
+                            <h3>{{ $follow->name.''.$follow->surname }}</h3>
+                            <p>{{ 'Se unio: '.\FormatTime::LongTimeFilter($follow->created_at) }}</p>
+                            <a href="{{ route('profile',['id'=>$follow->id]) }}" class="btn btn-info">
+                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver Perfil
+                            </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                @endforeach
+            </div>
+
+            <br>
+
+            <div class="images_profile">
+                <h2>Est. seguidos por mis amigos</h2>
+                <hr> 
+                @foreach ($friendsSites as $friendSite)
+                    <div class="profile-user">
+                        <div class="container-avatar">
+                            @if($friendSite->image <> null && $friendSite->image <> "")
+                                <img src="{{ route('user.avatar',['filename'=>$friendSite->image]) }}" class="avatar" />
+                            @else
+                                <img src="{{ asset('img/profile1.jpg') }}" class="avatar center" />
+                            @endif
+                        </div>
+
+                        <div class="user-info">
+                            <h2>{{ $friendSite->nick }}</h2>
+                            <h3>{{ $friendSite->name.''.$friendSite->surname }}</h3>
+                            <p>{{ 'Se unio: '.\FormatTime::LongTimeFilter($friendSite->created_at) }}</p>
+                            <a href="{{ route('profile',['id'=>$friendSite->id]) }}" class="btn btn-info">
+                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver Perfil
+                            </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                @endforeach
+            </div>
+
+            <br>
+            
+            <div class="images_profile">
+                <h2>Est. con mis gustos</h2>
+                <hr>
+                @foreach ($sitesFollowPleasure as $sitesFollow)
+                    <div class="profile-user">
+                        <div class="container-avatar">
+                            @if($sitesFollow->image <> null && $sitesFollow->image <> "")
+                                <img src="{{ route('user.avatar',['filename'=>$sitesFollow->image]) }}" class="avatar" /> 
+                            @else
+                                <img src="{{ asset('img/profile1.jpg') }}" class="avatar center" /> 
+                            @endif
+                        </div>
+
+                        <div class="user-info">
+                            <h2>{{ $sitesFollow->nick }}</h2>
+                            <h3>{{ $sitesFollow->name.''.$sitesFollow->surname }}</h3>
+                            <p>{{'Se unio: '.\FormatTime::LongTimeFilter($sitesFollow->created_at)}}</p>
+                            <a href="{{ route('profile',['id'=>$sitesFollow->id]) }}" class="btn btn-info">
+                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver Perfil
+                            </a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                @endforeach
+            </div>
+
+            @endif
+
+            <br>
+
+            {{-- inicio publicaciones comentadas--}} 
+            
+            @if ($user->hasRole('user'))
+                <div class="images_profile">
+                    <h2>Publicaciones comentadas</h2>
+                    <hr> 
+                    {{-- @if ($user->images != null && $user->images != "") --}} 
+                    @foreach ($pubs as $pub)
+                        @include('includes.image',['image'=>$pub])
+                    @endforeach
+                    {{-- @else
+                    <small>Este usuario no tiene publicaciones.</small> @endif --}}
+                </div>
             @endif {{-- fin publicaciones comentadas --}}
             <div class="clearfix"></div>
 
+            <br>
 
             @if ($user->hasRole('site'))
-            <div class="images_profile">
-
-                <h2>Publicaciones</h2>
-
-                <hr> @if ($user->images != null && $user->images != "") @foreach ($user->images as $image)
-    @include('includes.image',['image'=>$image])
-                @endforeach @else
-                <small>Este usuario no tiene publicaciones.</small> @endif
-            </div>
-            @endif @if ($user->hasRole('user'))
-            <div class="images_profile">
-                <h2>Establecimientos Seguidos</h2>
-                <hr> @foreach ($follows as $follow)
-
-                <div class="profile-user">
-                    <div class="container-avatar">
-                        @if($follow->image
-                        <> null && $follow->image
-                            <> "")
-                                <img src="{{ route('user.avatar',['filename'=>$follow->image]) }}" class="avatar" /> @else
-                                <img src="{{ asset('img/profile1.jpg') }}" class="avatar center" /> @endif
-                    </div>
-
-                    <div class="user-info">
-                        <h2>{{$follow->nick}}</h2>
-                        <h3>{{$follow->name.' '.$follow->surname}}</h3>
-                        <p>{{'Se unio: '.\FormatTime::LongTimeFilter($follow->created_at)}}</p>
-                        <a href="{{route('profile',['id'=> $follow->id])}}" class="btn btn-info">
-                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver Perfil
-                            </a>
-                    </div>
-                    <div class="clearfix"></div>
-                    <hr>
+                <div class="images_profile">
+                    <h2>Publicaciones</h2>
+                    <hr> 
+                    @if ($user->images != null && $user->images != "") 
+                        @foreach ($user->images as $image)
+                            @include('includes.image',['image'=>$image])
+                        @endforeach 
+                    @else
+                        <small>Este usuario no tiene publicaciones.</small> 
+                    @endif
                 </div>
-
-                @endforeach
-            </div>
-            @endif
+            @endif 
+            
+            {{-- Fin de las publicaciones --}}
             <br>
         </div>
     </div>

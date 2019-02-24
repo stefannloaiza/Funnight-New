@@ -18,12 +18,23 @@
                 </span>
             </a>
         </div>
+
+        <div style=" float: right; color: lightgreen; font-size: 18px;">
+            VIGENTE
+        </div>
     </div>
 
     <div class="card-body">
         <div class="image-container">
             <a href="{{ route('image.detail',['id'=>$image->id]) }}">
-                <img src="{{ route('image.file',['filename'=>$image->image_path]) }}" class="imageSites"/>
+                @if (substr($image->image_path, -3) == 'mp4')
+                    <video  controls>
+                        <source src="{{ route('image.file',['filename'=>$image->image_path]) }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                @else
+                    <img src="{{ route('image.file',['filename'=>$image->image_path]) }}" class="imageSites"/>
+                @endif
             </a>
         </div>
 

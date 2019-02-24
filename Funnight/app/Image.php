@@ -10,6 +10,7 @@ class Image extends Model
     use Rateable;
 
     protected $table = 'Images';
+    public $timestamps = true;
 
     //relacion one to many/ de uno a muchos
     public function comments()
@@ -26,4 +27,6 @@ class Image extends Model
     {
         return $this->belongsTo('App\User', 'user_id');
     }
+
+
 }
