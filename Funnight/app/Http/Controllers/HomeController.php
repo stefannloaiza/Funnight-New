@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use DateTime;
 use App\Image;
 use Illuminate\Http\Request;
@@ -56,7 +57,10 @@ class HomeController extends Controller
                 }
             } else {
                 # this is admin
-                return view('admin.index');
+                $users = User::where('role', '2')->orWhere('role', '3')->get();
+                return view('admin.index', [
+                    'users' => $users
+                    ]);
             }
         } else {
             # this is nothing

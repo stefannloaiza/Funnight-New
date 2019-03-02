@@ -5,16 +5,16 @@ namespace App\Http\Controllers;
 use App\Pais;
 use App\Role;
 use App\User;
+use App\Image;
 use App\Ciudad;
 use App\Comida;
 use App\Follow;
-use App\Image;
 use App\Musica;
+use App\Precio;
+use App\Comment;
 use App\Friends;
 use App\Ambiente;
 use App\Establecimiento;
-use App\Precio;
-use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
@@ -167,7 +167,7 @@ class UserController extends Controller
      */
     public function profile($id)
     {
-        //Get user auth
+        // Get user auth
         $authUser = auth()->user()->id;
 
         // Datas
@@ -177,43 +177,125 @@ class UserController extends Controller
         $comidas = Comida::where('id_comida', $user->tipo_comida)->first();
         $musica = Musica::where('id_musica', $user->tipo_musica)->first();
         $typeEstablecimiento = Establecimiento::where('id_tipo_establecimiento', $user->tipo_establecimiento)->first();
-     
-        
+    
+        // Get friend.
+        $friendSearch = Friends::where('user_id', $authUser)->where('friend_id', $id)->first();
+
         // Get follow site search.
         $followsearch = Follow::where('user_id', $authUser)->where('site_id', $id)->first();
 
         // Get images with comments->content.
-        
-        $comments= Comment::where('user_id', $id)->limit(10)->get();
+        $comments = Comment::where('user_id', $id)->limit(10)->get();
         $pubsArray = array();
-
+        // Get pubs
         foreach ($comments as $comment) {
-            #Get all pubs
+            # Get all pubs.
             $images = Image::find($comment->image_id);
             array_push($pubsArray, $images);
         }
-        
+        // unique.
         $pubsArray = array_unique($pubsArray);
-        // dd(array_unique($pubsArray));
-        // FIN get images with comments->content
-        // Get friend.
-        $friendSearch = Friends::where('user_id', $authUser)->where('friend_id', $id)->first();
         
         // Get follows site list.
         $followsUsers = Follow::where('user_id', $authUser)->get();
         $arraySites = array();
-
         // Get sites follows.
         foreach ($followsUsers as $follows) {
-            # code...
+            # Get sites users.
             $site = User::find($follows->site_id);
             array_push($arraySites, $site);
         }
 
+
+        
+        // Metodo para obtener todos los establecimientos seguidos por mis amigos.
+
+        # 1. obtener amigos.
+        $friends = Friends::where('user_id', $authUser)->get();
+        $arrayFriendsSites = array();
+        foreach ($friends as $friend) {
+            # 2. obtener todos los establecimientos de los amigos.
+            $followsFriends = Follow::where('user_id', $friend->friend_id)->get();
+            
+            foreach ($followsFriends as $ff) {
+                # 3. get sites data
+                $friendsSites = User::find($ff->site_id);
+                array_push($arrayFriendsSites, $friendsSites);
+            }
+        }
+        // unique.
+        $arrayFriendsSites = array_unique($arrayFriendsSites);
+
+
+
+        // Metodo para obtener establecimientos segun mis gustos.
+
+        $arraySitesPleasures = array();
+        $notUsersFollows = Follow::where('user_id', $authUser)->get(['site_id']);
+        $arrayPleasures = array(
+            $ambientes->id_ambiente,
+            $comidas->id_comida,
+            $musica->id_musica,
+            $typeEstablecimiento->id_tipo_establecimiento,
+        );
+
+        // Get sites not follows and with my pleasures.
+        $sitesNotFollow = User::where('role', 3)->whereNotIn('id', $notUsersFollows);
+
+        //get by pleasures.
+        switch (rand(0, 3)) {
+            case 0:
+                # Ambiente
+                // dd('Ambiente');
+                $sitesNotFollow = $sitesNotFollow->where('tipo_ambiente', $arrayPleasures[0]);
+                break;
+            case 1:
+                # Comida
+                // dd('Comida');
+                $sitesNotFollow = $sitesNotFollow->where('tipo_comida', $arrayPleasures[1]);
+                break;
+            case 2:
+                # Musica
+                // dd('Musica');
+                $sitesNotFollow = $sitesNotFollow->where('tipo_musica', $arrayPleasures[2]);
+                break;
+            case 3:
+                # Tipo
+                // dd('Tipo');
+                $sitesNotFollow = $sitesNotFollow->where('tipo_establecimiento', $arrayPleasures[3]);
+                break;
+            default:
+                # code...
+                break;
+        }
+        // Get sites with pleasures.
+        $sitesNotFollow = $sitesNotFollow->get();
+
+
+
+        // Metodo
+
+        # 1. obtener amigos.
+        $friends = Friends::where('user_id', $authUser)->get();
+        
+        foreach ($friends as $friend) {
+            # 2. obtener todos los establecimientos de los amigos.
+            $followsFriends = Follow::where('user_id', $friend->friend_id)->get();
+            
+            foreach ($followsFriends as $ff) {
+                # 3. get sites data
+                $friendsSites = User::find($ff->site_id);
+                array_push($arrayFriendsSites, $friendsSites);
+            }
+        }
+        // unique.
+        $arrayFriendsSites = array_unique($arrayFriendsSites);
+        
         return view('user.profile', [
-           'user'=> $user,
-           'paises' => $paises,
+            'user'=> $user,
+            'paises' => $paises,
             'ambientes' => $ambientes,
+<<<<<<< HEAD
            'comidas' => $comidas,
            'musica' => $musica,
            'tipoEstablecimiento' =>  $typeEstablecimiento,
@@ -221,12 +303,28 @@ class UserController extends Controller
            'pubs' =>  $pubsArray,
            'followSite' => $followsearch,
            'friend' => $friendSearch
+=======
+            'comidas' => $comidas,
+            'musica' => $musica,
+            'tipoEstablecimiento' =>  $typeEstablecimiento,
+            'follows' =>  $arraySites,
+            'pubs' =>  $pubsArray,
+            'followSite' => $followsearch,
+            'friend' => $friendSearch,
+            'friendsSites' => $arrayFriendsSites,
+            'sitesFollowPleasure' => $sitesNotFollow
+>>>>>>> 220ca4df7e732efddb85521402cfec3ffd71b06e
         ]);
     }
 
+    /**
+     * Metodo para inactivar los usuarios.
+     *
+     * @return void
+     */
     public function inactiveUser()
     {
-        //conseguir usuario identificado
+        // Conseguir usuario identificado
         $user = \Auth::user();
         $id = $user->id;
         $user->userActive = 0;
@@ -461,4 +559,47 @@ class UserController extends Controller
             'friends' => $arrayFriends
          ]);
     }
+
+
+
+/**
+     * Metodo para inactivar los usuarios.
+     *
+     * @return void
+     */
+    public function inactiveUserFromAdmin($user_id)
+    {
+        // Conseguir usuario identificado
+        $user = User::find($user_id);
+        // $id = $user->id;
+        $user->userActive = 0;
+        $user->save();
+
+        return redirect()->route('home')->with([
+            'message'=> 'El usuario ha sido inactivado!!'
+        ]);
+    }
+
+
+    /**
+     * Metodo para activar los usuarios.
+     *
+     * @return void
+     */
+    public function activeUserFromAdmin($user_id)
+    {
+        // Conseguir usuario identificado
+        $user = User::find($user_id);
+        // $id = $user->id;
+        $user->userActive = 1;
+        $user->save();
+
+        return redirect()->route('home')->with([
+            'message'=> 'El usuario ha sido activado!!'
+        ]);
+    }
+
+
+
+
 }

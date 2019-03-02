@@ -37,6 +37,10 @@ Route::get('/dejarAmigo/{site_id}', 'UserController@dejarAmigo')->name('dejarAmi
 Route::get('/gustosview', 'UserController@gustosview')->name('user.gustosview');
 Route::get('/gustos', 'UserController@gustos')->name('user.gustos');
 
+
+Route::get('/active/{user_id}', 'UserController@activeUserFromAdmin')->name('user.active');
+Route::get('/inactive/{user_id}', 'UserController@inactiveUserFromAdmin')->name('user.inactive');
+
 // Establecimiento
 Route::get('/sites', 'EstablecimientoController@index')->name('sites.index');
 Route::get('/sites/create', 'EstablecimientoController@create')->name('sites.create');

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Friends extends Model
 {
     
+    public $timestamps = true;
+    
     //relacion de muchos a uno
     public function user()
     {

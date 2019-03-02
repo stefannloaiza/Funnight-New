@@ -52,6 +52,8 @@ form .avatar{
 .pub_image .data-user{
     font-weight: bold;
     line-height: 35px;
+    float: left;
+    height: 40px;
 }
 
 .pub_image .data-user a{
