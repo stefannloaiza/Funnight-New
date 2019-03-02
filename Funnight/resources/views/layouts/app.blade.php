@@ -62,7 +62,7 @@
         .card {
             /* width: 80%; */
             border: 0;
-            
+
             margin-bottom: 25px;
             color: aquamarine;
             background-color: rgba(11, 11, 11, .9);
@@ -120,7 +120,7 @@
                         <li class="nav-item">
                             <a href="{{route('user.gustosview')}}" class="nav-link">Establecimiento</a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <a href="{{route('likes')}}" class="nav-link">Favoritas</a>
                         </li>
@@ -131,7 +131,7 @@
                         </li>
                         @endif
                         <li>
-                            @include('includes.avatar')
+    @include('includes.avatar')
                         </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"

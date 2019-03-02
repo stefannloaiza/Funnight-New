@@ -217,7 +217,7 @@ class UserController extends Controller
            'comidas' => $comidas,
            'musica' => $musica,
            'tipoEstablecimiento' =>  $typeEstablecimiento,
-           'follows' =>  $arraySite,
+           'follows' =>  $arraySites,
            'pubs' =>  $pubsArray,
            'followSite' => $followsearch,
            'friend' => $friendSearch
