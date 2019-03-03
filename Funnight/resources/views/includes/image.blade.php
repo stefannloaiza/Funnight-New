@@ -11,12 +11,20 @@
 
 
         <div class="data-user">
+            @if ($user->hasRole('user'))
             <a href="{{ route('profile',['id'=>$image->user->id]) }}">
             {{ ucwords($image->user->name.' '.$image->user->surname)  }}
                 <span class="nickname">
                     {{ '| '.$image->user->nick }}
                 </span>
-            </a>
+            </a> @else
+            <p href="{{ route('profile',['id'=>$image->user->id]) }}">
+                {{ ucwords($image->user->name.' '.$image->user->surname) }}
+                <span class="nickname">
+                            {{ '| '.$image->user->nick }}
+                        </span>
+            </p>
+            @endif
         </div>
 
         <div style=" float: right; color: lightgreen; font-size: 18px;">
@@ -39,7 +47,12 @@
         </div>
 
         <div class="description">
-            <span class="nickname">{{$image->user->nick}} </span><span class="nickname date"> {{' | '.\FormatTime::LongTimeFilter($image->created_at)}}</span>
+            <span class="nickname">{{$image->user->nick}} </span><span class="nickname date"> {{' | '.\FormatTime::LongTimeFilter($image->created_at)}}</span>            {{-- @if($image->typePub == 1)
+            <p>{{ route('image.typePublication',['id'=>$image->id]) }}</p>
+            @else
+            <p></p>
+
+            @endif --}}
             <br><br>
             <p>{{ ucfirst($image->description) }}</p>
         </div>

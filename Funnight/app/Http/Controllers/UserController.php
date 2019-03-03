@@ -177,6 +177,7 @@ class UserController extends Controller
         $comidas = Comida::where('id_comida', $user->tipo_comida)->first();
         $musica = Musica::where('id_musica', $user->tipo_musica)->first();
         $typeEstablecimiento = Establecimiento::where('id_tipo_establecimiento', $user->tipo_establecimiento)->first();
+        $precio = Precio::where('id_precio', $user->precio)->first();
     
         // Get friend.
         $friendSearch = Friends::where('user_id', $authUser)->where('friend_id', $id)->first();
@@ -290,20 +291,12 @@ class UserController extends Controller
         }
         // unique.
         $arrayFriendsSites = array_unique($arrayFriendsSites);
-        
+        // dd($precio);
+         
         return view('user.profile', [
             'user'=> $user,
             'paises' => $paises,
             'ambientes' => $ambientes,
-<<<<<<< HEAD
-           'comidas' => $comidas,
-           'musica' => $musica,
-           'tipoEstablecimiento' =>  $typeEstablecimiento,
-           'follows' =>  $arraySites,
-           'pubs' =>  $pubsArray,
-           'followSite' => $followsearch,
-           'friend' => $friendSearch
-=======
             'comidas' => $comidas,
             'musica' => $musica,
             'tipoEstablecimiento' =>  $typeEstablecimiento,
@@ -312,8 +305,8 @@ class UserController extends Controller
             'followSite' => $followsearch,
             'friend' => $friendSearch,
             'friendsSites' => $arrayFriendsSites,
-            'sitesFollowPleasure' => $sitesNotFollow
->>>>>>> 220ca4df7e732efddb85521402cfec3ffd71b06e
+            'sitesFollowPleasure' => $sitesNotFollow,
+            'precio'=>$precio
         ]);
     }
 
@@ -562,11 +555,11 @@ class UserController extends Controller
 
 
 
-/**
-     * Metodo para inactivar los usuarios.
-     *
-     * @return void
-     */
+    /**
+         * Metodo para inactivar los usuarios.
+         *
+         * @return void
+         */
     public function inactiveUserFromAdmin($user_id)
     {
         // Conseguir usuario identificado
@@ -598,8 +591,4 @@ class UserController extends Controller
             'message'=> 'El usuario ha sido activado!!'
         ]);
     }
-
-
-
-
 }

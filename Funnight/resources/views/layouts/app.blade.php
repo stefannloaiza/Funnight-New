@@ -145,7 +145,7 @@
                                     </a>
                                 <a class="dropdown-item" href="{{route('config')}}">
                                                      Configuración             
-                                    </a> @if( Auth::user()->hasRole('admin') )
+                                    </a> @if( Auth::user()->hasRole('site') )
                                 <a class="dropdown-item" href="{{route('administrar')}}">
                                             Reportes             
                                         </a> @endif

@@ -104,9 +104,10 @@
                         <h2>{{$user->nick}}</h2>
                         <h3>{{$user->name.' '.$user->surname}}</h3>
                         <p>{{'Se unio: '.\FormatTime::LongTimeFilter($user->created_at)}}</p>
+                        @if ($user->hasRole('user'))
                         <a href="{{route('profile',['id'=> $user->id])}}" class="btn btn-info">
                             <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver Perfil
-                        </a>
+                        </a> @endif
                     </div>
                     <div class="clearfix"></div>
                 </div>

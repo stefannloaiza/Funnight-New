@@ -260,4 +260,9 @@ class ImageController extends Controller
 
         $image->ratings()->save($rating);
     }
+
+    // public function typePublication(Type $var = null)
+    // {
+    //     # code...
+    // }
 }

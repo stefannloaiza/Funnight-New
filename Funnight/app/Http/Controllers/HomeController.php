@@ -29,9 +29,11 @@ class HomeController extends Controller
         if ($request->user()->authorizeRoles(['user', 'admin','site'])) {
             if ($request->user()->hasRole('user')) {
                 $images = Image::orderBy('id', 'desc')->paginate(10);
+                $user= \Auth::user();
 
                 return view('home', [
-                    'images' => $images
+                    'images' => $images,
+                    'user'=>$user
                 ]);
             } elseif ($request->user()->hasRole('site')) {
                 if ($this->withoutInteractionDays() == 5) {
@@ -47,12 +49,14 @@ class HomeController extends Controller
                     return Route::controller('inactiveUser', 'UserController');
                 } else {
                     $images = Image::orderBy('id', 'desc')->paginate(20);
+                    $user= \Auth::user();
                     // $images = Image::orderBy('id', 'desc')->simplePaginate(3);
                     # not without
                     $inactivity = false;
                     return view('sites.index', [
                     'inactivity'=> $inactivity,
-                    'images' => $images
+                    'images' => $images,
+                    'user'=>$user
                     ]);
                 }
             } else {
