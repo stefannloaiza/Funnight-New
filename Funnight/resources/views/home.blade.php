@@ -7,7 +7,6 @@
     @include('includes.image',['image'=>$image,'user'=>$user]) @endforeach
             <!-- PAGINACION -->
             <div class="clearfix"></div>
-            {{-- {{ $images->links() }} --}}
         </div>
     </div>
 </div>

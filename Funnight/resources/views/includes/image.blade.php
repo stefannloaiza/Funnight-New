@@ -47,13 +47,9 @@
         </div>
 
         <div class="description">
-            <span class="nickname">{{$image->user->nick}} </span><span class="nickname date"> {{' | '.\FormatTime::LongTimeFilter($image->created_at)}}</span>            {{-- @if($image->typePub == 1)
-            <p>{{ route('image.typePublication',['id'=>$image->id]) }}</p>
-            @else
-            <p></p>
-
-            @endif --}}
-            <br><br>
+            <span class="nickname">{{$image->user->nick}} </span><span class="nickname date"> {{' | '.\FormatTime::LongTimeFilter($image->created_at)}}</span>
+            <p class="datesPubs">{{ $image->textType}}</p>
+            <br>
             <p>{{ ucfirst($image->description) }}</p>
         </div>
         <hr> {{-- cierre calificaion por estrellas 1 --}}

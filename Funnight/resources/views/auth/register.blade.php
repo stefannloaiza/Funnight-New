@@ -85,6 +85,7 @@
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span> @endif
                             </div>
+                            <h6 class="col-md-10 col-form-label text-md-right" style="font-size:11px">La contraseña debe tener minimo 8 caracteres, un número y una mayuscula.</h6>
                         </div>
 
                         <div class="form-group row">

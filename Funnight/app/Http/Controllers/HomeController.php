@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\User;
 use DateTime;
 use App\Image;
+use App\Traits\ImagesMethods;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    use ImagesMethods;
     /**
      * Create a new controller instance.
      *
@@ -28,8 +30,13 @@ class HomeController extends Controller
     {
         if ($request->user()->authorizeRoles(['user', 'admin','site'])) {
             if ($request->user()->hasRole('user')) {
-                $images = Image::orderBy('id', 'desc')->paginate(10);
                 $user= \Auth::user();
+                $images = Image::orderBy('id', 'desc')->paginate(10);
+
+                foreach ($images as $image) {
+                    $image->textType = $this->typePublication($image->id);
+                    // dd($image);
+                }
 
                 return view('home', [
                     'images' => $images,

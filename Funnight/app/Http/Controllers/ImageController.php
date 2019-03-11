@@ -7,6 +7,7 @@ use App\Event;
 use App\Image;
 use App\Comment;
 use App\Promotion;
+use App\Traits\ImagesMethods;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
 {
+    use ImagesMethods;
     public function __construct()
     {
         $this->middleware('auth');
@@ -146,6 +148,9 @@ class ImageController extends Controller
     public function detail($id)
     {
         $image =Image::find($id);
+        $image->textType = $this->typePublication($image->id);
+        // dd($image);
+        
         return view('image.detail', [
 
             'image'=>$image
@@ -260,9 +265,4 @@ class ImageController extends Controller
 
         $image->ratings()->save($rating);
     }
-
-    // public function typePublication(Type $var = null)
-    // {
-    //     # code...
-    // }
 }

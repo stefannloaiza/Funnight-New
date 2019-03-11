@@ -28,13 +28,14 @@
                 <div class="card-body">
                     <div class="image-container" style="max-height: none;">
                         <img src="{{route('image.file',['filename'=>$image->image_path])}}" />
-                        
+
                     </div>
 
 
                     <div class="description">
                         <span class="nickname">{{$image->user->nick}}</span>
                         <span class="nickname date">{{' | '.\FormatTime::LongTimeFilter($image->created_at)}}</span>
+                        <p class="datesPubs">{{ $image->textType}}</p>
                         <br><br>
                         <p>{{ ucfirst($image->description) }}</p>
                     </div>
@@ -97,7 +98,7 @@
                         <hr>
                         <form method="POST" action="{{route('comment.save')}}">
                             @csrf
-                            
+
                             <input type="hidden" name="image_id" value="{{$image->id}}" />
                             <p>
                                 <textarea class="form-control {{ $errors->has('content') ? 'is-invalid' : ''}}" name="content"></textarea>                                @if($errors->has('content'))
@@ -115,35 +116,35 @@
                         <hr> @foreach ($image->comments as $comment )
                         <div class="comment">
 
-                            {{-- @if($image->image_path <> null && $image->image_path <> "")
-                            <img src="{{ route('user.avatar',['filename'=>$image->image_path]) }}"/> 
-                            @else
-                            <img src="{{ asset('img/profile1.jpg') }}" class="avatar center" /> 
-                            @endif --}}
-                            <span class="nickname">{{$comment->user->nick}}</span>
-                            <span class="nickname date"> {{' | '.\FormatTime::LongTimeFilter($comment->created_at)}}</span>
-                            <br>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <p>{{ $comment->content }}</p>
-                                </div>
+                            {{-- @if($image->image_path
+                            <> null && $image->image_path
+                                <> "")
+                                    <img src="{{ route('user.avatar',['filename'=>$image->image_path]) }}" /> @else
+                                    <img src="{{ asset('img/profile1.jpg') }}" class="avatar center" /> @endif --}}
+                                    <span class="nickname">{{$comment->user->nick}}</span>
+                                    <span class="nickname date"> {{' | '.\FormatTime::LongTimeFilter($comment->created_at)}}</span>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <p>{{ $comment->content }}</p>
+                                        </div>
 
-                                <div class="col-md-9">
+                                        <div class="col-md-9">
 
-                                    @if(Auth::check() && ($comment->user_id == Auth::user()->id || $comment->image->user_id== Auth::user()->id))
-                                    <form action="{{url('comment')}}/{{'update'}}/{{$comment->id}}" method="GET">
-                                        <a href="{{ route('comment.delete',['id'=>$comment->id]) }}" class="btn btn-xs btn-danger">
+                                            @if(Auth::check() && ($comment->user_id == Auth::user()->id || $comment->image->user_id== Auth::user()->id))
+                                            <form action="{{url('comment')}}/{{'update'}}/{{$comment->id}}" method="GET">
+                                                <a href="{{ route('comment.delete',['id'=>$comment->id]) }}" class="btn btn-xs btn-danger">
                                             <span class="glyphicon glyphicon-trash"></span> Eliminar
                                     </a> {{--
-                                        <form action="{{route('actualizarcomentario')}}" method="GET"> --}}
-                                            <button class="btn btn-xs btn-warning">
+                                                <form action="{{route('actualizarcomentario')}}" method="GET"> --}}
+                                                    <button class="btn btn-xs btn-warning">
                                                     <span class="glyphicon glyphicon-pencil"></span> Actualizar
                                             </button>
-                                        </form>
+                                                </form>
 
-                                        @endif
-                                </div>
-                            </div>
+                                                @endif
+                                        </div>
+                                    </div>
                         </div>
                         @endforeach
                     </div>

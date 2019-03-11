@@ -8,7 +8,21 @@ window.addEventListener("load", function () {
     $('.btn-like').css('cursor', 'pointer');
     $('.btn-dislike').css('cursor', 'pointer');
 
+    //
+    // Metodo para obtener las fechas dependiendo del tipo de publcacion.
+    //
 
+    // function getDatesPubs() {
+    //     $.ajax({
+    //         url: url + '/image/dates/' + $('.btn-like').data('id'),
+    //         type: 'GET',
+    //         success: function (response) {
+    //             // dates of pubs.
+    //             console.log(response.dates);
+    //             $(".datesPubs").text(response.dates);
+    //         }
+    //     });
+    // }
 
     // boton de like
     function countLikes() {

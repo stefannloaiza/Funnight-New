@@ -15,6 +15,7 @@ use App\Comment;
 use App\Friends;
 use App\Ambiente;
 use App\Establecimiento;
+use App\Traits\ImagesMethods;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+    use ImagesMethods;
     public function __construct()
     {
         $this->middleware('auth');
@@ -192,6 +194,7 @@ class UserController extends Controller
         foreach ($comments as $comment) {
             # Get all pubs.
             $images = Image::find($comment->image_id);
+            $images->textType = $this->typePublication($image->id);
             array_push($pubsArray, $images);
         }
         // unique.

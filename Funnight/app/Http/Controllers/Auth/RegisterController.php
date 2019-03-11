@@ -62,7 +62,7 @@ class RegisterController extends Controller
             'surname' => 'required|string|max:255',
             'nick' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|alfa_num|min:8|confirmed|regex:/[a-z]{1}',
         ]);
     }
 
@@ -74,8 +74,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // dd($data);
-
         if ($data['role'] == 2) {
             # Save user datas
             
