@@ -59,10 +59,12 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
-            'surname' => 'required|string|max:255',
+            'surname' => 'string|max:255',
             'nick' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|alfa_num|min:8|confirmed|regex:/[a-z]{1}',
+            'password' => 'required|string|min:8|confirmed',
+            'telefono' => 'required|Integer|min:7|max:10|confirmed',
+            'celular' => 'required|Integer|min:10|max:13|confirmed',
         ]);
     }
 
@@ -74,75 +76,88 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if ($data['role'] == 2) {
-            # Save user datas
-            
-            $user = User::create([
-                'name' => $data['name'],
-                'surname' => $data['surname'],
-                'nick' => $data['nick'],
-                'email' => $data['email'],
-                'role'=> $data['role'],
-                'image'=> '',
-                'userActive'=> 1,
-                'password' => Hash::make($data['password']),
+
+        /**
+         * Se verifica el nick si ya existe
+         */
+
+        $nickExist = User::where('nick', $data['nick'])->orWhere('email', $data['email'])->first();
+
+        if (is_null($nickExist) || empty($nickExist)) {
+            if ($data['role'] == 2) {
+                # Save user datas
                 
-                // More data
-                'paisActual' => $data['pais'],
-                'ciudadActual' => $data['ciudad'],
-                'genero'=> $data['genero'],
-                'zona' => $data['zona'],
-                'direccion_residencia' => $data['direccion'],
-                'fechaNacimiento'=> new DateTime($data['fechaNac']) ,
-                'telefono' => $data['telefono'],
-                'celular' => $data['celular'],
-                'tipo_establecimiento' => $data['establecimiento'],
-                'tipo_comida'=> $data['comidaUser'],
-                'tipo_ambiente'=> $data['ambienteUser'],
-                'tipo_musica'=> $data['musicaUser'],
-
-                'lastInteraction'=> new DateTime(),
-            ]);
-            
-            $user->roles()->attach($data['role']);
-            
-            return $user;
+                $user = User::create([
+                    'name' => $data['name'],
+                    'surname' => $data['surname'],
+                    'nick' => $data['nick'],
+                    'email' => $data['email'],
+                    'role'=> $data['role'],
+                    'image'=> '',
+                    'userActive'=> 1,
+                    'password' => Hash::make($data['password']),
+                    
+                    // More data
+                    'paisActual' => $data['pais'],
+                    'ciudadActual' => $data['ciudad'],
+                    'genero'=> $data['genero'],
+                    'zona' => $data['zona'],
+                    'direccion_residencia' => $data['direccion'],
+                    'fechaNacimiento'=> new DateTime($data['fechaNac']) ,
+                    'telefono' => $data['telefono'],
+                    'celular' => $data['celular'],
+                    'tipo_establecimiento' => $data['establecimiento'],
+                    'tipo_comida'=> $data['comidaUser'],
+                    'tipo_ambiente'=> $data['ambienteUser'],
+                    'tipo_musica'=> $data['musicaUser'],
+    
+                    'lastInteraction'=> new DateTime(),
+                ]);
+                
+                $user->roles()->attach($data['role']);
+                
+                return $user;
+            } else {
+                # Save night site datas
+                
+                $site = User::create([
+                    'name' => $data['name'],
+                    'surname' => $data['surname'],
+                    'nick' => $data['nick'],
+                    'email' => $data['email'],
+                    'role'=> $data['role'],
+                    'image'=> '',
+                    'userActive'=> 1,
+                    'password' => Hash::make($data['password']),
+    
+                     // More data
+                    'nit' => $data['nit'],
+                    'paisActual' => $data['paisSite'],
+                    'ciudadActual' => $data['ciudadSite'],
+                    'zona' => $data['zonaSite'],
+                    'direccion_residencia' => $data['direccionSite'],
+                    'telefono' => $data['telefonoSite'],
+                    'celular' => $data['celularSite'],
+                    'tipo_establecimiento' => $data['typeSite'],
+                    'tipo_comida'=> $data['comidaSite'],
+                    'tipo_ambiente'=> $data['ambienteSite'],
+                    'tipo_musica'=> $data['musicaSite'],
+                    'precio'=> $data['precioSite'],
+                     
+                    'genero'=> '',
+                    'lastInteraction'=> new DateTime(),
+                    // 'fechaNacimiento'=> '',
+                ]);
+               
+                
+                $site->roles()->attach($data['role']);
+                
+                return $site;
+            }
         } else {
-            # Save night site datas
-            
-            $site = User::create([
-                'name' => $data['name'],
-                'surname' => $data['surname'],
-                'nick' => $data['nick'],
-                'email' => $data['email'],
-                'role'=> $data['role'],
-                'image'=> '',
-                'userActive'=> 1,
-                'password' => Hash::make($data['password']),
+            # retornar con mensaje de nick existente.
 
-                 // More data
-                'nit' => $data['nit'],
-                'paisActual' => $data['paisSite'],
-                'ciudadActual' => $data['ciudadSite'],
-                'zona' => $data['zonaSite'],
-                'direccion_residencia' => $data['direccionSite'],
-                'telefono' => $data['telefonoSite'],
-                'celular' => $data['celularSite'],
-                'tipo_establecimiento' => $data['typeSite'],
-                'tipo_comida'=> $data['comidaSite'],
-                'tipo_ambiente'=> $data['ambienteSite'],
-                'tipo_musica'=> $data['musicaSite'],
-                'precio'=> $data['precioSite'],
-                 
-                'genero'=> '',
-                'lastInteraction'=> new DateTime(),
-                // 'fechaNacimiento'=> '',
-            ]);
-           
-            
-            $site->roles()->attach($data['role']);
-            
-            return $site;
+            return null;
         }
     }
 }

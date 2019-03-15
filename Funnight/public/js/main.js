@@ -25,14 +25,16 @@ window.addEventListener("load", function () {
     // }
 
     // boton de like
-    function countLikes() {
+    function countLikes(id) {
+        // var id = $('.btn-like').data('id');
+        console.log("id es: " + id);
         $.ajax({
-            url: url + '/countLikes/' + $('.btn-like').data('id'),
+            url: url + '/countLikes/' + id,
             type: 'GET',
             success: function (response) {
                 // numberLike
                 console.log(response.numberLike);
-                $(".number_likes").text(response.numberLike);
+                $(".number_likes" + id).text(response.numberLike);
             }
         });
     }
@@ -44,6 +46,8 @@ window.addEventListener("load", function () {
             $(this).addClass('btn-dislike').removeClass('btn-like');
             $(this).attr('src', url + '/img/heart-red.png');
 
+            var like_id = $(this).data('id');
+
             $.ajax({
                 url: url + '/like/' + $(this).data('id'),
                 type: 'GET',
@@ -51,8 +55,8 @@ window.addEventListener("load", function () {
                     if (response.like) {
                         console.log('has dado like a la publicacion');
                         setTimeout(function () {
-                            countLikes();
-                        }, 600);
+                            countLikes(like_id);
+                        }, 300);
                     } else {
                         console.log('Error al dar like');
                     }
@@ -77,7 +81,7 @@ window.addEventListener("load", function () {
                 success: function (response) {
                     if (response.like) {
                         console.log('has dado dislike a la publicacion');
-                        countLikes();
+                        countLikes($(this).data('id'));
                     } else {
                         console.log('Error al dar dislike');
                     }

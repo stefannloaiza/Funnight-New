@@ -7,6 +7,7 @@
                 <div class="card-header">{{ __('words.Register') }}</div>
 
                 <div class="card-body">
+    @include('includes.message')
                     <form method="POST" action="{{ route('register') }}" aria-label="{{ __('words.Register') }}">
                         @csrf
 
@@ -14,8 +15,8 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('words.Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}"
-                                    required autofocus> @if ($errors->has('name'))
+                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" pattern="[A-Za-z]{3,}"
+                                    value="{{ old('name') }}" required autofocus> @if ($errors->has('name'))
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span> @endif
@@ -27,7 +28,7 @@
 
                             <div class="col-md-6">
                                 <input id="surname" type="text" class="form-control{{ $errors->has('surname') ? ' is-invalid' : '' }}" name="surname" value="{{ old('surname') }}"
-                                    required autofocus> @if ($errors->has('surname'))
+                                    pattern="[A-Za-z]{3,}" autofocus> @if ($errors->has('surname'))
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('surname') }}</strong>
                                     </span> @endif
@@ -40,7 +41,7 @@
 
                             <div class="col-md-6">
                                 <input id="nick" type="text" class="form-control{{ $errors->has('nick') ? ' is-invalid' : '' }}" name="nick" value="{{ old('nick') }}"
-                                    required autofocus> @if ($errors->has('nick'))
+                                    pattern="[A-Za-z0-9]{5,}" required autofocus> @if ($errors->has('nick'))
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('nick') }}</strong>
                                     </span> @endif
@@ -80,19 +81,20 @@
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password"
-                                    required> @if ($errors->has('password'))
+                                    minlength="8" pattern="[A-Za-z0-9]{7,}" required> @if ($errors->has('password'))
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span> @endif
                             </div>
-                            <h6 class="col-md-10 col-form-label text-md-right" style="font-size:11px">La contraseña debe tener minimo 8 caracteres, un número y una mayuscula.</h6>
+                            <h6 class="col-md-10 col-form-label text-md-right" style="font-size:11px">La contraseña debe tener minimo 8 caracteres, un número,una mayúscula y minúscula.</h6>
                         </div>
 
                         <div class="form-group row">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('words.Confirm Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" min="8" pattern="[A-Za-z0-9]{7,}"
+                                    required>
                             </div>
                         </div>
 
@@ -195,8 +197,8 @@
                                 <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('words.Telefono') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="telefono" type="number" class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono"
-                                        value="{{ old('telefono') }}" autofocus> @if ($errors->has('telefono'))
+                                    <input id="telefono" type="number" minlength="7" maxlength="10" class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}"
+                                        name="telefono" value="{{ old('telefono') }}" autofocus>                                    @if ($errors->has('telefono'))
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('telefono') }}</strong>
                                         </span> @endif
@@ -207,8 +209,8 @@
                                 <label for="celular" class="col-md-4 col-form-label text-md-right">{{ __('words.Celular') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="celular" type="number" class="form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}" name="celular" value="{{ old('celular') }}"
-                                        autofocus> @if ($errors->has('celular'))
+                                    <input id="celular" type="number" minlength="10" maxlength="13" class="form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}"
+                                        name="celular" value="{{ old('celular') }}" autofocus>                                    @if ($errors->has('celular'))
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('celular') }}</strong>
                                         </span> @endif
@@ -359,7 +361,7 @@
 
                                 <div class="col-md-6">
                                     <input id="telefonoSite" type="number" class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefonoSite"
-                                        value="{{ old('telefono') }}" autofocus> @if ($errors->has('telefono'))
+                                        maxlength="13" value="{{ old('telefono') }}" autofocus>                                    @if ($errors->has('telefono'))
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('telefono') }}</strong>
                                         </span> @endif
@@ -371,7 +373,7 @@
 
                                 <div class="col-md-6">
                                     <input id="celularSite" type="number" class="form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}" name="celularSite"
-                                        value="{{ old('celular') }}" autofocus> @if ($errors->has('celular'))
+                                        maxlength="13" value="{{ old('celular') }}" autofocus>                                    @if ($errors->has('celular'))
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('celular') }}</strong>
                                         </span> @endif
@@ -390,7 +392,8 @@
 
                                 <div class="col-md-6">
                                     <input id="nit" type="text" class="form-control{{ $errors->has('nit') ? ' is-invalid' : '' }}" name="nit" value="{{ old('nit') }}"
-                                        required autofocus> @if ($errors->has('nit'))
+                                        pattern="[A-Za-z0-9]{8,}" required autofocus> @if
+                                    ($errors->has('nit'))
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('nit') }}</strong>
                                         </span> @endif

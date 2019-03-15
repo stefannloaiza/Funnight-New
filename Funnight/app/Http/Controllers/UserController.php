@@ -174,6 +174,7 @@ class UserController extends Controller
 
         // Datas
         $user = User::find($id);
+        // $user = User::where('nick',llegaregistro)->first();
         $paises = Pais::find($user->paisActual);
         $ambientes = Ambiente::where('id_ambiente', $user->tipo_ambiente)->first();
         $comidas = Comida::where('id_comida', $user->tipo_comida)->first();
@@ -187,6 +188,10 @@ class UserController extends Controller
         // Get follow site search.
         $followsearch = Follow::where('user_id', $authUser)->where('site_id', $id)->first();
 
+        /**
+         * Obtener pulicaciones comentadas - user Usuario.
+         */
+
         // Get images with comments->content.
         $comments = Comment::where('user_id', $id)->limit(10)->get();
         $pubsArray = array();
@@ -194,11 +199,15 @@ class UserController extends Controller
         foreach ($comments as $comment) {
             # Get all pubs.
             $images = Image::find($comment->image_id);
-            $images->textType = $this->typePublication($image->id);
+            $images->textType = $this->typePublication($images->id);
             array_push($pubsArray, $images);
         }
         // unique.
         $pubsArray = array_unique($pubsArray);
+
+        /**
+         * Obtener establecimientos seguidos
+         */
         
         // Get follows site list.
         $followsUsers = Follow::where('user_id', $authUser)->get();
@@ -210,29 +219,38 @@ class UserController extends Controller
             array_push($arraySites, $site);
         }
 
+        /**
+         * Obtener los establecimientos seguidos por mis amigos. que yo no sigo.
+         */
 
-        
-        // Metodo para obtener todos los establecimientos seguidos por mis amigos.
+        $arrayFriendsSites = array();
 
         # 1. obtener amigos.
         $friends = Friends::where('user_id', $authUser)->get();
-        $arrayFriendsSites = array();
+        // dd($friends);
+        # 1.5. Obtener mis establecimientos seguidos.
+        $AuthUsersFollows = Follow::where('user_id', $authUser)->get(['site_id'])->toArray();
+        // dd($AuthUsersFollows);
         foreach ($friends as $friend) {
             # 2. obtener todos los establecimientos de los amigos.
             $followsFriends = Follow::where('user_id', $friend->friend_id)->get();
-            
+            // dd($followsFriends);
             foreach ($followsFriends as $ff) {
                 # 3. get sites data
-                $friendsSites = User::find($ff->site_id);
-                array_push($arrayFriendsSites, $friendsSites);
+                $clave = array_search($ff->site_id, $AuthUsersFollows);
+                // dd($clave);
+                if ($clave == false) {
+                    $friendsSites = User::find($ff->site_id);
+                    array_push($arrayFriendsSites, $friendsSites);
+                }
             }
         }
-        // unique.
+        // unique datas in array.
         $arrayFriendsSites = array_unique($arrayFriendsSites);
 
-
-
-        // Metodo para obtener establecimientos segun mis gustos.
+        /**
+         * Obtener establecimientos segun mis gustos. que yo no sigo.
+         */
 
         $arraySitesPleasures = array();
         $notUsersFollows = Follow::where('user_id', $authUser)->get(['site_id']);
@@ -242,7 +260,6 @@ class UserController extends Controller
             $musica->id_musica,
             $typeEstablecimiento->id_tipo_establecimiento,
         );
-
         // Get sites not follows and with my pleasures.
         $sitesNotFollow = User::where('role', 3)->whereNotIn('id', $notUsersFollows);
 
@@ -275,27 +292,6 @@ class UserController extends Controller
         // Get sites with pleasures.
         $sitesNotFollow = $sitesNotFollow->get();
 
-
-
-        // Metodo
-
-        # 1. obtener amigos.
-        $friends = Friends::where('user_id', $authUser)->get();
-        
-        foreach ($friends as $friend) {
-            # 2. obtener todos los establecimientos de los amigos.
-            $followsFriends = Follow::where('user_id', $friend->friend_id)->get();
-            
-            foreach ($followsFriends as $ff) {
-                # 3. get sites data
-                $friendsSites = User::find($ff->site_id);
-                array_push($arrayFriendsSites, $friendsSites);
-            }
-        }
-        // unique.
-        $arrayFriendsSites = array_unique($arrayFriendsSites);
-        // dd($precio);
-         
         return view('user.profile', [
             'user'=> $user,
             'paises' => $paises,

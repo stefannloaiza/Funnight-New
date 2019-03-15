@@ -55,9 +55,12 @@ trait RegistersUsers
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
+        $user = $this->create($request->all());
+        if ($user == null) {
+            return redirect()->back()->withErrors(['nick'=>'El usuario o correo ya existen. Por favor intente nuevamente.']);
+        }
 
-        event(new Registered($user = $this->create($request->all())));
-
+        event(new Registered($user));
         $this->guard()->login($user);
 
         return $this->registered($request, $user)

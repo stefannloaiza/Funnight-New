@@ -17,7 +17,7 @@
                     <h2>{{ ucwords($user->name.' '.$user->surname) }}</h2>
                     <p>{{'Se unio: '.\FormatTime::LongTimeFilter($user->created_at)}}</p>
 
-                    @if( $user->hasRole('site') ) @if (isset($followSite))
+                    @if( $user->hasRole('site') && Auth::user()->hasRole('user') ) @if (isset($followSite))
                     <button name="followSite" id="{{ $user->id }}" type="button" class="btn btn-primary btn-block followSite" hidden="hidden">
                                 Seguir
                             </button>
@@ -47,8 +47,9 @@
 
                 {{-- Calificacion por estrellas 1--}}
 
+
                 <div class="user-info ratings">
-                    @if( $user->hasRole('site') )
+                    @if( $user->hasRole('site') && Auth::user()->hasRole('user') )
                     <input id="input-1" name="input-1" class="rating rating-loading btn-stars" data-id="{{ $user->id }}" data-min="0" data-max="5"
                         data-step="1" value="{{ round($user->userAverageRating)   }}" data-size="xs" style="height: 40px;">
                     <div class="clearfix"></div>

@@ -20,7 +20,8 @@ class LikeController extends Controller
                     ->paginate(5);
 
         return view('like.index', [
-            'likes'=> $likes
+            'likes'=> $likes,
+            'user'=>$user
         ]);
     }
 

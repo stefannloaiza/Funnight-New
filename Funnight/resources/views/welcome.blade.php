@@ -51,7 +51,7 @@
 
         .content {
             text-align: center;
-            margin: 12em;
+            margin: 10em;
             margin-bottom: 0;
         }
 
@@ -98,29 +98,29 @@
             <a href="{{ route('login') }}">{{ __('welcome.login') }}</a>
             <a href="{{ route('register') }}">{{ __('welcome.register') }}</a> @endauth
         </div>
-        @endif
-
+        @endif @auth
+        <div class="container">
+            <div class="alert alert-success text-center" role="alert">
+                <h2>
+                    Bienvenido {{ ucwords( Auth::user()->name ) }}!!
+                </h2>
+                Continua en el Home...
+            </div>
+        </div>
+        @endauth
         <div class="content">
 
-            <div class="title">
-                <p>
-
-                    {{--
-                    <div>
-                        <img src="{{asset('img/logov2.png')}}" class="logofunnight" />
-                    </div> --}}
-                    <b>
-                        Fun Night
-                    </b>
-                </p>
+            <div class="title"><b>
+                Fun Night
+            </b>
             </div>
             <br>
             <p class="lead">
                 Fun Night te ayuda a encontrar tu sitio nocturno favorito, registrate como usuario para encuentres tu sitio ideal o resgistra
                 tu establecimiento nocturno, haz parte de esta comunidad y comienza a crecer tu negocio.
             </p>
-            <br>
-            <a class="btn btn-primary btn-lg" href="{{ route('register') }}" role="button">Registrate</a>
+            <br> @guest
+            <a class="btn btn-primary btn-lg" href="{{ route('register') }}" role="button">Registrate</a> @endguest
         </div>
     </div>
 </body>

@@ -108,10 +108,11 @@ class CommentController extends Controller
 
     public function update($id)
     {
-        $comment = DB::SELECT('SELECT * FROM Comments WHERE id = :id', ['id' => $id]);
+        // $comment = DB::SELECT('SELECT * FROM comments WHERE id = :id', ['id' => $id]);
+        $comment = Comment::find($id);
         // dd($comment[0]);
         // return view('actualizarcomentario', compact('comment'));
-        return view('actualizarcomentario', ['comment'=>$comment[0]]);
+        return view('actualizarcomentario', ['comment'=>$comment]);
         //return view('actualizarcomentario');
         // return ($comment);
     }

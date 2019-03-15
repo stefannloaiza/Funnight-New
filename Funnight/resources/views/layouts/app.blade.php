@@ -21,7 +21,7 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css"
     />
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.css" rel="stylesheet">
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.css" rel="stylesheet">
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
