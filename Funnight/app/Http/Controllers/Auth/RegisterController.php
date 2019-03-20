@@ -63,8 +63,8 @@ class RegisterController extends Controller
             'nick' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'telefono' => 'required|Integer|min:7|max:10|confirmed',
-            'celular' => 'required|Integer|min:10|max:13|confirmed',
+            'telefono' => 'required',
+            'celular' => 'required',
         ]);
     }
 

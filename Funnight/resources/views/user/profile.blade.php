@@ -94,24 +94,24 @@
                 <hr>
             </div>
 
-            @if ($user->hasRole('user')) {{--
+            @if ($user->hasRole('user'))
             <h2>Actividad</h2>
             <hr>
             <div class="row text-center">
                 <div class="col-md-4">
-                    <button type="button" class="btn btn-info btn-lg btn-block">Establecimientos seguidos</button>
+                    <button type="button" name="estSeguidos" id="estSeguidos" class="btn btn-info btn-lg btn-block">Establecimientos seguidos</button>
                 </div>
                 <div class="col-md-4">
-                    <button type="button" class="btn btn-primary btn-lg btn-block">Est. seguidos por mis amigos</button>
+                    <button type="button" name="estAmigos" id="estAmigos" class="btn btn-primary btn-lg btn-block">Est. seguidos por mis amigos</button>
                 </div>
                 <div class="col-md-4">
-                    <button type="button" class="btn btn-primary btn-lg btn-block">Est. con mis gustos</button>
+                    <button type="button" name="estGustos" id="estGustos" class="btn btn-primary btn-lg btn-block">Est. con mis gustos</button>
                 </div>
             </div>
 
-            <br> --}}
+            <br>
 
-            <div class="images_profile">
+            <div class="images_profile" id="divSeguido">
                 <h2>Establecimientos Seguidos</h2>
                 <hr> @foreach ($follows as $follow)
                 <div class="profile-user">
@@ -136,9 +136,7 @@
                 @endforeach
             </div>
 
-            <br>
-
-            <div class="images_profile">
+            <div class="images_profile" id="divAmigos" style="display: none;">
                 <h2>Est. seguidos por mis amigos</h2>
                 <hr> @foreach ($friendsSites as $friendSite)
                 <div class="profile-user">
@@ -163,9 +161,7 @@
                 @endforeach
             </div>
 
-            <br>
-
-            <div class="images_profile">
+            <div class="images_profile" id="divGustos" style="display: none;">
                 <h2>Est. con mis gustos</h2>
                 <hr> @foreach ($sitesFollowPleasure as $sitesFollow)
                 <div class="profile-user">
@@ -219,5 +215,6 @@
     <script type="text/javascript">
         $("#input-id").rating();
     </script>
+    <script src="{{ asset('js/activityUser.js') }}"></script>
 </div>
 @endsection

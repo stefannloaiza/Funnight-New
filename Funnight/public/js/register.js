@@ -34,7 +34,7 @@ window.addEventListener("load", function () {
         var pais = $("#paisSite").val()
 
         if (pais == "") {
-            $("#ciudadSite").attr("disabled", "disables");
+            $("#ciudadSite").attr("disabled", "disabled");
         } else {
             $("#ciudadSite").removeAttr("disabled");
         }

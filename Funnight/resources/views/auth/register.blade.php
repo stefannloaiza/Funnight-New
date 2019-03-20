@@ -15,7 +15,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('words.Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" pattern="[A-Za-z]{3,}"
+                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" pattern="[A-Za-z ]{3,}"
                                     value="{{ old('name') }}" required autofocus> @if ($errors->has('name'))
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -28,7 +28,7 @@
 
                             <div class="col-md-6">
                                 <input id="surname" type="text" class="form-control{{ $errors->has('surname') ? ' is-invalid' : '' }}" name="surname" value="{{ old('surname') }}"
-                                    pattern="[A-Za-z]{3,}" autofocus> @if ($errors->has('surname'))
+                                    pattern="[A-Za-z ]{3,}" autofocus> @if ($errors->has('surname'))
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('surname') }}</strong>
                                     </span> @endif
@@ -197,8 +197,9 @@
                                 <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('words.Telefono') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="telefono" type="number" minlength="7" maxlength="10" class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}"
-                                        name="telefono" value="{{ old('telefono') }}" autofocus>                                    @if ($errors->has('telefono'))
+                                    <input id="telefono" type="text" class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono"
+                                        pattern="[0-9]{7,10}" title="solo se admiten  de 7 a 10 números positivos" value="{{ old('telefono') }}"
+                                        autofocus> @if ($errors->has('telefono'))
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('telefono') }}</strong>
                                         </span> @endif
@@ -209,8 +210,8 @@
                                 <label for="celular" class="col-md-4 col-form-label text-md-right">{{ __('words.Celular') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="celular" type="number" minlength="10" maxlength="13" class="form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}"
-                                        name="celular" value="{{ old('celular') }}" autofocus>                                    @if ($errors->has('celular'))
+                                    <input id="celular" type="text" class="form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}" name="celular" pattern="[0-9]{10}"
+                                        title="solo se admiten 10  números positivos" value="{{ old('celular') }}" autofocus>                                    @if ($errors->has('celular'))
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('celular') }}</strong>
                                         </span> @endif
@@ -360,8 +361,9 @@
                                 <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('words.Telefono') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="telefonoSite" type="number" class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefonoSite"
-                                        maxlength="13" value="{{ old('telefono') }}" autofocus>                                    @if ($errors->has('telefono'))
+                                    <input id="telefonoSite" type="text" class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefonoSite"
+                                        pattern="[0-9]{7,10}" title="solo se admiten  de 7 a 10 números positivos" value="{{ old('telefono') }}"
+                                        autofocus> @if ($errors->has('telefono'))
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('telefono') }}</strong>
                                         </span> @endif
@@ -372,8 +374,9 @@
                                 <label for="celular" class="col-md-4 col-form-label text-md-right">{{ __('Celular Administrativo') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="celularSite" type="number" class="form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}" name="celularSite"
-                                        maxlength="13" value="{{ old('celular') }}" autofocus>                                    @if ($errors->has('celular'))
+                                    <input id="celularSite" type="text" class="form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}" name="celularSite"
+                                        pattern="[0-9]{10}" title="solo se admiten 10 números positivos" value="{{ old('celular') }}"
+                                        autofocus> @if ($errors->has('celular'))
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('celular') }}</strong>
                                         </span> @endif
@@ -392,8 +395,7 @@
 
                                 <div class="col-md-6">
                                     <input id="nit" type="text" class="form-control{{ $errors->has('nit') ? ' is-invalid' : '' }}" name="nit" value="{{ old('nit') }}"
-                                        pattern="[A-Za-z0-9]{8,}" required autofocus> @if
-                                    ($errors->has('nit'))
+                                        pattern="[A-Za-z0-9]{8,}" required autofocus> @if($errors->has('nit'))
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $errors->first('nit') }}</strong>
                                         </span> @endif
