@@ -7,6 +7,8 @@ use DateTime;
 use App\Image;
 use App\Traits\ImagesMethods;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Artisan;
 
 class HomeController extends Controller
 {
@@ -28,9 +30,10 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        Artisan::call('cache:clear');
         if ($request->user()->authorizeRoles(['user', 'admin','site'])) {
+            $user= \Auth::user();
             if ($request->user()->hasRole('user')) {
-                $user= \Auth::user();
                 $images = Image::orderBy('id', 'desc')->paginate(10);
 
                 foreach ($images as $image) {
@@ -43,23 +46,24 @@ class HomeController extends Controller
                     'user'=>$user
                 ]);
             } elseif ($request->user()->hasRole('site')) {
-                if ($this->withoutInteractionDays() == 5) {
+                $inactivity = false;
+                if ($this->withoutInteractionDays() > 4 && $this->withoutInteractionDays() < 7) {
                     $images = Image::orderBy('id', 'desc')->paginate(20);
                     # 5 days without interaction
                     $inactivity = true;
                     return view('sites.index', [
                     'inactivity'=> $inactivity,
-                    'images' => $images
+                    'images' => $images,
+                    'user'=>$user
                     ]);
-                } elseif ($this->withoutInteractionDays() == 7) {
+                } elseif ($this->withoutInteractionDays() > 6) {
                     # 7 days without interaction - inactive
-                    return Route::controller('inactiveUser', 'UserController');
+                    return app(UserController::class)->inactiveUser();
                 } else {
                     $images = Image::orderBy('id', 'desc')->paginate(20);
-                    $user= \Auth::user();
                     // $images = Image::orderBy('id', 'desc')->simplePaginate(3);
                     # not without
-                    $inactivity = false;
+                    
                     return view('sites.index', [
                     'inactivity'=> $inactivity,
                     'images' => $images,
@@ -108,7 +112,8 @@ class HomeController extends Controller
         $date2 = new DateTime();
 
         $diff = $date1->diff($date2)->days; // numeric = 0,1,...
-
+        $diff = $diff+1;
+        //dd($diff);
         return $diff;
     }
 

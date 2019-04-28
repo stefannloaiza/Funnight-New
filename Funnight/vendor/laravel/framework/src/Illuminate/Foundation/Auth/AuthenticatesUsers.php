@@ -2,8 +2,8 @@
 
 namespace Illuminate\Foundation\Auth;
 
+use DateTime;
 use Illuminate\Http\Request;
-// use App\Traits\UserAuthentication;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
@@ -51,10 +51,26 @@ trait AuthenticatesUsers
         if ($this->guard()->validate($this->credentials($request))) {
             $user = $this->guard()->getLastAttempted();
 
-            // dd($user->userActive);
+            $lastInteraction = $user->lastInteraction;
+
+            $date1 = new DateTime($lastInteraction);
+            $date2 = new DateTime();
+    
+            $diff = $date1->diff($date2)->days; // numeric = 0,1,...
+            $diff = $diff+1;
+           
+            if ($diff > 6) {
+                # code...
+                $user->userActive = 0;
+                $user->save();
+            }
 
             // Make sure the user is active
             if ($user->userActive && $this->attemptLogin($request)) {
+                // new login date.
+                $user->lastInteraction = new DateTime();
+                $user->save();
+
                 // Send the normal successful login response
                 return $this->sendLoginResponse($request);
             } else {

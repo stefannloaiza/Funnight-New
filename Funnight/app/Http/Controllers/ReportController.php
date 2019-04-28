@@ -43,7 +43,9 @@ class ReportController extends Controller
         ->orderBy('cantidad', 'desc')
         ->limit(5)
         ->get();
-  
+        
+        
+
         $view = \View::make('reporte/topusers', compact('likes'))->render();
         $pdf= \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
