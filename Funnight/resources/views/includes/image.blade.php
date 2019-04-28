@@ -9,7 +9,6 @@
                     <img src="{{ asset('img/profile1.jpg') }}" class="avatar" /> @endif
         </div>
 
-
         <div class="data-user">
             @if ($user->hasRole('user'))
             <a href="{{ route('profile',['id'=>$image->user->id]) }}">
@@ -64,8 +63,6 @@
 
             <span class="number_likes{{ $image->id }}">{{ count($image->likes) }}</span>
         </div>
-
-
 
         <div class="comments">
             <a href="{{ route('image.detail',['id'=>$image->id]) }}" class="btn btn-sm btn-warning btn-comments">
