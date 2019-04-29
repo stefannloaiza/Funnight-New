@@ -8,11 +8,13 @@ use App\Event;
 use App\Image;
 use App\Promotion;
 use Illuminate\Http\Request;
+use App\Traits\ImagesMethods;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Artisan;
 
 class HomeController extends Controller
 {
+    use ImagesMethods;
     /**
      * Create a new controller instance.
      *
@@ -40,9 +42,12 @@ class HomeController extends Controller
             if ($request->user()->hasRole('user')) {
 
                 foreach ($images as $image) {
-                    $image->textType = $this->typePublication($image->id);
-                    // dd($image);
+                    
+                    $image->textType = $this->typePublication($image);
+                    $image->vigent = $this->isVigent($image);
                 }
+                
+                // dd($images);
 
                 return view('home', [
                     'images' => $images,
@@ -57,16 +62,18 @@ class HomeController extends Controller
                     # show warning message.
                     $inactivity = true;
 
+                    foreach ($images as $image) {
+                    
+                        $image->textType = $this->typePublication($image);
+                        $image->vigent = $this->isVigent($image);
+                    }
+
                     return view('sites.index', [
                     'inactivity'=> $inactivity,
                     'images' => $images,
                     'user'=>$user
                     ]);
-                } 
-                // elseif ($this->withoutInteractionDays() > 6) {
-                //     # 7 days without interaction - inactive
-                //     return app(UserController::class)->inactiveUser();
-                // } 
+                }
                 else {
                     return view('sites.index', [
                     'inactivity'=> $inactivity,
@@ -134,11 +141,9 @@ class HomeController extends Controller
     public function isUserActive()
     {
         $user = \Auth::user();
-
         if ($user->userActive == 1) {
             return true;
         }
-
         return false;
     }
 
@@ -153,7 +158,6 @@ class HomeController extends Controller
 
         #get promos valids (get promos that mayor or equals today).
         $promotions = Promotion::where('final_date', '>=', new DateTime())->get();
-        // dd($promotions);
         foreach ($promotions as $promotion) {
             $image = Image::find($promotion->image_id);
             array_push($validImages, $image);
@@ -167,8 +171,8 @@ class HomeController extends Controller
         }
 
         # Sort the array for id.
-        $validImages = collect($validImages)->sortBy('id')->reverse()->toArray();
-
+        $validImages = collect($validImages)->sortBy('id')->reverse();
+        
         return $validImages;
     }
 }

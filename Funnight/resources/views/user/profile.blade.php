@@ -191,10 +191,8 @@
             <br> {{-- inicio publicaciones comentadas--}} @if ($user->hasRole('user'))
             <div class="images_profile">
                 <h2>Publicaciones comentadas</h2>
-                <hr> {{-- @if ($user->images != null && $user->images != "") --}} @foreach ($pubs as $pub)
-    @include('includes.image',['image'=>$pub])
-                @endforeach {{-- @else
-                <small>Este usuario no tiene publicaciones.</small> @endif --}}
+                <hr> @foreach ($pubs as $pub)
+    @include('includes.image',['image'=>$pub]) @endforeach
             </div>
             @endif {{-- fin publicaciones comentadas --}}
             <div class="clearfix"></div>
@@ -202,8 +200,8 @@
             <br> @if ($user->hasRole('site'))
             <div class="images_profile">
                 <h2>Publicaciones</h2>
-                <hr> @if ($user->images != null && $user->images != "") @foreach ($user->images as $image)
-    @include('includes.image',['image'=>$image])
+                <hr> @if ($pubsSite != null && $pubsSite != "") @foreach ($pubsSite as $pubSite)
+    @include('includes.image',['image'=>$pubSite])
                 @endforeach @else
                 <small>Este usuario no tiene publicaciones.</small> @endif
             </div>
