@@ -4,7 +4,6 @@ namespace Illuminate\Foundation\Auth;
 
 use App\Pais;
 use App\Role;
-use App\Ciudad;
 use App\Comida;
 use App\Musica;
 use App\Precio;
@@ -54,6 +53,7 @@ trait RegistersUsers
      */
     public function register(Request $request)
     {
+        // dd($request);
         $this->validator($request->all())->validate();
         $user = $this->create($request->all());
         if ($user == null) {
@@ -87,6 +87,6 @@ trait RegistersUsers
     protected function registered(Request $request, $user)
     {
         // first initial user.
-        return view('welcome');
+        // return view('welcome');
     }
 }

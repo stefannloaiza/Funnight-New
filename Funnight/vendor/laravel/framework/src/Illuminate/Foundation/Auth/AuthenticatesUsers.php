@@ -50,7 +50,7 @@ trait AuthenticatesUsers
         // This section is the only change
         if ($this->guard()->validate($this->credentials($request))) {
             $user = $this->guard()->getLastAttempted();
-
+            // dd($user);
             $lastInteraction = $user->lastInteraction;
 
             $date1 = new DateTime($lastInteraction);

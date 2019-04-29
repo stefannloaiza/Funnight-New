@@ -18,7 +18,6 @@
 
             <!-- PAGINACION -->
             <div class="clearfix"></div>
-            {{ $images->links() }}
         </div>
     </div>
 </div>
