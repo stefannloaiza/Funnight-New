@@ -199,7 +199,7 @@ class UserController extends Controller
         foreach ($comments as $comment) {
             # Get all pubs.
             $images = Image::find($comment->image_id);
-            $images->textType = $this->typePublication($images->id);
+            $images->textType = $this->typePublication($images);
             array_push($pubsArray, $images);
         }
         // unique.
@@ -292,6 +292,14 @@ class UserController extends Controller
         // Get sites with pleasures.
         $sitesNotFollow = $sitesNotFollow->get();
 
+
+        // Site Code Images
+        $pubsSite = Image::where('user_id',$user->id)->get();
+        foreach ($pubsSite as $image) {
+            $image->textType = $this->typePublication($image);
+            $image->vigent = $this->isVigent($image);
+        }
+
         return view('user.profile', [
             'user'=> $user,
             'paises' => $paises,
@@ -305,7 +313,8 @@ class UserController extends Controller
             'friend' => $friendSearch,
             'friendsSites' => $arrayFriendsSites,
             'sitesFollowPleasure' => $sitesNotFollow,
-            'precio'=>$precio
+            'precio'=>$precio,
+            'pubsSite' =>  $pubsSite
         ]);
     }
 

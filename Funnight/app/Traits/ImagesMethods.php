@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use Datetime;
 use App\Event;
 use App\Image;
 use App\Promotion;
@@ -11,15 +12,15 @@ use Illuminate\Validation\ValidationException;
 trait ImagesMethods
 {
     /**
-     * Función que verifica si el usuario esta activo.
+     * Función que verifica si la imagen es una promocion o un evento.
      *
      * @return bool
      */
     
-    public function typePublication($image_id)
+    public function typePublication($image)
     {
-        $image = Image::find($image_id);
         $text = "";
+        
 
         if ($image->typePub != null) {
             if ($image->typePub==1) {
@@ -35,5 +36,37 @@ trait ImagesMethods
         }
 
         return $text;
+    }
+
+    /**
+     * Metodo que verifica si la imagen es vigente.
+     *
+     * @param [type] $image_id
+     * @return bool
+     */
+    public function isVigent($image)
+    {
+        if ($image->typePub != null) {
+            if ($image->typePub == 1) {
+                # promotion
+                $promotion = Promotion::where('image_id', $image->id)->first();
+
+                if (new DateTime($promotion->final_date) >= new DateTime()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                # event
+                $event = Event::where('image_id', $image->id)->first();
+
+                if (new DateTime($event->event_date) >= new DateTime()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 }

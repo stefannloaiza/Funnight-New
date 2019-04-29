@@ -26,10 +26,15 @@
             @endif
         </div>
 
-        {{--
+        @if( $image->vigent )
         <div style=" float: right; color: lightgreen; font-size: 18px;">
             VIGENTE
-        </div> --}}
+        </div>
+        @else
+        <div style=" float: right; color: red; font-size: 18px;">
+            NO VIGENTE
+        </div>
+        @endif
     </div>
 
     <div class="card-body">
