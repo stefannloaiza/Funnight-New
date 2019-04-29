@@ -7,8 +7,8 @@ use App\Event;
 use App\Image;
 use App\Comment;
 use App\Promotion;
-use App\Traits\ImagesMethods;
 use Illuminate\Http\Request;
+use App\Traits\ImagesMethods;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -31,7 +31,6 @@ class ImageController extends Controller
      */
     public function save(Request $request)
     {
-        
         // dd($request);
         // asignar valores nuevo objeto
         $user = \Auth::user();
@@ -122,7 +121,7 @@ class ImageController extends Controller
         }
 
         return redirect()->route('home')->with([
-            'message'=> 'La publicación ha sido subida correctamente!!'
+            'message'=> 'La publicaci?n ha sido subida correctamente!!'
         ]);
     }
 
@@ -205,7 +204,6 @@ class ImageController extends Controller
 
     public function update(Request $request)
     {
-
         //validacion
         $validate = $this->validate($request, [
 

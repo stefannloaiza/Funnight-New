@@ -15,8 +15,8 @@ use App\Comment;
 use App\Friends;
 use App\Ambiente;
 use App\Establecimiento;
-use App\Traits\ImagesMethods;
 use Illuminate\Http\Request;
+use App\Traits\ImagesMethods;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -323,9 +323,7 @@ class UserController extends Controller
         $user->save();
 
         $inactive = true;
-        return view('auth.login', [
-                        'inactive'=> $inactive
-                        ]);
+        return view('auth.login', ['inactive'=> $inactive ]);
     }
 
     /**

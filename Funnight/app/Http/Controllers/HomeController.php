@@ -5,14 +5,12 @@ namespace App\Http\Controllers;
 use App\User;
 use DateTime;
 use App\Image;
-use App\Traits\ImagesMethods;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Artisan;
 
 class HomeController extends Controller
 {
-    use ImagesMethods;
     /**
      * Create a new controller instance.
      *
@@ -125,7 +123,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Función que verifica si el usuario esta activo.
+     * Funci?n que verifica si el usuario esta activo.
      *
      * @return bool
      */
