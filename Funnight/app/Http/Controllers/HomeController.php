@@ -32,7 +32,7 @@ class HomeController extends Controller
     {
         Artisan::call('cache:clear');
         if ($request->user()->authorizeRoles(['user', 'admin','site'])) {
-            $user= \Auth::user();
+            $user = \Auth::user();
             if ($request->user()->hasRole('user')) {
                 $images = Image::orderBy('id', 'desc')->paginate(10);
 
@@ -56,10 +56,12 @@ class HomeController extends Controller
                     'images' => $images,
                     'user'=>$user
                     ]);
-                } elseif ($this->withoutInteractionDays() > 6) {
-                    # 7 days without interaction - inactive
-                    return app(UserController::class)->inactiveUser();
-                } else {
+                }
+                // elseif ($this->withoutInteractionDays() > 6) {
+                //     # 7 days without interaction - inactive
+                //     return app(UserController::class)->inactiveUser();
+                // }
+                else {
                     $images = Image::orderBy('id', 'desc')->paginate(20);
                     // $images = Image::orderBy('id', 'desc')->simplePaginate(3);
                     # not without
@@ -73,10 +75,15 @@ class HomeController extends Controller
             } else {
                 # this is admin
                 $users = User::where('role', '2')->orWhere('role', '3')->get();
+
                 return view('admin.index', [
                     'users' => $users
                     ]);
             }
+
+            // new login date.
+            $user->lastInteraction = new DateTime();
+            $user->save();
         } else {
             # this is nothing
             return view('welcome');
@@ -112,8 +119,8 @@ class HomeController extends Controller
         $date2 = new DateTime();
 
         $diff = $date1->diff($date2)->days; // numeric = 0,1,...
-        $diff = $diff+1;
-        //dd($diff);
+        $diff = $diff;
+        // dd($diff);
         return $diff;
     }
 
