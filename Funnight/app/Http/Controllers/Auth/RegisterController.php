@@ -9,9 +9,9 @@ use DateTime;
 use App\Ciudad;
 use App\Comida;
 use App\Musica;
+use App\Precio;
 use App\Ambiente;
 use App\Establecimiento;
-use App\Precio;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -149,14 +149,12 @@ class RegisterController extends Controller
                     // 'fechaNacimiento'=> '',
                 ]);
                
-                
                 $site->roles()->attach($data['role']);
                 
                 return $site;
             }
         } else {
             # retornar con mensaje de nick existente.
-
             return null;
         }
     }

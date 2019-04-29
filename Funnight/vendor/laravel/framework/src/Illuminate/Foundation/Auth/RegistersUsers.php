@@ -7,9 +7,9 @@ use App\Role;
 use App\Ciudad;
 use App\Comida;
 use App\Musica;
+use App\Precio;
 use App\Ambiente;
 use App\Establecimiento;
-use App\Precio;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -86,6 +86,7 @@ trait RegistersUsers
      */
     protected function registered(Request $request, $user)
     {
-        //
+        // first initial user.
+        return view('welcome');
     }
 }

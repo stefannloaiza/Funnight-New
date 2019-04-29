@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\User;
 use DateTime;
+use App\Event;
 use App\Image;
+use App\Promotion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Artisan;
@@ -30,9 +32,12 @@ class HomeController extends Controller
     {
         Artisan::call('cache:clear');
         if ($request->user()->authorizeRoles(['user', 'admin','site'])) {
+            # get authenticated user
             $user= \Auth::user();
+            # get valid images.
+            $images = $this->getImagesValid();
+            # verify role
             if ($request->user()->hasRole('user')) {
-                $images = Image::orderBy('id', 'desc')->paginate(10);
 
                 foreach ($images as $image) {
                     $image->textType = $this->typePublication($image->id);
@@ -44,24 +49,25 @@ class HomeController extends Controller
                     'user'=>$user
                 ]);
             } elseif ($request->user()->hasRole('site')) {
+
                 $inactivity = false;
+
                 if ($this->withoutInteractionDays() > 4 && $this->withoutInteractionDays() < 7) {
-                    $images = Image::orderBy('id', 'desc')->paginate(20);
-                    # 5 days without interaction
+                    
+                    # show warning message.
                     $inactivity = true;
+
                     return view('sites.index', [
                     'inactivity'=> $inactivity,
                     'images' => $images,
                     'user'=>$user
                     ]);
-                } elseif ($this->withoutInteractionDays() > 6) {
-                    # 7 days without interaction - inactive
-                    return app(UserController::class)->inactiveUser();
-                } else {
-                    $images = Image::orderBy('id', 'desc')->paginate(20);
-                    // $images = Image::orderBy('id', 'desc')->simplePaginate(3);
-                    # not without
-                    
+                } 
+                // elseif ($this->withoutInteractionDays() > 6) {
+                //     # 7 days without interaction - inactive
+                //     return app(UserController::class)->inactiveUser();
+                // } 
+                else {
                     return view('sites.index', [
                     'inactivity'=> $inactivity,
                     'images' => $images,
@@ -77,7 +83,7 @@ class HomeController extends Controller
             }
         } else {
             # this is nothing
-            return view('welcome');
+            return view('auth.login');
         }
     }
 
@@ -110,7 +116,7 @@ class HomeController extends Controller
         $date2 = new DateTime();
 
         $diff = $date1->diff($date2)->days; // numeric = 0,1,...
-        $diff = $diff+1;
+        $diff = $diff;
         //dd($diff);
         return $diff;
     }
@@ -129,5 +135,35 @@ class HomeController extends Controller
         }
 
         return false;
+    }
+
+    /**
+     * Función que obtiene las imagenes vigentes.
+     * 
+     */
+
+    public function getImagesValid()
+    {
+        $validImages = array();
+
+        #get promos valids (get promos that mayor or equals today).
+        $promotions = Promotion::where('final_date', '>=', new DateTime())->get();
+        // dd($promotions);
+        foreach ($promotions as $promotion) {
+            $image = Image::find($promotion->image_id);
+            array_push($validImages, $image);
+        }
+        
+        #get events valids
+        $events = Event::where('event_date', '>=', new DateTime())->get();
+        foreach ($events as $event) {
+            $image = Image::find($event->image_id);
+            array_push($validImages, $image);
+        }
+
+        # Sort the array for id.
+        $validImages = collect($validImages)->sortBy('id')->reverse()->toArray();
+
+        return $validImages;
     }
 }
