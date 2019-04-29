@@ -38,7 +38,6 @@ class HomeController extends Controller
             $images = $this->getImagesValid();
             # verify role
             if ($request->user()->hasRole('user')) {
-
                 foreach ($images as $image) {
                     $image->textType = $this->typePublication($image->id);
                     // dd($image);
@@ -49,7 +48,6 @@ class HomeController extends Controller
                     'user'=>$user
                 ]);
             } elseif ($request->user()->hasRole('site')) {
-
                 $inactivity = false;
 
                 if ($this->withoutInteractionDays() > 4 && $this->withoutInteractionDays() < 7) {
@@ -62,11 +60,11 @@ class HomeController extends Controller
                     'images' => $images,
                     'user'=>$user
                     ]);
-                } 
+                }
                 // elseif ($this->withoutInteractionDays() > 6) {
                 //     # 7 days without interaction - inactive
                 //     return app(UserController::class)->inactiveUser();
-                // } 
+                // }
                 else {
                     return view('sites.index', [
                     'inactivity'=> $inactivity,
@@ -144,7 +142,7 @@ class HomeController extends Controller
 
     /**
      * Función que obtiene las imagenes vigentes.
-     * 
+     *
      */
 
     public function getImagesValid()
