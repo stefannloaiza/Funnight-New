@@ -77,10 +77,15 @@ class HomeController extends Controller
             } else {
                 # this is admin
                 $users = User::where('role', '2')->orWhere('role', '3')->get();
+
                 return view('admin.index', [
                     'users' => $users
                     ]);
             }
+
+            // new login date.
+            $user->lastInteraction = new DateTime();
+            $user->save();
         } else {
             # this is nothing
             return view('auth.login');
@@ -117,7 +122,7 @@ class HomeController extends Controller
 
         $diff = $date1->diff($date2)->days; // numeric = 0,1,...
         $diff = $diff;
-        //dd($diff);
+        // dd($diff);
         return $diff;
     }
 

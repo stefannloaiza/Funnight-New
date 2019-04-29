@@ -57,7 +57,7 @@ trait AuthenticatesUsers
             $date2 = new DateTime();
     
             $diff = $date1->diff($date2)->days; // numeric = 0,1,...
-            $diff = $diff+1;
+            $diff = $diff;
            
             if ($diff > 6) {
                 # code...
@@ -67,9 +67,7 @@ trait AuthenticatesUsers
 
             // Make sure the user is active
             if ($user->userActive && $this->attemptLogin($request)) {
-                // new login date.
-                $user->lastInteraction = new DateTime();
-                $user->save();
+                
 
                 // Send the normal successful login response
                 return $this->sendLoginResponse($request);

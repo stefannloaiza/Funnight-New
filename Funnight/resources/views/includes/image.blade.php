@@ -26,9 +26,10 @@
             @endif
         </div>
 
+        {{--
         <div style=" float: right; color: lightgreen; font-size: 18px;">
             VIGENTE
-        </div>
+        </div> --}}
     </div>
 
     <div class="card-body">
