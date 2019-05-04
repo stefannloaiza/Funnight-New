@@ -20,6 +20,7 @@ use App\Traits\ImagesMethods;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Datetime;
 
 class UserController extends Controller
 {
@@ -294,7 +295,7 @@ class UserController extends Controller
 
 
         // Site Code Images
-        $pubsSite = Image::where('user_id',$user->id)->get();
+        $pubsSite = Image::where('user_id', $user->id)->get();
         foreach ($pubsSite as $image) {
             $image->textType = $this->typePublication($image);
             $image->vigent = $this->isVigent($image);
@@ -329,6 +330,7 @@ class UserController extends Controller
         $user = \Auth::user();
         $id = $user->id;
         $user->userActive = 0;
+        $user->lastInteraction = new DateTime();
         $user->save();
 
         $inactive = true;
@@ -572,6 +574,7 @@ class UserController extends Controller
         $user = User::find($user_id);
         // $id = $user->id;
         $user->userActive = 0;
+        $user->lastInteraction = new DateTime();
         $user->save();
 
         return redirect()->route('home')->with([
@@ -591,6 +594,7 @@ class UserController extends Controller
         $user = User::find($user_id);
         // $id = $user->id;
         $user->userActive = 1;
+        $user->lastInteraction = new DateTime();
         $user->save();
 
         return redirect()->route('home')->with([

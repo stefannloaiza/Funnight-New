@@ -62,6 +62,7 @@ trait AuthenticatesUsers
             if ($diff > 6) {
                 # code...
                 $user->userActive = 0;
+                $user->lastInteraction = new DateTime();
                 $user->save();
             }
 

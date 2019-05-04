@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
 use Illuminate\Contracts\Auth\Authenticatable as UserContract;
+use Datetime;
 
 class EloquentUserProvider implements UserProvider
 {
@@ -88,6 +89,8 @@ class EloquentUserProvider implements UserProvider
         $timestamps = $user->timestamps;
 
         $user->timestamps = false;
+
+        $user->lastInteraction = new DateTime();
 
         $user->save();
 

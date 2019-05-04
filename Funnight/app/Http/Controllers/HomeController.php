@@ -54,15 +54,15 @@ class HomeController extends Controller
             } elseif ($request->user()->hasRole('site')) {
                 $inactivity = false;
 
+
+                foreach ($images as $image) {
+                    $image->textType = $this->typePublication($image);
+                    $image->vigent = $this->isVigent($image);
+                }
                 if ($this->withoutInteractionDays() > 4 && $this->withoutInteractionDays() < 7) {
                     
                     # show warning message.
                     $inactivity = true;
-
-                    foreach ($images as $image) {
-                        $image->textType = $this->typePublication($image);
-                        $image->vigent = $this->isVigent($image);
-                    }
 
                     return view('sites.index', [
                     'inactivity'=> $inactivity,

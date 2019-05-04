@@ -147,7 +147,7 @@ class ImageController extends Controller
     public function detail($id)
     {
         $image =Image::find($id);
-        $image->textType = $this->typePublication($image->id);
+        $image->textType = $this->typePublication($image);
         // dd($image);
         
         return view('image.detail', [

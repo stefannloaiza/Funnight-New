@@ -1,4 +1,4 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 @section('content')
 <div class="container">
     <div class="row justify-content-center searchdata">
@@ -18,31 +18,39 @@
                     <p>{{'Se unio: '.\FormatTime::LongTimeFilter($user->created_at)}}</p>
 
                     @if( $user->hasRole('site') && Auth::user()->hasRole('user') ) @if (isset($followSite))
-                    <button name="followSite" id="{{ $user->id }}" type="button" class="btn btn-primary btn-block followSite" hidden="hidden">
-                                Seguir
-                            </button>
-                    <button name="unfollowSite" id="{{ $user->id }}" type="button" class="btn btn-success btn-block unfollowSite">
-                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Seguido
-                            </button> @else
-                    <button name="followSite" id="{{ $user->id }}" type="button" class="btn btn-primary btn-block followSite">
-                                Seguir
-                            </button>
-                    <button name="unfollowSite" id="{{ $user->id }}" type="button" class="btn btn-success btn-block unfollowSite" hidden="hidden">
-                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Seguido
-                            </button> @endif @endif @if( $user->hasRole('user') && $user->id != Auth::user()->id
+                    <button name="followSite" id="{{ $user->id }}" type="button"
+                        class="btn btn-primary btn-block followSite" hidden="hidden">
+                        Seguir
+                    </button>
+                    <button name="unfollowSite" id="{{ $user->id }}" type="button"
+                        class="btn btn-success btn-block unfollowSite">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Seguido
+                    </button> @else
+                    <button name="followSite" id="{{ $user->id }}" type="button"
+                        class="btn btn-primary btn-block followSite">
+                        Seguir
+                    </button>
+                    <button name="unfollowSite" id="{{ $user->id }}" type="button"
+                        class="btn btn-success btn-block unfollowSite" hidden="hidden">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Seguido
+                    </button> @endif @endif @if( $user->hasRole('user') && $user->id != Auth::user()->id
                     ) @if (isset($friend))
-                    <button name="unFollowFriend" id="{{ $user->id }}" type="button" class="btn btn-success btn-block unFollowFriend">
-                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Amigo seguido
-                            </button>
-                    <button name="followFriend" id="{{ $user->id }}" type="button" class="btn btn-primary btn-block followFriend" hidden="hidden">
-                                Amigo
-                            </button> @else
-                    <button name="followFriend" id="{{ $user->id }}" type="button" class="btn btn-primary btn-block followFriend">
-                                Amigo
-                            </button>
-                    <button name="unFollowFriend" id="{{ $user->id }}" type="button" class="btn btn-success btn-block unFollowFriend" hidden="hidden">
-                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Amigo seguido
-                            </button> @endif @endif
+                    <button name="unFollowFriend" id="{{ $user->id }}" type="button"
+                        class="btn btn-success btn-block unFollowFriend">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Amigo seguido
+                    </button>
+                    <button name="followFriend" id="{{ $user->id }}" type="button"
+                        class="btn btn-primary btn-block followFriend" hidden="hidden">
+                        Amigo
+                    </button> @else
+                    <button name="followFriend" id="{{ $user->id }}" type="button"
+                        class="btn btn-primary btn-block followFriend">
+                        Amigo
+                    </button>
+                    <button name="unFollowFriend" id="{{ $user->id }}" type="button"
+                        class="btn btn-success btn-block unFollowFriend" hidden="hidden">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Amigo seguido
+                    </button> @endif @endif
                 </div>
 
                 {{-- Calificacion por estrellas 1--}}
@@ -50,12 +58,14 @@
 
                 <div class="user-info ratings">
                     @if( $user->hasRole('site') && Auth::user()->hasRole('user') )
-                    <input id="input-1" name="input-1" class="rating rating-loading btn-stars" data-id="{{ $user->id }}" data-min="0" data-max="5"
-                        data-step="1" value="{{ round($user->userAverageRating)   }}" data-size="xs" style="height: 40px;">
+                    <input id="input-1" name="input-1" class="rating rating-loading btn-stars" data-id="{{ $user->id }}"
+                        data-min="0" data-max="5" data-step="1" value="{{ round($user->userAverageRating)   }}"
+                        data-size="xs" style="height: 40px;">
                     <div class="clearfix"></div>
                     <br> @endif @if( $user->hasRole('user') )
                     <a href="{{ route('user.friendList',['id'=>$user->id]) }}">
-                        <button name="unFollowFriend" id="{{ $user->id }}" type="button" class="btn btn-warning btn-block">
+                        <button name="unFollowFriend" id="{{ $user->id }}" type="button"
+                            class="btn btn-warning btn-block">
                             <span class="glyphicon glyphicon-list" aria-hidden="true"></span> Lista de amigos
                         </button>
                     </a> @endif
@@ -94,18 +104,21 @@
                 <hr>
             </div>
 
-            @if ($user->hasRole('user'))
+            @if ($user->hasRole('user') && Auth::user()->hasRole('user'))
             <h2>Actividad</h2>
             <hr>
             <div class="row text-center">
                 <div class="col-md-4">
-                    <button type="button" name="estSeguidos" id="estSeguidos" class="btn btn-info btn-lg btn-block">Establecimientos seguidos</button>
+                    <button type="button" name="estSeguidos" id="estSeguidos"
+                        class="btn btn-info btn-lg btn-block">Establecimientos seguidos</button>
                 </div>
                 <div class="col-md-4">
-                    <button type="button" name="estAmigos" id="estAmigos" class="btn btn-primary btn-lg btn-block">Est. seguidos por mis amigos</button>
+                    <button type="button" name="estAmigos" id="estAmigos" class="btn btn-primary btn-lg btn-block">Est.
+                        seguidos por mis amigos</button>
                 </div>
                 <div class="col-md-4">
-                    <button type="button" name="estGustos" id="estGustos" class="btn btn-primary btn-lg btn-block">Est. con mis gustos</button>
+                    <button type="button" name="estGustos" id="estGustos" class="btn btn-primary btn-lg btn-block">Est.
+                        con mis gustos</button>
                 </div>
             </div>
 
@@ -119,7 +132,8 @@
                         @if ($follow->image
                         <> null && $follow->image
                             <> "")
-                                <img src="{{ route('user.avatar',['filename' => $follow->image]) }}" class="avatar" /> @else
+                                <img src="{{ route('user.avatar',['filename' => $follow->image]) }}" class="avatar" />
+                                @else
                                 <img src="{{ asset('img/profile1.jpg') }}" class="avatar center" /> @endif
                     </div>
 
@@ -128,8 +142,8 @@
                         <h3>{{ $follow->name.''.$follow->surname }}</h3>
                         <p>{{ 'Se unio: '.\FormatTime::LongTimeFilter($follow->created_at) }}</p>
                         <a href="{{ route('profile',['id'=>$follow->id]) }}" class="btn btn-info">
-                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver Perfil
-                            </a>
+                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver Perfil
+                        </a>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -144,7 +158,8 @@
                         @if($friendSite->image
                         <> null && $friendSite->image
                             <> "")
-                                <img src="{{ route('user.avatar',['filename'=>$friendSite->image]) }}" class="avatar" />                                @else
+                                <img src="{{ route('user.avatar',['filename'=>$friendSite->image]) }}" class="avatar" />
+                                @else
                                 <img src="{{ asset('img/profile1.jpg') }}" class="avatar center" /> @endif
                     </div>
 
@@ -153,8 +168,8 @@
                         <h3>{{ $friendSite->name.''.$friendSite->surname }}</h3>
                         <p>{{ 'Se unio: '.\FormatTime::LongTimeFilter($friendSite->created_at) }}</p>
                         <a href="{{ route('profile',['id'=>$friendSite->id]) }}" class="btn btn-info">
-                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver Perfil
-                            </a>
+                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver Perfil
+                        </a>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -169,7 +184,8 @@
                         @if($sitesFollow->image
                         <> null && $sitesFollow->image
                             <> "")
-                                <img src="{{ route('user.avatar',['filename'=>$sitesFollow->image]) }}" class="avatar" />                                @else
+                                <img src="{{ route('user.avatar',['filename'=>$sitesFollow->image]) }}"
+                                    class="avatar" /> @else
                                 <img src="{{ asset('img/profile1.jpg') }}" class="avatar center" /> @endif
                     </div>
 
@@ -178,8 +194,8 @@
                         <h3>{{ $sitesFollow->name.''.$sitesFollow->surname }}</h3>
                         <p>{{'Se unio: '.\FormatTime::LongTimeFilter($sitesFollow->created_at)}}</p>
                         <a href="{{ route('profile',['id'=>$sitesFollow->id]) }}" class="btn btn-info">
-                                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver Perfil
-                            </a>
+                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Ver Perfil
+                        </a>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -192,7 +208,7 @@
             <div class="images_profile">
                 <h2>Publicaciones comentadas</h2>
                 <hr> @foreach ($pubs as $pub)
-    @include('includes.image',['image'=>$pub]) @endforeach
+                @include('includes.image',['image'=>$pub]) @endforeach
             </div>
             @endif {{-- fin publicaciones comentadas --}}
             <div class="clearfix"></div>
@@ -201,7 +217,7 @@
             <div class="images_profile">
                 <h2>Publicaciones</h2>
                 <hr> @if ($pubsSite != null && $pubsSite != "") @foreach ($pubsSite as $pubSite)
-    @include('includes.image',['image'=>$pubSite])
+                @include('includes.image',['image'=>$pubSite])
                 @endforeach @else
                 <small>Este usuario no tiene publicaciones.</small> @endif
             </div>
