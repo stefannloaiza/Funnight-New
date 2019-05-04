@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Pais;
 use App\Role;
 use App\User;
+use Datetime;
 use App\Image;
 use App\Ciudad;
 use App\Comida;
@@ -20,7 +21,6 @@ use App\Traits\ImagesMethods;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use Datetime;
 
 class UserController extends Controller
 {

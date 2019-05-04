@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Like;
+use App\Image;
 use Illuminate\Http\Request;
+use App\Traits\ImagesMethods;
 
 class LikeController extends Controller
 {
+    use ImagesMethods;
+    
     public function __construct()
     {
         $this->middleware('auth');
@@ -16,11 +20,22 @@ class LikeController extends Controller
     public function index()
     {
         $user = \Auth::user();
+        $LikesImages = array();
         $likes = Like::where('user_id', $user->id)->orderBy('id', 'desc')
                     ->paginate(5);
 
+        // Set datas to the likes images.
+        foreach ($likes as $like ){
+            $image = Image::find($like->image->id);
+
+            $image->textType = $this->typePublication($image);
+            $image->vigent = $this->isVigent($image);
+
+            array_push($LikesImages, $image);
+        }
+
         return view('like.index', [
-            'likes'=> $likes,
+            'likes'=> $LikesImages,
             'user'=>$user
         ]);
     }

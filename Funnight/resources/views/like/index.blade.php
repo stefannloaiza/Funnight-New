@@ -5,8 +5,9 @@
         <div class="col-md-8">
 
             <h1 class="titles">Mis favoritos</h1>
-            <hr/> @foreach ($likes as $like )
-    @include('includes.image',['image'=>$like->image]) @endforeach
+            <hr/> @foreach ($likes as $likeImage )
+    @include('includes.image',['image'=>$likeImage]) @endforeach
+
             <!-- PAGINACION -->
             <div class="clearfix"></div>
             {{-- {{$likes->links()}} --}}
