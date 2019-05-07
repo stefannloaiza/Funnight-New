@@ -25,7 +25,7 @@ class LikeController extends Controller
                     ->paginate(5);
 
         // Set datas to the likes images.
-        foreach ($likes as $like ){
+        foreach ($likes as $like) {
             $image = Image::find($like->image->id);
 
             $image->textType = $this->typePublication($image);
