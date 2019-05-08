@@ -22,11 +22,11 @@ class LikeController extends Controller
         $user = \Auth::user();
         $LikesImages = array();
         $likes = Like::where('user_id', $user->id)->orderBy('id', 'desc')
-                    ->paginate(5);
+                    ->get();
 
         // Set datas to the likes images.
         foreach ($likes as $like) {
-            $image = Image::find($like->image->id);
+            $image = Image::find($like->image_id);
 
             $image->textType = $this->typePublication($image);
             $image->vigent = $this->isVigent($image);

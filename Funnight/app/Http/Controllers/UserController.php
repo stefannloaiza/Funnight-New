@@ -32,9 +32,10 @@ class UserController extends Controller
 
     public function index($search= null)
     {
+        $userAuth = \Auth::user();
         if (!empty($search)) {
             // dd($search);
-            $users =User::where('role', '2')
+            $users =User::where('role', '2')->where('id', '!=', $userAuth->id)
             ->where(function ($query) use ($search) {
                 $query->where('nick', 'LIKE', '%'.$search.'%')
                  ->orWhere('name', 'LIKE', '%'.$search.'%')
@@ -44,7 +45,8 @@ class UserController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(50);
         } else {
-            $users = User::where('role', '2')->orderBy('id', 'desc')->paginate(50);
+            $users = User::where('role', '2')->where('id', '!=', $userAuth->id)
+            ->orderBy('id', 'desc')->paginate(50);
         }
         return view('user.index', [
            'users' => $users
@@ -201,6 +203,7 @@ class UserController extends Controller
             # Get all pubs.
             $images = Image::find($comment->image_id);
             $images->textType = $this->typePublication($images);
+            $images->vigent = $this->isVigent($images);
             array_push($pubsArray, $images);
         }
         // unique.

@@ -21,18 +21,17 @@ trait ImagesMethods
     {
         $text = "";
         
-
-        if ($image->typePub != null) {
-            if ($image->typePub==1) {
+        if (!empty($image->typePub)) {
+            if ($image->typePub == 1) {
                 #promocion
                 
                 $promotion = Promotion::where('image_id', $image->id)->first();
-                $text = "Promoción valida desde: ".date_format(date_create($promotion->initial_date), 'd/m/Y')." hasta ".date_format(date_create($promotion->final_date), 'd/m/Y');
+                $text = "Promoción valida desde: ".date_format(date_create($promotion->initial_date), 'd/M/Y')." hasta ".date_format(date_create($promotion->final_date), 'd/M/Y');
             } else {
                 #evento
                 $event = Event::where('image_id', $image->id)->first();
                 // dd($event);
-                $text = "Fecha del evento: ".date_format(date_create($event->event_date), 'd/m/Y');
+                $text = "Fecha del evento: ".date_format(date_create($event->event_date), 'd/M/Y');
             }
         }
         
@@ -54,7 +53,7 @@ trait ImagesMethods
                 # promotion
                 $promotion = Promotion::where('image_id', $image->id)->first();
 
-                if (new DateTime($promotion->final_date) >= new DateTime()) {
+                if (date_format(new DateTime($promotion->final_date), 'Y-m-d') >= date_format(new DateTime(), 'Y-m-d')) {
                     return true;
                 } else {
                     return false;
@@ -63,7 +62,7 @@ trait ImagesMethods
                 # event
                 $event = Event::where('image_id', $image->id)->first();
 
-                if (new DateTime($event->event_date) >= new DateTime()) {
+                if (date_format(new DateTime($event->event_date), 'Y-m-d') >= date_format(new DateTime(), 'Y-m-d')) {
                     return true;
                 } else {
                     return false;
