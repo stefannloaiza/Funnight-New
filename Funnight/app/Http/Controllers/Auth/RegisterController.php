@@ -60,9 +60,9 @@ class RegisterController extends Controller
         if ($data['role'] == 2) {
             # user
             return Validator::make($data, [
-                'name' => 'required|string|max:255',
-                'surname' => 'string|max:255',
-                'nick' => 'required|string|max:255',
+                'name' => 'required|alpha_num|max:255',
+                'surname' => 'alpha_num|max:255',
+                'nick' => 'alpha_num|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:8|confirmed',
                 'telefono' => 'required',
@@ -71,9 +71,9 @@ class RegisterController extends Controller
         } else {
             # site
             return Validator::make($data, [
-                'name' => 'required|string|max:255',
-                'surname' => 'string|max:255',
-                'nick' => 'required|string|max:255',
+                'name' => 'required|alpha_num|max:255',
+                'surname' => 'alpha_num|max:255',
+                'nick' => 'required|alpha_num|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:8|confirmed',
                 'telefonoSite' => 'required',

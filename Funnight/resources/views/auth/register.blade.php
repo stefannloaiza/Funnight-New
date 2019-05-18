@@ -1,4 +1,4 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -7,31 +7,35 @@
                 <div class="card-header">{{ __('words.Register') }}</div>
 
                 <div class="card-body">
-    @include('includes.message')
+                    @include('includes.message')
                     <form method="POST" action="{{ route('register') }}" aria-label="{{ __('words.Register') }}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('words.Name') }}</label>
+                            <label for="name"
+                                class="col-md-4 col-form-label text-md-right">{{ __('words.Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" pattern="[A-Za-z ]{3,}"
-                                    value="{{ old('name') }}" required autofocus> @if ($errors->has('name'))
+                                <input id="name" type="text"
+                                    class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name"
+                                    value="{{ old('name') }}" required autofocus> @if($errors->has('name'))
                                 <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span> @endif
+                                    <strong>{{ $errors->first('name') }}</strong>
+                                </span> @endif
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="surname" class="col-md-4 col-form-label text-md-right">{{ __('words.Surname') }}</label>
+                            <label for="surname"
+                                class="col-md-4 col-form-label text-md-right">{{ __('words.Surname') }}</label>
 
                             <div class="col-md-6">
-                                <input id="surname" type="text" class="form-control{{ $errors->has('surname') ? ' is-invalid' : '' }}" name="surname" value="{{ old('surname') }}"
-                                    pattern="[A-Za-z ]{3,}" autofocus> @if ($errors->has('surname'))
+                                <input id="surname" type="text"
+                                    class="form-control{{ $errors->has('surname') ? ' is-invalid' : '' }}"
+                                    name="surname" value="{{ old('surname') }}" autofocus> @if($errors->has('surname'))
                                 <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('surname') }}</strong>
-                                    </span> @endif
+                                    <strong>{{ $errors->first('surname') }}</strong>
+                                </span> @endif
                             </div>
                         </div>
 
@@ -40,61 +44,70 @@
                             <label for="nick" class="col-md-4 col-form-label text-md-right">{{ __('Usuario') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nick" type="text" class="form-control{{ $errors->has('nick') ? ' is-invalid' : '' }}" name="nick" value="{{ old('nick') }}"
-                                    pattern="[A-Za-z0-9]{5,}" required autofocus> @if ($errors->has('nick'))
+                                <input id="nick" type="text"
+                                    class="form-control{{ $errors->has('nick') ? ' is-invalid' : '' }}" name="nick"
+                                    value="{{ old('nick') }}" required autofocus> @if($errors->has('nick'))
                                 <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('nick') }}</strong>
-                                    </span> @endif
+                                    <strong>{{ $errors->first('nick') }}</strong>
+                                </span> @endif
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('words.E-Mail') }}</label>
+                            <label for="email"
+                                class="col-md-4 col-form-label text-md-right">{{ __('words.E-Mail') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}"
-                                    required> @if ($errors->has('email'))
+                                <input id="email" type="email"
+                                    class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email"
+                                    value="{{ old('email') }}" required> @if ($errors->has('email'))
                                 <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span> @endif
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span> @endif
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('words.Role') }}</label>
+                            <label for="role"
+                                class="col-md-4 col-form-label text-md-right">{{ __('words.Role') }}</label>
 
                             <div class="col-md-6">
                                 <select class="form-control" name="role" id="role" style="height: auto;" required>
                                     <option value="">Selecciona el rol</option>
                                     @foreach ($roles as $role)
-                                        <option value="{{ $role->id }}">{{ $role->description }}</option> 
+                                    <option value="{{ $role->id }}">{{ $role->description }}</option>
                                     @endforeach
                                 </select> @if ($errors->has('role'))
                                 <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('role') }}</strong>
-                                    </span> @endif
+                                    <strong>{{ $errors->first('role') }}</strong>
+                                </span> @endif
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('words.Password') }}</label>
+                            <label for="password"
+                                class="col-md-4 col-form-label text-md-right">{{ __('words.Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password"
-                                    minlength="8" pattern="[A-Za-z0-9]{7,}" required> @if ($errors->has('password'))
+                                <input id="password" type="password"
+                                    class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                    name="password" minlength="8" pattern="[A-Za-z0-9]{7,}" required>
+                                @if($errors->has('password'))
                                 <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span> @endif
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span> @endif
                             </div>
-                            <h6 class="col-md-10 col-form-label text-md-right" style="font-size:11px">La contraseña debe tener minimo 8 caracteres, un número,una mayúscula y minúscula.</h6>
+                            <h6 class="col-md-10 col-form-label text-md-right" style="font-size:11px">La contraseña debe
+                                tener minimo 8 caracteres, un número,una mayúscula y minúscula.</h6>
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('words.Confirm Password') }}</label>
+                            <label for="password-confirm"
+                                class="col-md-4 col-form-label text-md-right">{{ __('words.Confirm Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" min="8" pattern="[A-Za-z0-9]{7,}"
-                                    required>
+                                <input id="password-confirm" type="password" class="form-control"
+                                    name="password_confirmation" min="8" pattern="[A-Za-z0-9]{7,}" required>
                             </div>
                         </div>
 
@@ -106,34 +119,37 @@
                             </h4>
                             <br>
                             <div class="form-group row">
-                                <label for="pais" class="col-md-4 col-form-label text-md-right">{{ __('words.Pais Usuario') }}</label>
+                                <label for="pais"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('words.Pais Usuario') }}</label>
 
                                 <div class="col-md-6">
                                     <select class="form-control" name="pais" id="paisUser" style="height: auto;">
                                         <option value="">Selecciona el pais</option>
                                         @foreach ($paises as $pais)
-                                            <option value="{{ $pais->id }}">{{ $pais->nombre }}</option> 
+                                        <option value="{{ $pais->id }}">{{ $pais->nombre }}</option>
                                         @endforeach
                                     </select> @if ($errors->has('pais'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('pais') }}</strong>
-                                        </span> @endif
+                                        <strong>{{ $errors->first('pais') }}</strong>
+                                    </span> @endif
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="ciudad" class="col-md-4 col-form-label text-md-right">{{ __('Ciudad Usuario') }}</label>
+                                <label for="ciudad"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Ciudad Usuario') }}</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-control" name="ciudad" id="ciudadUser" style="height: auto;" disabled>
+                                    <select class="form-control" name="ciudad" id="ciudadUser" style="height: auto;"
+                                        disabled>
                                         {{-- <option value="">Selecciona la ciudad</option> --}}
                                         {{-- @foreach ($paises as $pais)
-                                            <option value="{{ $pais->id }}">{{ $pais->nombre }}</option> 
+                                            <option value="{{ $pais->id }}">{{ $pais->nombre }}</option>
                                         @endforeach --}}
                                     </select> @if ($errors->has('ciudad'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('ciudad') }}</strong>
-                                        </span> @endif
+                                        <strong>{{ $errors->first('ciudad') }}</strong>
+                                    </span> @endif
                                 </div>
                             </div>
 
@@ -149,13 +165,14 @@
                                         <option value="OES">Oeste</option>
                                     </select> @if ($errors->has('zona'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('zona') }}</strong>
-                                        </span> @endif
+                                        <strong>{{ $errors->first('zona') }}</strong>
+                                    </span> @endif
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="genero" class="col-md-4 col-form-label text-md-right">{{ __('Genero') }}</label>
+                                <label for="genero"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Genero') }}</label>
 
                                 <div class="col-md-6">
                                     <select class="form-control" name="genero" id="genUser" style="height: auto;">
@@ -164,57 +181,69 @@
                                         <option value="FEM">Femenino</option>
                                     </select> @if ($errors->has('genero'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('genero') }}</strong>
-                                        </span> @endif
+                                        <strong>{{ $errors->first('genero') }}</strong>
+                                    </span> @endif
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="direccion" class="col-md-4 col-form-label text-md-right">{{ __('words.Direccion') }}</label>
+                                <label for="direccion"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('words.Direccion') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="direccion" type="text" class="form-control{{ $errors->has('direccion') ? ' is-invalid' : '' }}" name="direccion"
-                                        value="{{ old('direccion') }}" autofocus> @if ($errors->has('direccion'))
+                                    <input id="direccion" type="text"
+                                        class="form-control{{ $errors->has('direccion') ? ' is-invalid' : '' }}"
+                                        name="direccion" value="{{ old('direccion') }}" autofocus>
+                                    @if($errors->has('direccion'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('direccion') }}</strong>
-                                        </span> @endif
+                                        <strong>{{ $errors->first('direccion') }}</strong>
+                                    </span> @endif
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="fechaNac" class="col-md-4 col-form-label text-md-right">{{ __('words.FechaNacimiento') }}</label>
+                                <label for="fechaNac"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('words.FechaNacimiento') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="fechaNac" type="date" class="form-control{{ $errors->has('fechaNac') ? ' is-invalid' : '' }}" name="fechaNac"
-                                        value="{{ old('fechaNac') }}" autofocus> @if ($errors->has('fechaNac'))
+                                    <input id="fechaNac" type="date"
+                                        class="form-control{{ $errors->has('fechaNac') ? ' is-invalid' : '' }}"
+                                        name="fechaNac" value="{{ old('fechaNac') }}" autofocus>
+                                    @if($errors->has('fechaNac'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('fechaNac') }}</strong>
-                                        </span> @endif
+                                        <strong>{{ $errors->first('fechaNac') }}</strong>
+                                    </span> @endif
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('words.Telefono') }}</label>
+                                <label for="telefono"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('words.Telefono') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="telefono" type="text" class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefono"
-                                        pattern="[0-9]{7,10}" title="solo se admiten  de 7 a 10 números positivos" value="{{ old('telefono') }}"
-                                        autofocus> @if ($errors->has('telefono'))
+                                    <input id="telefono" type="text"
+                                        class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}"
+                                        name="telefono" pattern="[0-9]{7,10}"
+                                        title="solo se admiten  de 7 a 10 números positivos"
+                                        value="{{ old('telefono') }}" autofocus> @if ($errors->has('telefono'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('telefono') }}</strong>
-                                        </span> @endif
+                                        <strong>{{ $errors->first('telefono') }}</strong>
+                                    </span> @endif
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="celular" class="col-md-4 col-form-label text-md-right">{{ __('words.Celular') }}</label>
+                                <label for="celular"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('words.Celular') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="celular" type="text" class="form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}" name="celular" pattern="[0-9]{10}"
-                                        title="solo se admiten 10  números positivos" value="{{ old('celular') }}" autofocus>                                    @if ($errors->has('celular'))
+                                    <input id="celular" type="text"
+                                        class="form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}"
+                                        name="celular" pattern="[0-9]{10}" title="solo se admiten 10  números positivos"
+                                        value="{{ old('celular') }}" autofocus> @if ($errors->has('celular'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('celular') }}</strong>
-                                        </span> @endif
+                                        <strong>{{ $errors->first('celular') }}</strong>
+                                    </span> @endif
                                 </div>
                             </div>
 
@@ -225,66 +254,75 @@
                             </h4>
                             <br>
                             <div class="form-group row">
-                                <label for="establecimiento" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de establecimiento preferido') }}</label>
+                                <label for="establecimiento"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Tipo de establecimiento preferido') }}</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-control" name="establecimiento" id="siteUser" style="height: auto;">
+                                    <select class="form-control" name="establecimiento" id="siteUser"
+                                        style="height: auto;">
                                         <option value="">Selecciona el tipo de establecimiento</option>
                                         @foreach ($tipoEstablecimiento as $type)
-                                            <option value="{{ $type->id_tipo_establecimiento }}">{{ $type->nombre }}</option> 
+                                        <option value="{{ $type->id_tipo_establecimiento }}">{{ $type->nombre }}
+                                        </option>
                                         @endforeach
                                     </select> @if ($errors->has('establecimiento'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('establecimiento') }}</strong>
-                                        </span> @endif
+                                        <strong>{{ $errors->first('establecimiento') }}</strong>
+                                    </span> @endif
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="comida" class="col-md-4 col-form-label text-md-right">{{ __('Comida preferida') }}</label>
+                                <label for="comida"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Comida preferida') }}</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-control" name="comidaUser" id="comidaUser" style="height: auto;">
+                                    <select class="form-control" name="comidaUser" id="comidaUser"
+                                        style="height: auto;">
                                         <option value="">Selecciona tu comida</option>
                                         @foreach ($comidas as $comida)
-                                            <option value="{{ $comida->id_comida }}">{{ $comida->nombre }}</option> 
+                                        <option value="{{ $comida->id_comida }}">{{ $comida->nombre }}</option>
                                         @endforeach
                                     </select> @if ($errors->has('comida'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('comida') }}</strong>
-                                        </span> @endif
+                                        <strong>{{ $errors->first('comida') }}</strong>
+                                    </span> @endif
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="ambiente" class="col-md-4 col-form-label text-md-right">{{ __('Ambiente preferido en un sitio nocturno') }}</label>
+                                <label for="ambiente"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Ambiente preferido en un sitio nocturno') }}</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-control" name="ambienteUser" id="ambienteUser" style="height: auto;">
+                                    <select class="form-control" name="ambienteUser" id="ambienteUser"
+                                        style="height: auto;">
                                         <option value="">Selecciona el ambiente</option>
                                         @foreach ($ambientes as $ambiente)
-                                            <option value="{{ $ambiente->id_ambiente }}">{{ $ambiente->nombre }}</option> 
+                                        <option value="{{ $ambiente->id_ambiente }}">{{ $ambiente->nombre }}</option>
                                         @endforeach
                                     </select> @if ($errors->has('ambiente'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('ambiente') }}</strong>
-                                        </span> @endif
+                                        <strong>{{ $errors->first('ambiente') }}</strong>
+                                    </span> @endif
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="musica" class="col-md-4 col-form-label text-md-right">{{ __('Musica que te gusta escuchar') }}</label>
+                                <label for="musica"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Musica que te gusta escuchar') }}</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-control" name="musicaUser" id="musicaUser" style="height: auto;">
+                                    <select class="form-control" name="musicaUser" id="musicaUser"
+                                        style="height: auto;">
                                         <option value="">Selecciona tu musica</option>
                                         @foreach ($musica as $music)
-                                            <option value="{{ $music->id_musica }}">{{ $music->nombre }}</option> 
+                                        <option value="{{ $music->id_musica }}">{{ $music->nombre }}</option>
                                         @endforeach
                                     </select> @if ($errors->has('musica'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('musica') }}</strong>
-                                        </span> @endif
+                                        <strong>{{ $errors->first('musica') }}</strong>
+                                    </span> @endif
                                 </div>
                             </div>
 
@@ -297,34 +335,37 @@
                             </h4>
                             <br>
                             <div class="form-group row">
-                                <label for="paisSite" class="col-md-4 col-form-label text-md-right">{{ __('words.Pais Establecimiento') }}</label>
+                                <label for="paisSite"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('words.Pais Establecimiento') }}</label>
 
                                 <div class="col-md-6">
                                     <select class="form-control" name="paisSite" id="paisSite" style="height: auto;">
                                         <option value="">Selecciona el pais</option>
                                         @foreach ($paises as $pais)
-                                            <option value="{{ $pais->id }}">{{ $pais->nombre }}</option> 
+                                        <option value="{{ $pais->id }}">{{ $pais->nombre }}</option>
                                         @endforeach
                                     </select> @if ($errors->has('paisSite'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('paisSite') }}</strong>
-                                        </span> @endif
+                                        <strong>{{ $errors->first('paisSite') }}</strong>
+                                    </span> @endif
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="ciudadSite" class="col-md-4 col-form-label text-md-right">{{ __('Ciudad Establecimiento') }}</label>
+                                <label for="ciudadSite"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Ciudad Establecimiento') }}</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-control" name="ciudadSite" id="ciudadSite" style="height: auto;" disabled>
+                                    <select class="form-control" name="ciudadSite" id="ciudadSite" style="height: auto;"
+                                        disabled>
                                         {{-- <option value="">Selecciona la ciudad</option> --}}
                                         {{-- @foreach ($paises as $pais)
-                                            <option value="{{ $pais->id }}">{{ $pais->nombre }}</option> 
+                                            <option value="{{ $pais->id }}">{{ $pais->nombre }}</option>
                                         @endforeach --}}
                                     </select> @if ($errors->has('ciudadSite'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('ciudadSite') }}</strong>
-                                        </span> @endif
+                                        <strong>{{ $errors->first('ciudadSite') }}</strong>
+                                    </span> @endif
                                 </div>
                             </div>
 
@@ -340,46 +381,55 @@
                                         <option value="OES">Oeste</option>
                                     </select> @if ($errors->has('zona'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('zona') }}</strong>
-                                        </span> @endif
+                                        <strong>{{ $errors->first('zona') }}</strong>
+                                    </span> @endif
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="direccion" class="col-md-4 col-form-label text-md-right">{{ __('words.Direccion') }}</label>
+                                <label for="direccion"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('words.Direccion') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="direccionSite" type="text" class="form-control{{ $errors->has('direccion') ? ' is-invalid' : '' }}" name="direccionSite"
-                                        value="{{ old('direccion') }}" autofocus> @if ($errors->has('direccion'))
+                                    <input id="direccionSite" type="text"
+                                        class="form-control{{ $errors->has('direccion') ? ' is-invalid' : '' }}"
+                                        name="direccionSite" value="{{ old('direccion') }}" autofocus>
+                                    @if($errors->has('direccion'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('direccion') }}</strong>
-                                        </span> @endif
+                                        <strong>{{ $errors->first('direccion') }}</strong>
+                                    </span> @endif
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="telefono" class="col-md-4 col-form-label text-md-right">{{ __('words.Telefono') }}</label>
+                                <label for="telefono"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('words.Telefono') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="telefonoSite" type="text" class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}" name="telefonoSite"
-                                        pattern="[0-9]{7,10}" title="solo se admiten  de 7 a 10 números positivos" value="{{ old('telefono') }}"
-                                        autofocus> @if ($errors->has('telefono'))
+                                    <input id="telefonoSite" type="text"
+                                        class="form-control{{ $errors->has('telefono') ? ' is-invalid' : '' }}"
+                                        name="telefonoSite" pattern="[0-9]{7,10}"
+                                        title="solo se admiten  de 7 a 10 números positivos"
+                                        value="{{ old('telefono') }}" autofocus> @if ($errors->has('telefono'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('telefono') }}</strong>
-                                        </span> @endif
+                                        <strong>{{ $errors->first('telefono') }}</strong>
+                                    </span> @endif
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="celular" class="col-md-4 col-form-label text-md-right">{{ __('Celular Administrativo') }}</label>
+                                <label for="celular"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Celular Administrativo') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="celularSite" type="text" class="form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}" name="celularSite"
-                                        pattern="[0-9]{10}" title="solo se admiten 10 números positivos" value="{{ old('celular') }}"
+                                    <input id="celularSite" type="text"
+                                        class="form-control{{ $errors->has('celular') ? ' is-invalid' : '' }}"
+                                        name="celularSite" pattern="[0-9]{10}"
+                                        title="solo se admiten 10 números positivos" value="{{ old('celular') }}"
                                         autofocus> @if ($errors->has('celular'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('celular') }}</strong>
-                                        </span> @endif
+                                        <strong>{{ $errors->first('celular') }}</strong>
+                                    </span> @endif
                                 </div>
                             </div>
 
@@ -391,93 +441,106 @@
                             <br>
 
                             <div class="form-group row">
-                                <label for="nit" class="col-md-4 col-form-label text-md-right">{{ __('Ingrese su Nit') }}</label>
+                                <label for="nit"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Ingrese su Nit') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="nit" type="text" class="form-control{{ $errors->has('nit') ? ' is-invalid' : '' }}" name="nit" value="{{ old('nit') }}"
-                                        pattern="[A-Za-z0-9]{8,}" required autofocus> @if($errors->has('nit'))
+                                    <input id="nit" type="text"
+                                        class="form-control{{ $errors->has('nit') ? ' is-invalid' : '' }}" name="nit"
+                                        value="{{ old('nit') }}" pattern="[A-Za-z0-9]{8,}" required autofocus>
+                                    @if($errors->has('nit'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('nit') }}</strong>
-                                        </span> @endif
+                                        <strong>{{ $errors->first('nit') }}</strong>
+                                    </span> @endif
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="establecimiento" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de Establecimiento') }}</label>
+                                <label for="establecimiento"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Tipo de Establecimiento') }}</label>
 
                                 <div class="col-md-6">
                                     <select class="form-control" name="typeSite" id="typeSite" style="height: auto;">
                                         <option value="">Selecciona el tipo de establecimiento</option>
                                         @foreach ($tipoEstablecimiento as $type)
-                                            <option value="{{ $type->id_tipo_establecimiento }}">{{ $type->nombre }}</option> 
+                                        <option value="{{ $type->id_tipo_establecimiento }}">{{ $type->nombre }}
+                                        </option>
                                         @endforeach
                                     </select> @if ($errors->has('establecimiento'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('establecimiento') }}</strong>
-                                        </span> @endif
+                                        <strong>{{ $errors->first('establecimiento') }}</strong>
+                                    </span> @endif
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="comida" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de Comida u producto (si lo manejan)') }}</label>
+                                <label for="comida"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Tipo de Comida u producto (si lo manejan)') }}</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-control" name="comidaSite" id="comidaSite" style="height: auto;">
+                                    <select class="form-control" name="comidaSite" id="comidaSite"
+                                        style="height: auto;">
                                         <option value="">Selecciona tu comida</option>
                                         @foreach ($comidas as $comida)
-                                            <option value="{{ $comida->id_comida }}">{{ $comida->nombre }}</option> 
+                                        <option value="{{ $comida->id_comida }}">{{ $comida->nombre }}</option>
                                         @endforeach
                                     </select> @if ($errors->has('comida'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('comida') }}</strong>
-                                        </span> @endif
+                                        <strong>{{ $errors->first('comida') }}</strong>
+                                    </span> @endif
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="ambiente" class="col-md-4 col-form-label text-md-right">{{ __('Ambiente que lo caracteriza') }}</label>
+                                <label for="ambiente"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Ambiente que lo caracteriza') }}</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-control" name="ambienteSite" id="ambienteSite" style="height: auto;">
+                                    <select class="form-control" name="ambienteSite" id="ambienteSite"
+                                        style="height: auto;">
                                         <option value="">Selecciona el ambiente</option>
                                         @foreach ($ambientes as $ambiente)
-                                            <option value="{{ $ambiente->id_ambiente }}">{{ $ambiente->nombre }}</option> 
+                                        <option value="{{ $ambiente->id_ambiente }}">{{ $ambiente->nombre }}</option>
                                         @endforeach
                                     </select> @if ($errors->has('ambiente'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('ambiente') }}</strong>
-                                        </span> @endif
+                                        <strong>{{ $errors->first('ambiente') }}</strong>
+                                    </span> @endif
                                 </div>
                             </div>
 
                             <div class="form-group row">
-                                <label for="musica" class="col-md-4 col-form-label text-md-right">{{ __('Musica que se escucha') }}</label>
+                                <label for="musica"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Musica que se escucha') }}</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-control" name="musicaSite" id="musicaSite" style="height: auto;">
+                                    <select class="form-control" name="musicaSite" id="musicaSite"
+                                        style="height: auto;">
                                         <option value="">Selecciona tu musica</option>
                                         @foreach ($musica as $music)
-                                            <option value="{{ $music->id_musica }}">{{ $music->nombre }}</option> 
+                                        <option value="{{ $music->id_musica }}">{{ $music->nombre }}</option>
                                         @endforeach
                                     </select> @if ($errors->has('musica'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('musica') }}</strong>
-                                        </span> @endif
+                                        <strong>{{ $errors->first('musica') }}</strong>
+                                    </span> @endif
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="precio" class="col-md-4 col-form-label text-md-right">{{ __('Precio Sugerido') }}</label>
+                                <label for="precio"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Precio Sugerido') }}</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-control" name="precioSite" id="precioSite" style="height: auto;">
+                                    <select class="form-control" name="precioSite" id="precioSite"
+                                        style="height: auto;">
                                         <option value="">Selecciona tu Precio Sugerido</option>
                                         @foreach ($precio as $preci)
-                                            <option value="{{ $preci->id_precio }}">{{ $preci->valor }}</option> 
+                                        <option value="{{ $preci->id_precio }}">{{ $preci->valor }}</option>
                                         @endforeach
                                     </select> @if ($errors->has('precio'))
                                     <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('precio') }}</strong>
-                                        </span> @endif
+                                        <strong>{{ $errors->first('precio') }}</strong>
+                                    </span> @endif
                                 </div>
                             </div>
 
