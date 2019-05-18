@@ -35,9 +35,13 @@
                 background-image: url("{{ asset('img/fondo2.jpg') }}");
                 background-attachment: fixed;
                 background-repeat: no-repeat;
-                background-size: 100% 100%;
                 font-weight: 100;
                 margin: 0;
+
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
             }
 
             .titles {
@@ -138,7 +142,7 @@
                                     <a class="dropdown-item" href="{{ route('profile',['id' => Auth::user()->id])}}">Mi
                                         perfil</a>
                                     <a class="dropdown-item" href="{{ route('config') }}">
-                                        Configuración</a>
+                                        Configuraciรณn</a>
                                     @if( Auth::user()->hasRole('site') )
                                     <a class="dropdown-item" href="{{ route('administrar') }}">
                                         Reportes

@@ -1,6 +1,5 @@
-
-
-<table class="table">
+<div class="table-responsive">
+    <table class="table">
         <tr>
             <th class="text-center">Tipo de Usuario</th>
             <th class="text-center">Nombre</th>
@@ -14,9 +13,9 @@
         <tr>
             <td>
                 @if( $user->role == 2 )
-                    Usuario
+                Usuario
                 @else
-                    Establecimiento
+                Establecimiento
                 @endif
             </td>
             <td>{{ $user->name }}</td>
@@ -24,19 +23,23 @@
             <td>{{ $user->nick }}</td>
             <td>
                 @if( $user->userActive == 1 )
-                    Activo
+                Activo
                 @else
-                    Inactivo
+                Inactivo
                 @endif
             </td>
             <td>
                 @if( $user->userActive == 1 )
-                    {{-- <button type="button" class="btn btn-primary">Inactivar</button> --}}
-                    <a name="userActive" id="userActive" class="btn btn-primary" href="{{ route('user.inactive',['user_id'=>$user->id]) }}" role="button">Inactivar</a>
+                {{-- <button type="button" class="btn btn-primary">Inactivar</button> --}}
+                <a name="userActive" id="userActive" class="btn btn-primary"
+                    href="{{ route('user.inactive',['user_id'=>$user->id]) }}" role="button">Inactivar</a>
                 @else
-                    <a name="userActive" id="userActive" class="btn btn-success" href="{{ route('user.active',['user_id'=>$user->id]) }}" role="button">Activar</a>
+                <a name="userActive" id="userActive" class="btn btn-success"
+                    href="{{ route('user.active',['user_id'=>$user->id]) }}" role="button">Activar</a>
                 @endif
             </td>
         </tr>
         @endforeach
-</table>
+    </table>
+
+</div>

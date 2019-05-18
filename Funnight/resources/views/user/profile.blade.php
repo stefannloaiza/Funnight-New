@@ -67,7 +67,7 @@
                         <button name="unFollowFriend" id="{{ $user->id }}" type="button"
                             class="btn btn-warning btn-block">
                             <span class="glyphicon glyphicon-list" aria-hidden="true"></span> Lista de amigos
-                        </button>
+                        </button><br>
                     </a> @endif
                 </div>
 
@@ -78,8 +78,7 @@
 
             <div class="table-responsive">
                 <h2>Mis Gustos!</h2>
-                <hr>
-                <table class="table table-striped">
+                <table class="table table-striped table-condensed">
                     <tr>
                         <th class="text-center">Pais</th>
                         <th class="text-center">Tipo de Ambiente</th>
@@ -101,9 +100,8 @@
                         @endif
                     </tr>
                 </table>
-                <hr>
             </div>
-
+            <hr>
             @if ($user->hasRole('user') && Auth::user()->hasRole('user'))
             <h2>Actividad</h2>
             <hr>

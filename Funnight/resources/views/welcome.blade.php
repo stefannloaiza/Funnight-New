@@ -21,12 +21,13 @@
                 background-image: url("img/fondo2.jpg");
                 background-attachment: fixed;
                 background-repeat: no-repeat;
-                background-size: 100% 100%;
-                background-color: #fff;
-                color: white;
                 font-weight: 100;
-                /* height: 100vh; */
-                margin: 0;
+                color: white;
+
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
             }
 
             .full-height {
@@ -51,8 +52,8 @@
 
             .content {
                 text-align: center;
-                margin: 10em;
-                margin-bottom: 0;
+                margin: 5em;
+                margin-top: 10em;
             }
 
             .title {
@@ -117,9 +118,9 @@
                 </div>
                 <br>
                 <p class="lead">
-                    Fun Night te ayuda a encontrar tu sitio nocturno favorito, registrate como usuario para encuentres
-                    tu sitio ideal o resgistra
-                    tu establecimiento nocturno, haz parte de esta comunidad y comienza a crecer tu negocio.
+                    Fun Night te ayuda a encontrar tu sitio nocturno favorito,
+                    <br>registrate como usuario para encuentres tu sitio ideal o resgistra tu establecimiento nocturno,
+                    <br>haz parte de esta comunidad y comienza a crecer tu negocio.
                 </p>
                 <br> @guest
                 <a class="btn btn-primary btn-lg" href="{{ route('register') }}" role="button">Registrate</a> @endguest

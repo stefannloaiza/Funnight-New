@@ -1,4 +1,4 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 @section('content')
 <div class="container">
     <div class="row justify-content-center searchdata">
@@ -14,8 +14,8 @@
                     <div class="form-group col btn-search">
 
                         <button type="submit" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar
-                            </button> {{-- <input type="submit" value="buscar" class="btn btn-success"
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar
+                        </button> {{-- <input type="submit" value="buscar" class="btn btn-success"
                         /> --}}
                     </div>
                 </div>
@@ -23,68 +23,74 @@
                     <div>
                         <h2>Filtrar por tipo de:</h2>
                     </div>
-                    <table class="table table-striped table-condensed">
-                        <tr>
-                            <th class="text-center">Ambiente</th>
-                            <th class="text-center">Comida</th>
-                            <th class="text-center">Establecimiento</th>
-                            <th class="text-center">Musica</th>
-                            <th class="text-center">Pais</th>
-                            <th class="text-center">Precio</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <select class="form-control" name="ambienteUser" id="ambienteUser" style="height: auto;">
-                                <option value="">Selecciona el ambiente</option>
-                                @foreach ($ambientes as $ambiente)
-                                    <option value="{{ $ambiente->id_ambiente }}">{{ $ambiente->nombre }}</option> 
-                                @endforeach
-                            </select>
-                            </td>
-                            <td>
-                                <select class="form-control" name="comidaSite" id="comidaSite" style="height: auto;">
-                                <option value="">Selecciona tu comida</option>
-                                @foreach ($comidas as $comida)
-                                    <option value="{{ $comida->id_comida }}">{{ $comida->nombre }}</option> 
-                                @endforeach
-                            </select>
-                            </td>
-                            <td>
-                                <select class="form-control" name="typeSite" id="typeSite" style="height: auto;">
-                                <option value="">Selecciona el tipo de establecimiento</option>
-                                @foreach ($tipoEstablecimiento as $type)
-                                    <option value="{{ $type->id_tipo_establecimiento }}">{{ $type->nombre }}</option> 
-                                @endforeach
-                            </select>
-                            </td>
-                            <td>
-                                <select class="form-control" name="musicaSite" id="musicaSite" style="height: auto;">
-                                <option value="">Selecciona tu musica</option>
-                                @foreach ($musica as $music)
-                                    <option value="{{ $music->id_musica }}">{{ $music->nombre }}</option> 
-                                @endforeach
-                            </select>
-                            </td>
-                            <td>
-                                <select class="form-control" name="pais" id="paisUser" style="height: auto;">
-                                <option value="">Selecciona el pais</option>
-                                @foreach ($paises as $pais)
-                                    <option value="{{ $pais->id }}">{{ $pais->nombre }}</option> 
-                                @endforeach
-                            </select>
-                            </td>
-                            <td>
-                                <select class="form-control" name="precio" id="precioSite" style="height: auto;">
-                                <option value="">Selecciona el precio</option>
-                                @foreach ($precio as $preci)
-                                    <option value="{{ $preci->id_precio }}">{{ $preci->valor }}</option> 
-                                @endforeach
-                            </select>
-                            </td>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-condensed">
+                            <tr>
+                                <th class="text-center">Ambiente</th>
+                                <th class="text-center">Comida</th>
+                                <th class="text-center">Establecimiento</th>
+                                <th class="text-center">Musica</th>
+                                <th class="text-center">Pais</th>
+                                <th class="text-center">Precio</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <select class="form-control" name="ambienteUser" id="ambienteUser"
+                                        style="height: auto;">
+                                        <option value="">Selecciona el ambiente</option>
+                                        @foreach ($ambientes as $ambiente)
+                                        <option value="{{ $ambiente->id_ambiente }}">{{ $ambiente->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" name="comidaSite" id="comidaSite"
+                                        style="height: auto;">
+                                        <option value="">Selecciona tu comida</option>
+                                        @foreach ($comidas as $comida)
+                                        <option value="{{ $comida->id_comida }}">{{ $comida->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" name="typeSite" id="typeSite" style="height: auto;">
+                                        <option value="">Selecciona el tipo de establecimiento</option>
+                                        @foreach ($tipoEstablecimiento as $type)
+                                        <option value="{{ $type->id_tipo_establecimiento }}">{{ $type->nombre }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" name="musicaSite" id="musicaSite"
+                                        style="height: auto;">
+                                        <option value="">Selecciona tu musica</option>
+                                        @foreach ($musica as $music)
+                                        <option value="{{ $music->id_musica }}">{{ $music->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" name="pais" id="paisUser" style="height: auto;">
+                                        <option value="">Selecciona el pais</option>
+                                        @foreach ($paises as $pais)
+                                        <option value="{{ $pais->id }}">{{ $pais->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control" name="precio" id="precioSite" style="height: auto;">
+                                        <option value="">Selecciona el precio</option>
+                                        @foreach ($precio as $preci)
+                                        <option value="{{ $preci->id_precio }}">{{ $preci->valor }}</option>
+                                        @endforeach
+                                    </select>
+                                </td>
 
 
-                        </tr>
-                    </table>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </form>
             <hr>
@@ -116,4 +122,4 @@
                 <br>
             </div>
         </div>
-@endsection
+        @endsection
