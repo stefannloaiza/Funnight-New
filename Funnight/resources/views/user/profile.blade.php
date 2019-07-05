@@ -68,7 +68,13 @@
                             class="btn btn-warning btn-block">
                             <span class="glyphicon glyphicon-list" aria-hidden="true"></span> Lista de amigos
                         </button><br>
-                    </a> @endif
+                    </a> 
+                    <a href="{{ route('user.follows',['id'=>$user->id]) }}">
+                        <button type="button" name="estSeguidos" id="estSeguidos"
+                            class="btn btn-success btn-block">Establecimientos seguidos</button>
+                        <br>
+                    </a>
+                    @endif
                 </div>
 
                 <div class="user-info">
@@ -102,7 +108,7 @@
                 </table>
             </div>
             <hr>
-            @if ($user->hasRole('user') && Auth::user()->hasRole('user'))
+            @if ($user->hasRole('user') && Auth::user()->hasRole('user') && $user->id == Auth::user()->id)
             <h2>Actividad</h2>
             <hr>
             <div class="row text-center">

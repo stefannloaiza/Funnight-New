@@ -545,9 +545,14 @@ class UserController extends Controller
                 ]);
     }
 
+    /**
+     * Este metodo sirve para obtener la lista de amigos de un usuario autenticado.
+     *
+     * @param [type] $id
+     * @return void
+     */
     public function friendList($id)
     {
-
         // Get follows site list.
         $followsUsers = Friends::where('user_id', $id)->get();
         $arrayFriends = array();
@@ -561,6 +566,33 @@ class UserController extends Controller
 
         return view('user.friends', [
             'friends' => $arrayFriends
+         ]);
+    }
+
+    /**
+     * Este metodo sirve para obtener la lista de establecimientos seguidos de un usuario autenticado.
+     *
+     * @param [type] $id
+     * @return void
+     */
+    public function followsList($id)
+    {
+        /**
+         * Obtener establecimientos seguidos
+         */
+        
+        // Get follows site list.
+        $followsUsers = Follow::where('user_id', $id)->get();
+        $arraySites = array();
+        // Get sites follows.
+        foreach ($followsUsers as $follows) {
+            # Get sites users.
+            $site = User::find($follows->site_id);
+            array_push($arraySites, $site);
+        }
+
+        return view('user.followsites', [
+            'follows' => $arraySites
          ]);
     }
 
